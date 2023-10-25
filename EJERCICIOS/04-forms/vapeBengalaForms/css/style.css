@@ -1,0 +1,25 @@
+/*
+style.css 
+Contener el código CSS 
+*/
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #ff6600, #ff99cc, #3333cc);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+.content {
+    background-image: url('../img/Yoshifumon.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+ul {
+    list-style: none;
+}

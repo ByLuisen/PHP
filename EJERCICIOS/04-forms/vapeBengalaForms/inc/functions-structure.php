@@ -44,7 +44,7 @@ function myMenu()
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" style="font-size: 25px;">Cerrar Sesión</a>
+                            <a class="nav-link active" style="font-size: 22px;">Cerrar Sesión</a>
                         </li>
                     </ul>
                 </div>

@@ -32,32 +32,50 @@ function myMenu()
     echo <<< MENU
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #faba42">
+            <nav class="navbar navbar-expand-lg navbar-dark p-0" style="background-color: #faba42">
             <div class="container">
-                <a class="navbar-brand me-5" href="./index.php"><img src="./img/Yoshifumon.png" alt="Yoshi Fum" width="70px"> <img src="./img/nombre.png" width="220px"></a>
+                <a class="navbar-brand me-5" href="./index.php" style="flex:1;"><img src="./img/Yoshifumon.png" alt="Yoshi Fum" width="70px"> <img src="./img/nombre.png" width="220px"></a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link active" id="vuelos" href="index.html"></a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" style="font-size: 25px;">Cerrar Sesión</a>
+                        </li>
+                    </ul>
                 </div>
+
             </div>
             </nav>
         </header>
     MENU;
 }
 
-function myFooter()
+// Función herecode que determina la estructura del footer
+function myFooter(): void
 {
-    echo <<<FOOTER
-    </body>
+    // Obtener la fecha y hora
+    date_default_timezone_set('Europe/Madrid');
+    $fechaHora = "La fecha es: " . date("d-m-Y") . " y la hora es " . date("h:i:s");
 
-    </html>
+    echo <<<FOOTER
+    <footer class="bg-dark text-white py-3 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="mb-3 mb-md-0">&copy; Bengala Spain 2023</span>
+                    </div>
+                    <div class="text-end">
+                        $fechaHora
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     FOOTER;
 }

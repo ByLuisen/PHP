@@ -11,10 +11,10 @@ $inputs = [];
     <!-- Form dirección de envío -->
     <div class="content">
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-            <div class="row p-5 justify-content-center">
-                <div class="col-xxl-5" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
+            <div class="row pt-5 justify-content-center">
+                <div class="col-xxl-5 p-4" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
                     <ul>
-                        <li>
+                        <li class="mb-4">
                             <h2 class="text-white">Dirección de envío</h2>
                         </li>
                         <li>
@@ -60,9 +60,9 @@ $inputs = [];
             </div>
             <!-- Form método de pago -->
             <div class="row p-3 justify-content-center">
-                <div class="col-xxl-4 p-3 my-5" style="background: linear-gradient(180deg, #D65573 0%, #DC1040 0.01%, #F59448 100%); border-radius: 23px">
+                <div class="col-xxl-4 p-3 my-4" style="background: linear-gradient(180deg, #D65573 0%, #DC1040 0.01%, #F59448 100%); border-radius: 23px">
                     <ul>
-                        <li>
+                        <li class="mb-3">
                             <h2 class="text-white">Método de pago</h2>
                         </li>
                         <li class="d-flex align-items-center p-1">
@@ -92,38 +92,51 @@ $inputs = [];
             </div>
             <!-- Form vaper personalizado-->
 
-            <div class="row p-3 justify-content-center">
-                <div class="col-xxl-7" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
+            <div class="row justify-content-center">
+                <div class="col-xxl-7 p-5" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
                     <ul>
                         <li>
-                            <div class="form-floating mb-3">
-                                <h2 style="color: white;">Vaper personalizado<input type="checkbox" name="vaper" class="mx-4"></h2><br>
+                            <div class="form-floating mb-5 d-flex align-items-center">
+                                <input class="me-3" type="checkbox" name="vaper" width="100px">
+                                <h2 style="color: white;">Vaper personalizado</h2>
                             </div>
                         </li>
                         <li>
                             <div class="form-floating mb-3">
-                                <h2 style="color: white;">Cantidad<input type="number" name="vaper" min="1" max="10" place class="mx-4"></h2><br>
+                                <h2 style="color: white;">Cantidad<input type="number" name="vaper" min="1" max="10" value="1" place class="mx-4"></h2><br>
                             </div>
                         </li>
                         <li>
                             <div class="form-floating mb-3">
-                                <div class="d-flex justify-content-between mx-3">
+                                <h2 class="text-white">Tamaños</h2>
+                                <div class="d-flex justify-content-between my-5 px-5">
                                     <div>
-                                        <img src="./img/vaper1.png" width="200px" height="200px" style="border-radius: 50px; border-color: black;border-width: 5px; border-style: solid;">
-                                        <label for="tamaño" style="color: white;"><input type="radio" name="tamaños[]" id="tamaño" class="mx-6"> Pequeño(9,95€)</label>
+                                        <img src="./img/vaper1.png" width="260px" class="mb-4">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="radio" name="tamaños[]" id="tamaño" class="me-3">
+                                            <label for="tamaño" style="color: white;">Pequeño (9,95€)</label>
+                                        </div>
                                     </div>
                                     <div>
-                                        <img src="./img/vaper2.png" width="200px" height="200px" style="border-radius: 50px; border-color: black; border-width: 5px; border-style: solid;">
-                                        <label for="tamaño" style="color: white;"><input type="radio" name="tamaños[]" id="tamaño" class="mx-6"> Mediano(11,95€)</label>
+                                        <img src="./img/vaper2.png" width="260px" class="mb-4">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="radio" name="tamaños[]" id="tamaño" class="me-3">
+                                            <label for="tamaño" style="color: white;">Mediano (11,95€)</label>
+                                        </div>
+
                                     </div>
                                     <div>
-                                        <img src="./img/vaper3.png" width="200px" height="200px" style="border-radius: 50px;  border-color: black; border-width: 5px; border-style: solid;">
-                                        <label for="tamaño" style="color: white;"><input type="radio" name="tamaños[]" id="tamaño" class="mx-6"> Grande(14,95€)</label>
+                                        <img src="./img/vaper3.png" width="260px" class="mb-4">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="radio" name="tamaños[]" id="tamaño" class="me-3">
+                                            <label for="tamaño" style="color: white;">Grande (14,95€)</label>
+                                        </div>
+
                                     </div>
                                 </div>
                         </li>
                         <li>
-                            <div class="form-floating mb-3">
+                            <div class="form-floating mb-5">
                                 <h2 style="color: white;">Sabores del vaper<select type="select" name="seleccionVaper" id="seleccionVaper" class="btn btn-light mx-4 ">
                                         <option value="value1">Peach Ice (Melocotón Helado)</option>
                                         <option value="value2">Yogurt</option>
@@ -139,22 +152,34 @@ $inputs = [];
                         <li>
                             <div class="form-floating mb-3">
                                 <h2 style="color: white;">Complementos</h2></br>
-                                <div class="d-flex justify-content-between mx-2">
+                                <div class="d-flex justify-content-between mx-2 text-center px-5">
                                     <div>
-                                        <img src="./img/pod1.png" width="200px" height="200px" style="border-radius: 50px; border-color: black;border-width: 5px; border-style: solid;">
-                                        <label for="complemento1" style="color: white;"><input type="checkbox" name="complemento[]" id="complemento1" class="mx-6"> Pod de Fresa (2,95€)</label>
+                                        <img src="./img/pod1.png" width="180px">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="checkbox" name="complemento[]" id="complemento1" class="me-3">
+                                            <label for="complemento1" style="color: white;">Pod de Fresa (2,95€)</label>
+                                        </div>
                                     </div>
                                     <div>
-                                        <img src="./img/pod2.png" width="200px" height="200px" style="border-radius: 50px; border-color: black; border-width: 5px; border-style: solid;">
-                                        <label for="complemento2" style="color: white;"><input type="checkbox" name="complemento[]" id="complemento2" class="mx-6"> Pod de Sandía (3,95€)</label>
+                                        <img src="./img/pod2.png" width="180px">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="checkbox" name="complemento[]" id="complemento2" class="me-3">
+                                            <label for="complemento2" style="color: white;">Pod de Sandía (3,95€)</label>
+                                        </div>
+                                    </div>
+                                    <div style="width:190px">
+                                        <img src="./img/pod3.png" width="180px">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="checkbox" name="complemento[]" id="complemento3" class="me-3">
+                                            <label for="complemento3" style="color: white">Pod algodón de azucar (4,95€)</label>
+                                        </div>
                                     </div>
                                     <div>
-                                        <img src="./img/pod3.png" width="200px" height="200px" style="border-radius: 50px;  border-color: black; border-width: 5px; border-style: solid;">
-                                        <label for="complemento3" style="color: white;"><input type="checkbox" name="complemento[]" id="complemento3" class="mx-6"> Pod algodón </br> de azucar (4,95€)</label>
-                                    </div>
-                                    <div>
-                                        <img src="./img/pod4.png" width="200px" height="200px" style="border-radius: 50px;  border-color: black; border-width: 5px; border-style: solid;">
-                                        <label for="complemento4" style="color: white;"><input type="checkbox" name="complemento[]" id="complemento4" class="mx-6"> Pod de Mora (5,95€)</label>
+                                        <img src="./img/pod4.png" width="180px">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="checkbox" name="complemento[]" id="complemento4" class="me-3">
+                                            <label for="complemento4" style="color: white;">Pod de Mora (5,95€)</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -164,8 +189,8 @@ $inputs = [];
             </div>
 
             <div class="text-center py-5">
-                <button type="submit" name="submit" class="btn" style="background: linear-gradient(180deg, #D65573 0%, #DC1040 0.01%, #F59448 100%);">
-                    Comprar ahora
+                <button type="submit" name="submit" class="btn rounded-pill p-3 text-white">
+                    <h5>Comprar ahora</h5>
                 </button>
             </div>
         </form>

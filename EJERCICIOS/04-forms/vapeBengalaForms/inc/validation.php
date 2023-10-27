@@ -1,23 +1,46 @@
 <?php
+
+$errors = [];
+$inputs = [];
+
 if (isset($_POST['submit'])) {
     // El botón "submit" se ha presionado, realizar la validación
-    // Validacion nombre
-    $nombreCompleto = $_POST['full-name'];
-    $nombreCompleto = filter_var(trim($nombreCompleto), FILTER_SANITIZE_STRING);
+    // Validación formulario Dirección de envío
 
-    if (!preg_match('/[0-9]/', $nombreCompleto)) {
-    } else {
-        // El valor no es un string, muestra un mensaje de error
-        $errors['full-name'] = 'El nombre itroducido es incorrecto';
+    // validate name
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $inputs['name'] = $name;
+    if (!$name || trim($name) === '') {
+        $errors['name'] = 'Please enter your name';
     }
 
     // Validación número teléfono
-    $numeroTelefono = $_POST['telefono'];
-    $numeroTelefono = filter_var(trim($numeroTelefono), FILTER_SANITIZE_STRING);
-
-    if (preg_match('/[0-9]/', $numeroTelefono)) {
-    } else {
-        // El valor introducido no tiene el formato de numero de telefono
-        $errors['telefono'] = 'El número de teléfono introducido no es válido';
+    $numero = filter_input(INPUT_POST, 'telefono', FILTER_SANITIZE_NUMBER_INT);
+    $inputs['telefono'] =  $numero;
+    if (!$numero || trim($numero) === '') {
+        $errors['telefono'] = 'Please enter your number';
     }
-}
+
+    // validate email
+    $email = filter_input(INPUT_POST, 'correo', FILTER_SANITIZE_EMAIL);
+    $inputs['correo'] = $email;
+
+    if (!$email) {
+        $errors['correo'] = 'Por favor introduce un telefono';
+    }
+
+    // Validación formulario Método de pago
+    // Validación numero de la tarjeta
+    $numeroTarjeta = $_POST['numeroTarjeta'];
+    $numeroTarjeta = filter_var(trim($numeroTarjeta), FILTER_SANITIZE_NUMBER_INT);
+
+    if (preg_match('^\d{1,16}$^', $numeroTarjeta)) {
+    } else {
+        $errors['numeroTarjeta'] = "El número de la tarjeta introducido no es válido";
+    }
+
+    // Validación nombre de la tarjeta
+    $nombreTarjeta = $_POST['nombreTarjeta'];
+    $nombreTarjeta = filter_var(trim($nombreTarjeta), FILTER_SANITIZE_NUMBER_INT);
+    // TODO if preg_match
+}   

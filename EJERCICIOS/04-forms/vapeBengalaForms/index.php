@@ -1,16 +1,14 @@
 <?php
-require_once('./inc/functions-structure.php');
 require __DIR__ . '/inc/validation.php';
+require_once('./inc/functions-structure.php');
 myHead();
 myMenu();
 
-$errors = [];
-$inputs = [];
 ?>
 <div class="container-fluid">
     <!-- Form dirección de envío -->
     <div class="content">
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+        <form method="post">
             <div class="row pt-5 justify-content-center">
                 <div class="col-xxl-5 p-4" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
                     <ul>
@@ -20,7 +18,7 @@ $inputs = [];
                         <li>
                             <label class="text-white" for="full-name">Nombre completo (nombre y apellidos)</label>
                             <input type="text" name="full-name" id="full-name" class="form-control border-2">
-                            <small><?php echo $errors['full-name'] ?? ' ' ?></small>
+                            <small><?php echo $errors['full-name']??' ' ?></small>
                         </li>
                         <li>
                             <label class="text-white" for="telefono">Número de teléfono</label>
@@ -58,9 +56,10 @@ $inputs = [];
                     </ul>
                 </div>
             </div>
+            
             <!-- Form método de pago -->
-            <div class="row p-3 justify-content-center">
-                <div class="col-xxl-4 p-3 my-4" style="background: linear-gradient(180deg, #D65573 0%, #DC1040 0.01%, #F59448 100%); border-radius: 23px">
+            <div class="row p-5 justify-content-center">
+                <div class="col-xxl-5 p-4" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
                     <ul>
                         <li class="mb-3">
                             <h2 class="text-white">Método de pago</h2>
@@ -68,7 +67,7 @@ $inputs = [];
                         <li class="d-flex align-items-center p-1">
                             <label for="numeroTarjeta" class="text-white pr-2 w-25">Número de la tarjeta</label>
                             <input type="text" name="numeroTarjeta" id="numeroTarjeta" class="form-control border-2" style="width: 500px;">
-                            <small><?php echo $errors['numeroTarjeta'] ?? '' ?></small>
+                            <small class=""><?php echo $errors['numeroTarjeta'] ?? '' ?></small>
                         </li>
                         <li class="d-flex align-items-center p-1">
                             <label for="nombreTarjeta" class="text-white pr-2 w-25">Nombre en la tarjeta</label>
@@ -90,8 +89,52 @@ $inputs = [];
                     </ul>
                 </div>
             </div>
-            <!-- Form vaper personalizado-->
 
+            <!-- Ofertars Personalizadas -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-xxl-7 p-5" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
+                    <ul>
+                        <li>
+                            <div class="form-floating mb-3">
+                                <h2 style="color: white;">Ofertas del día</h2></br>
+                                <div class="d-flex justify-content-between mx-2 text-center px-5">
+                                    <div>
+                                        <img src="./img/oferta1.jpg" width="180px" height="180px" style="border-radius: 30px;" class="mb-4">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="checkbox" name="complemento[]" id="complemento1" class="me-3">
+                                            <label for="complemento1" style="color: white;">Vaper Recargable (6,50€)</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <img src="./img/oferta2.jpg" width="180px" height="180px" style="border-radius: 30px;" class="mb-4">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="checkbox" name="complemento[]" id="complemento2" class="me-3">
+                                            <label for="complemento2" style="color: white;">Vaper de Mango (8,35€)</label>
+                                        </div>
+                                    </div>
+                                    <div style="width:190px">
+                                        <img src="./img/oferta3.jpg" width="180px" height="180px" style="border-radius: 30px;" class="mb-4">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="checkbox" name="complemento[]" id="complemento3" class="me-3">
+                                            <label for="complemento3" style="color: white">Vaper Fresa (10,95€)</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <img src="./img/oferta4.jpg" width="180px" height="180px" style="border-radius: 30px;" class="mb-4">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <input type="checkbox" name="complemento[]" id="complemento4" class="me-3">
+                                            <label for="complemento4" style="color: white;">Vaper Piña (9,80€)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- Form vaper personalizado-->
             <div class="row justify-content-center">
                 <div class="col-xxl-7 p-5" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
                     <ul>

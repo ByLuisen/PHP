@@ -24,7 +24,7 @@
                         <div class="card-body p-5 text-center">
                             <form action="login.php" class="w-100">
 
-                                <div class="mb-md-4 mt-md-3">
+                                <div class="mb-md-4 mt-md-3 ">
 
                                     <h2 class="fw-bold mb-2 text-uppercase mb-5">Iniciar Sesión</h2>
 

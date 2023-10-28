@@ -1,6 +1,6 @@
 <?php
 
-function myHead()
+function myHead($title)
 {
     echo <<< HEAD
     <!DOCTYPE html>
@@ -21,7 +21,7 @@ function myHead()
     <!-- files CSS -->
     <link rel="stylesheet" href="css/style.css">
     
-    <title>Vape Bengala</title>
+    <title>$title</title>
     </head>
 
     HEAD;

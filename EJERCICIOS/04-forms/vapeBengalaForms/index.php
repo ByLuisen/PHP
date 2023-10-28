@@ -1,14 +1,27 @@
 <?php
-require __DIR__ . '/inc/validation.php';
-require_once('./inc/functions-structure.php');
-myHead();
+require_once('src/functions-structure.php');
+session_start();
+myHead('Vape Bengala');
 myMenu();
+// if (!isset($_SESSION['usuario'])) {
+//     // El usuario no está autenticado
+//     header('Location: login.php');
+// }
+if (isset($_SESSION['inputs'])) {
+    $inputs = $_SESSION['inputs'];
+    // Haz algo con $inputs, por ejemplo, mostrar los datos en el formulario
+}
+
+if (isset($_SESSION['errors'])) {
+    $errors = $_SESSION['errors'];
+    // Haz algo con $errors, por ejemplo, mostrar los mensajes de error
+}
 
 ?>
 <div class="container-fluid">
     <!-- Form dirección de envío -->
     <div class="content">
-        <form method="post">
+        <form action="src/validation.php" method="post">
             <div class="row pt-5 justify-content-center">
                 <div class="col-xxl-5 p-4" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
                     <ul>
@@ -17,46 +30,46 @@ myMenu();
                         </li>
                         <li>
                             <label class="text-white" for="full-name">Nombre completo (nombre y apellidos)</label>
-                            <input type="text" name="full-name" id="full-name" class="form-control border-2">
-                            <small><?php echo $errors['full-name']??' ' ?></small>
+                            <input type="text" name="full-name" id="full-name" class="form-control border-2" value="<?php echo $inputs['full-name'] ?? ' ' ?>">
+                            <small><?php echo $errors['full-name'] ?? ' ' ?></small>
                         </li>
                         <li>
                             <label class="text-white" for="telefono">Número de teléfono</label>
-                            <input type="text" name="telefono" id="telefono" class="form-control border-2">
+                            <input type="text" name="telefono" id="telefono" class="form-control border-2" value="<?php echo $inputs['telefono'] ?? ' ' ?>">
                             <small><?php echo $errors['telefono'] ?? ' ' ?></small>
                         </li>
                         <li>
                             <label class="text-white" for="correo">Correo</label>
-                            <input type="text" name="correo" id="correo" class="form-control border-2">
+                            <input type="text" name="correo" id="correo" class="form-control border-2" value="<?php echo $inputs['correo'] ?? ' ' ?>">
                             <small><?php echo $errors['correo'] ?? ' ' ?></small>
                         </li>
                         <li>
                             <label class="text-white" for="direccion">Línea de dirección 1</label>
-                            <input type="text" name="direccion" id="direccion" class="form-control border-2">
+                            <input type="text" name="direccion" id="direccion" class="form-control border-2" value="<?php echo $inputs['direccion'] ?? ' ' ?>">
                             <small><?php echo $errors['direccion'] ?? ' ' ?></small>
                         </li>
                         <li>
                             <div class="d-flex">
                                 <div class="me-5">
                                     <label class="text-white" for="codigo-postal">Código postal</label>
-                                    <input type="text" name="codigo-postal" id="codigo-postal" class="form-control border-2">
+                                    <input type="text" name="codigo-postal" id="codigo-postal" class="form-control border-2" value="<?php echo $inputs['codigo-postal'] ?? ' ' ?>">
                                     <small><?php echo $errors['codigo-postal'] ?? ' ' ?></small>
                                 </div>
                                 <div class="w-100">
                                     <label class="text-white" for="ciudad">Ciudad</label>
-                                    <input type="text" name="ciudad" id="ciudad" class="form-control border-2">
+                                    <input type="text" name="ciudad" id="ciudad" class="form-control border-2" value="<?php echo $inputs['ciudad'] ?? ' ' ?>">
                                     <small><?php echo $errors['ciudad'] ?? ' ' ?></small>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <label class="text-white" for="provincia">Provincia</label>
-                            <input type="text" name="provincia" id="provincia" class="form-control border-2">
+                            <input type="text" name="provincia" id="provincia" class="form-control border-2" value="<?php echo $inputs['provincia'] ?? ' ' ?>">
                         </li>
                     </ul>
                 </div>
             </div>
-            
+
             <!-- Form método de pago -->
             <div class="row p-5 justify-content-center">
                 <div class="col-xxl-5 p-4" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">

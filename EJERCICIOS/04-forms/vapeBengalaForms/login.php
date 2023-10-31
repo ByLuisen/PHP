@@ -1,6 +1,16 @@
 <?php
+session_start();
 require_once('src/functions-structure.php');
 myHead('Inicio de sesión');
+
+if (isset($_SESSION['inputsLogin'])) {
+    $inputsLogin = $_SESSION['inputsLogin'];
+    // Haz algo con $inputs, por ejemplo, mostrar los datos en el formulario
+}
+if (isset($_SESSION['errorsLogin'])) {
+    $errorsLogin = $_SESSION['errorsLogin'];
+    // Haz algo con $errors, por ejemplo, mostrar los mensajes de error
+}
 ?>
 
 <body>
@@ -9,22 +19,24 @@ myHead('Inicio de sesión');
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <?php if (isset($errorsLogin['login'])) : ?>
-                        <div class="alert alert-error">
+                        <div class="alert alert-danger">
                             <?= $errorsLogin['login'] ?>
                         </div>
                     <?php endif ?>
                     <div class="card text-white" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
                         <div class="card-body p-5 text-center">
-                            <form method="post" class="w-100">
+                            <form action="src/validationLogin.php" method="post" class="w-100">
                                 <div class="mb-md-4 mt-md-3 ">
                                     <h2 class="fw-bold mb-2 text-uppercase mb-5">Iniciar Sesión</h2>
-                                    <div class="form-floating form-white mb-4">
-                                        <input type="text" id="userName" name="userName" class="form-control form-control-lg" placeholder="UserName" />
-                                        <label class="text-secondary" for="userName">Nombre de usuario</label>
+                                    <div class="form-floating form-white">
+                                        <input type="text" id="username" name="username" class="form-control form-control-lg" value="<?php echo $inputsLogin['username'] ?? '' ?>" placeholder="userexample@gmail.com" />
+                                        <label class="text-secondary" for="username">Nombre de usuario</label>
+                                        <p style="height: 30px;"><?= $errorsLogin['username'] ?? '' ?></p>
                                     </div>
-                                    <div class="form-floating form-white mb-5">
-                                        <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="xxxxxxx" />
+                                    <div class="form-floating form-white mb-4">
+                                        <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="xxxxxxxx" />
                                         <label class="text-secondary" for="password">Contraseña</label>
+                                        <p style="height: 30px;"><?= $errorsLogin['password'] ?? '' ?></p>
                                     </div>
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar Sesión</button>
                                 </div>
@@ -36,5 +48,8 @@ myHead('Inicio de sesión');
         </div>
     </section>
 </body>
-
+<?php
+unset($_SESSION['inputsLogin']);
+unset($_SESSION['errorsLogin']);
+?>
 </html>

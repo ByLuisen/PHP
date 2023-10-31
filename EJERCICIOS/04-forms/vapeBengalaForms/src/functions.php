@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Función que recibe dos arrays y devuelve "checked" si $needle está en $haystack, de lo contrario, devuelve una cadena vacía.
  *
@@ -41,5 +42,3 @@ function redirect_with(string $url, array $items): void
     }
     redirect_to($url);
 }
-
-

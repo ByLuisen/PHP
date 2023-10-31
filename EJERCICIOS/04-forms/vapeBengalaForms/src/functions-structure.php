@@ -29,6 +29,8 @@ function myHead($title)
 
 function myMenu()
 {
+    $current_user = current_user();
+
     echo <<< MENU
     <body>
         <header>
@@ -44,7 +46,7 @@ function myMenu()
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <p>Welcome <?= current_user() ?> <a href="logout.php">Logout</a></p>
+                            <p>Welcome $current_user <a href="src/logout.php">Logout</a></p>
                         </li>
                     </ul>
                 </div>

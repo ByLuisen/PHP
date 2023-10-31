@@ -1,7 +1,7 @@
 <?php
 
 const FILTERS = [
-    'string' => FILTER_SANITIZE_SPECIAL_CHARS,
+    'string' => FILTER_SANITIZE_STRING,
 ];
 
 /**
@@ -30,7 +30,7 @@ function array_trim(array $items): array
  * @param bool $trim
  * @return array
  */
-function sanitize(array $inputs, array $fields = [], int $default_filter = FILTER_SANITIZE_SPECIAL_CHARS, array $filters = FILTERS, bool $trim = true): array
+function sanitize(array $inputs, array $fields = [], int $default_filter = FILTER_SANITIZE_STRING, array $filters = FILTERS, bool $trim = true): array
 {
     if ($fields) {
         $options = array_map(fn ($field) => $filters[$field], $fields);

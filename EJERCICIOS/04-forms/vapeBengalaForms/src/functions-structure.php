@@ -60,10 +60,6 @@ function myMenu()
 // Función herecode que determina la estructura del footer
 function myFooter(): void
 {
-    // Obtener la fecha y hora en PHP
-    date_default_timezone_set('Europe/Madrid');
-    $fechaHora = date("d-m-Y H:i:s");
-
     echo <<<FOOTER
     <footer class="bg-dark text-white py-3 mt-auto">
         <div class="container">
@@ -73,7 +69,6 @@ function myFooter(): void
                         <span class="mb-3 mb-md-0">&copy; Bengala Spain 2023</span>
                     </div>
                     <div class="text-end" id="real-time-clock">
-                        $fechaHora
                     </div>
                 </div>
             </div>

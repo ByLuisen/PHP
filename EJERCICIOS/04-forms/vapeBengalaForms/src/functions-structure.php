@@ -44,7 +44,7 @@ function myMenu()
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" style="font-size: 22px;">Cerrar Sesión</a>
+                            <p>Welcome <?= current_user() ?> <a href="logout.php">Logout</a></p>
                         </li>
                     </ul>
                 </div>
@@ -58,9 +58,9 @@ function myMenu()
 // Función herecode que determina la estructura del footer
 function myFooter(): void
 {
-    // Obtener la fecha y hora
+    // Obtener la fecha y hora en PHP
     date_default_timezone_set('Europe/Madrid');
-    $fechaHora = "La fecha es: " . date("d-m-Y") . " y la hora es " . date("h:i:s");
+    $fechaHora = date("d-m-Y H:i:s");
 
     echo <<<FOOTER
     <footer class="bg-dark text-white py-3 mt-auto">
@@ -70,12 +70,25 @@ function myFooter(): void
                     <div>
                         <span class="mb-3 mb-md-0">&copy; Bengala Spain 2023</span>
                     </div>
-                    <div class="text-end">
+                    <div class="text-end" id="real-time-clock">
                         $fechaHora
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Función para actualizar la hora en tiempo real
+        function updateClock() {
+            const clockElement = document.getElementById("real-time-clock");
+            const now = new Date();
+            const formattedTime = now.toLocaleString("es-ES", { hour: "numeric", minute: "numeric", second: "numeric" });
+            clockElement.textContent = "La fecha es: " + now.toLocaleDateString("es-ES") + " y la hora es " + formattedTime;
+        }
+
+        // Actualizar la hora cada segundo
+        setInterval(updateClock, 1000);
+    </script>
     FOOTER;
 }

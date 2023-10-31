@@ -1,69 +1,42 @@
 <?php
 
-// $usernames = ['nom1', 'nom2', 'nom3'];
-// $passwords = ['pas1', 'pas2', 'pas3'];
+require_once('functions.php');
+require_once('datos.php');
 
-// $inputs = [];
-// $errors = [];
+if (is_user_logged_in()) {
+    redirect_to('index.php');
+}
 
-// if (is_post_request()) {
+$inputsLogin = [];
+$errorsLogin = [];
 
-//     [$inputs, $errors] = filter($_POST, [
-//         'username' => 'string | required',
-//         'password' => 'string | required'
-//     ]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-//     if ($errors) {
-//         redirect_with('login.php', ['errors' => $errors, 'inputs' => $inputs]);
-//     }
+    // sanitize & validate user inputs
+    [$inputsLogin, $errorsLogin] = filter($_POST, [
+        'username' => 'string | required',
+        'password' => 'string | required'
+    ]);
 
-//     // if login fails
-//     if (!login($inputs['username'], $inputs['password'])) {
+    // if validation error
+    if ($errorsLogin) {
+        redirect_with('login.php', [
+            'errorsLogin' => $errorsLogin,
+            'inputsLogin' => $inputsLogin
+        ]);
+    }
 
-//         $errors['login'] = 'Invalid username or password';
+    // if login fails
+    if (!login($inputsLogin['username'], $inputsLogin['password'])) {
 
-//         redirect_with('login.php', [
-//             'errors' => $errors,
-//             'inputs' => $inputs
-//         ]);
-//     }
-//     // login successfully
-//     redirect_to('index.php');
+        $errorsLogin['login'] = 'Invalid username or password';
 
-// } else if (is_get_request()) {
-//     [$errors, $inputs] = session_flash('errors', 'inputs');
-// }
+        redirect_with('login.php', [
+            'errorsLogin' => $errorsLogin,
+            'inputsLogin' => $inputsLogin
+        ]);
+    }
 
-// function find_user_by_username(string $username)
-// {
-//     $sql = 'SELECT username, password
-//             FROM users
-//             WHERE username=:username';
-
-//     $statement = db()->prepare($sql);
-//     $statement->bindValue(':username', $username, PDO::PARAM_STR);
-//     $statement->execute();
-
-//     return $statement->fetch(PDO::FETCH_ASSOC);
-// }
-
-// function login(string $username, string $password): bool
-// {
-//     $user = find_user_by_username($username);
-
-//     // if user found, check the password
-//     if ($user && password_verify($password, $user['password'])) {
-
-//         // prevent session fixation attack
-//         session_regenerate_id();
-
-//         // set username in the session
-//         $_SESSION['username'] = $user['username'];
-//         $_SESSION['user_id']  = $user['id'];
-
-
-//         return true;
-//     }
-
-//     return false;
-//  } 
+    // login successfully
+    redirect_to('index.php');
+}

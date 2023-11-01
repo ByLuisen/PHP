@@ -52,4 +52,5 @@ if (isset($_SESSION['errorsLogin'])) {
 unset($_SESSION['inputsLogin']);
 unset($_SESSION['errorsLogin']);
 ?>
+
 </html>

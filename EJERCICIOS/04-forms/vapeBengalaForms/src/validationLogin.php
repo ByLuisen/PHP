@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // sanitize & validate user inputs
     [$inputsLogin, $errorsLogin] = filter($_POST, [
-        'username' => 'string|required',
-        'password' => 'string|required'
+        'username' => 'string|alphanumeric|required',
+        'password' => 'string|alphanumeric|required'
     ]);
 
     // if validation error

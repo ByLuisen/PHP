@@ -44,7 +44,7 @@ function sanitize(array $inputs, array $fields = [], int $default_filter = FILTE
 
 const DEFAULT_VALIDATION_ERRORS = [
     'required' => 'El %s es requerido',
-    'string' => 'El %s debe ser un texto',
+    'alphanumeric' => 'El %s debe tener solo letras y números',
 ];
 
 /**
@@ -111,6 +111,21 @@ function validate(array $data, array $fields, array $messages = []): array
 function is_required(array $data, string $field): bool
 {
     return isset($data[$field]) && trim($data[$field]) !== '';
+}
+
+/**
+ * Return true if a string is alphanumeric
+ * @param array $data
+ * @param string $field
+ * @return bool
+ */
+function is_alphanumeric(array $data, string $field): bool
+{
+    if (!isset($data[$field])) {
+        return true;
+    }
+
+    return ctype_alnum($data[$field]);
 }
 
 /**

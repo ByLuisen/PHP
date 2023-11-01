@@ -1,22 +1,22 @@
 <?php
 
 $vapers = [
-    'vaper Recargable' => 6.5,
-    'vaper de Mango' => 8.35,
-    'vaper de Fresa' => 10.95,
-    'vaper Piña' => 9.80
+    'Vaper Recargable' => 6.5,
+    'Vaper de Mango' => 8.35,
+    'Vaper de Fresa' => 10.95,
+    'Vaper Piña' => 9.80
 ];
 $complementos = [
-    'pod de Fresa' => 2.95,
-    'pod de Sandía' => 3.95,
-    'pod de algodón de Azúcar' => 4.95,
-    'pod de Mora' => 5.95
+    'Pod de Fresa' => 2.95,
+    'Pod de Sandía' => 3.95,
+    'Pod de algodón de Azúcar' => 4.95,
+    'Pod de Mora' => 5.95
 ];
 
 $tamaños = [
-    'pequeño' => 9.55,
-    'mediano' => 11.55,
-    'grande' => 14.95
+    'Pequeño' => 9.55,
+    'Mediano' => 11.55,
+    'Grande' => 14.95
 ];
 
 $meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];

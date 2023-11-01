@@ -6,6 +6,9 @@ require_once('functions.php');
 $inputs = [];
 $errors = [];
 
+$inputs['total'] = 0;
+$_SESSION['productos'] = [];
+
 define('VALIDATION_ERRORS', [
     'required' => 'El campo de %s es requerido',
     'full-name' => 'El %s introducido no es válido',
@@ -20,6 +23,7 @@ define('VALIDATION_ERRORS', [
     'codigoSeguridadTarjeta' => 'El %s no es un código de seguridad válido.',
     'cantidadVaper' => 'Por favor, ingrese una cantidad válida para el vaper personalizado.',
     'complemento' => 'No se ha seleccionado ninguna opción.',
+    'tamaño' => 'Selecciona almenos un tamaño de vape'
 ]);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verifica si el número de teléfono tiene el formato válido
         if (!empty($telefono)) {
             // El número de teléfono tiene 9 dígitos, que es un formato común
-            if (preg_match('/^\d{9}$/', $telefono)) {
+            if (preg_match('/^\d{9}$/', $telefono)) { // TODO cambiar el patron y validar la longitud del telefono
                 if (filter_var($telefono, FILTER_VALIDATE_INT)) {
                     $inputs['telefono'] = trim($telefono);
                 } else {
@@ -78,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validación y saneamiento del campo "Línea de dirección 1"
     if (isset($_POST['direccion'])) {
-        $direccion = htmlspecialchars($_POST['direccion'], ENT_QUOTES, 'UTF-8');
+        $direccion = filter_input(INPUT_POST, 'direccion', FILTER_SANITIZE_STRING);
 
         if (!empty($direccion)) {
             if (preg_match('/^.{10,}$/', $direccion)) {
@@ -98,12 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!empty($codigo_postal)) {
             // Puedes realizar validaciones adicionales para el código postal según tus requisitos
-            if (preg_match('/^\d{5}$/', $codigo_postal)) {
-                if (filter_var($codigo_postal, FILTER_VALIDATE_INT)) {
-                    $inputs['codigo-postal'] = trim($codigo_postal);
-                } else {
-                    $errors['codigo-postal'] = sprintf(VALIDATION_ERRORS['codigo-postal'], 'codigo postal');
-                }
+            if (preg_match('/^[0-9]{5}$/', $codigo_postal)) {
+                $inputs['codigo-postal'] = trim($codigo_postal);
             } else {
                 $errors['codigo-postal'] = sprintf(VALIDATION_ERRORS['codigo-postal'], 'codigo postal');
             }
@@ -209,6 +209,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
+    $selected_ciudad = filter_input(
+        INPUT_POST,
+        'seleccionCiudad',
+        FILTER_SANITIZE_STRING,
+        FILTER_REQUIRE_ARRAY
+    );
 
     $_SESSION['selected_ciudad'] = [];
 
@@ -267,47 +273,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // check data against the original values
     if ($selected_vapers) {
-        $contador = 0;
+
         foreach ($selected_vapers as $vaper) {
-            $contador++;
-            $cantidadOferta = filter_input(INPUT_POST, "cantidadOferta$contador", FILTER_VALIDATE_INT);
-            $inputs["cantidadOferta$contador"] = $cantidadOferta;
+            $posicion = array_search($vaper, array_keys($vapers)) + 1;
+
+            $cantidadOferta = filter_input(INPUT_POST, "cantidadOferta$posicion", FILTER_VALIDATE_INT);
+            $inputs["cantidadOferta$posicion"] = $cantidadOferta;
             if (in_array($vaper, $vaperNombres)) {
                 $_SESSION['selected_vapers'][] = $vaper;
                 $total += $vapers[$vaper] * $cantidadOferta;
-                $inputs['total'] = $total;
+                $_SESSION['productos'][] = array(
+                    'Nombre' => $vaper,
+                    'Precio' => $vapers[$vaper]
+                );
             }
         }
+        $inputs['total'] += $total;
     }
     if (!$_SESSION['selected_vapers']) {
         $errors['vapers'] = "No has seleccionado ningún vaper";
     }
 
-    // Si has marcado las ofertas del día, se almacenan en un array
-    if (isset($_POST['complemento']) && is_array($_POST['complemento'])) {
-        $complementos = $_POST['complemento'];
-        $inputs['complemento'] = $complementos;
-    }
-
     $marcado = htmlspecialchars($_POST['vaperChecked'], ENT_QUOTES, 'UTF-8');
 
+    $_SESSION['vaperChecked'] = [];
+
     if ($marcado) {
+        $_SESSION['vaperChecked'][] = 'vaperChecked';
 
         //--------------------------------------------------------- VALIDAR CANTIDAD ---------------------------
         if (isset($_POST['cantidadVaper'])) {
+            $cantidadVaper = filter_input(INPUT_POST, 'cantidadVaper', FILTER_SANITIZE_NUMBER_INT);
 
-            $cantidadVaper = filter_input(INPUT_POST, 'cantidadVaper', FILTER_VALIDATE_INT);
-
-            if ($cantidadVaper > 0 || $cantidadVaper < 20) {
-
-                if ($cantidadVaper !== false) {
-                    // Realiza validaciones adicionales para la cantidad de vaper personalizado según tus requisitos
+            if (!empty($cantidadVaper)) {
+                if (filter_var($cantidadVaper, FILTER_VALIDATE_INT)) {
                     $inputs['cantidadVaper'] = $cantidadVaper;
+                } else {
+                    $errors['cantidadVaper'] = sprintf(VALIDATION_ERRORS['cantidadVaper']);
                 }
-            } else if ($cantidadVaper < 0 || $cantidadVaper > 20) {
-                $errors['cantidadVaper'] =  sprintf(VALIDATION_ERRORS['cantidadVaper']);
+            } else {
+                $errors['cantidadVaper'] = sprintf(VALIDATION_ERRORS['required'], 'cantidad de vapers');
             }
         }
+
+        //----------------------------------------------------------------------------------------
+        // sanitize tamaños
+        $tamaño = filter_input(INPUT_POST, 'tamaños', FILTER_SANITIZE_STRING);
+        $_SESSION['selected_tamaño'] = []; // for storing selected tamaños
+        $total = 0; // for storing total
+
+        // check the selected value against the original values
+        if ($tamaño && array_key_exists($tamaño, $tamaños)) {
+            $cantidadVaper = filter_input(INPUT_POST, "cantidadVaper", FILTER_VALIDATE_INT);
+            $_SESSION['selected_tamaño'][] = $tamaño;
+            $total += $tamaños[$tamaño] * $cantidadVaper;
+            $inputs['total'] += $total;
+        } else {
+            $errors['tamaño'] = sprintf(VALIDATION_ERRORS['tamaño']);
+        }
+
 
         //--------------------------------------------------------- VALIDAR SABOR ---------------------------
         $selected_sabor = filter_input(
@@ -323,24 +347,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['selected_sabor'][] = $sabor;
         }
 
-        // Validación y saneamiento del campo "ciudad"
-        $selected_ciudad = filter_input(
-            INPUT_POST,
-            'seleccionCiudad',
-            FILTER_SANITIZE_STRING,
-            FILTER_REQUIRE_ARRAY
-        );
+        if ($selected_sabor) {
+            $_SESSION['productos'][] = array(
+                'Sabor' => $_SESSION['selected_sabor'][0],
+                'Tamaño' => $_SESSION['selected_tamaño'][0],
+                'Precio' => $tamaños[$_SESSION['selected_tamaño'][0]]
+            );
+        }
 
         //--------------------------------------------------------- VALIDAR COMPLEMENTOS ---------------------------
-        // Verificar si se han seleccionado opciones
-        if (isset($_POST['complemento']) && !empty($_POST['complemento'])) {
-            // Recorrer el array de opciones seleccionadas
-            foreach ($_POST['complemento'] as $opcion) {
-                // Realizar las acciones necesarias con cada opción seleccionada
-                echo "Opción seleccionada: " . $opcion . "<br>";
+        // sanitize the inputs
+        $selected_complementos = filter_input(
+            INPUT_POST,
+            'complementos',
+            FILTER_SANITIZE_STRING,
+            FILTER_REQUIRE_ARRAY
+        ) ?? [];
+
+        // select the topping names
+        $vaperComplementos = array_keys($complementos);
+
+        $_SESSION['selected_complementos'] = []; // for storing selected toppings
+        $total = 0; // for storing total
+
+        // check data against the original values
+        if ($selected_complementos) {
+
+            foreach ($selected_complementos as $complemento) {
+                if (in_array($complemento, $vaperComplementos)) {
+                    $_SESSION['selected_complementos'][] = $complemento;
+                    $total += $complementos[$complemento];
+                    $_SESSION['productos'][] = array(
+                        'Complemento' => $complemento,
+                        'Precio' => $complementos[$complemento]
+                    );
+                }
             }
-        } else {
-            $errors['complemento'] =  sprintf(VALIDATION_ERRORS['complemento']);
+            $inputs['total'] += $total;
         }
     }
 
@@ -350,6 +393,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         redirect_with('../index.php', [
             'inputs' => $inputs,
             'errors' => $errors
+        ]);
+    }
+    // Verifica si hay errores
+    if (empty($errors)) {
+        // Redirige al usuario a la página anterior (el formulario) con un mensaje de error
+        redirect_with('../ticket.php', [
+            'inputs' => $inputs
         ]);
     }
 }

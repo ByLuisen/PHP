@@ -30,17 +30,17 @@ if (isset($_SESSION['errors'])) {
                             </li>
                             <li>
                                 <label class="text-white" for="full-name">Nombre completo (nombre y apellidos)</label>
-                                <input type="text" name="full-name" id="full-name" class="form-control border-2" value="<?php echo $inputs['full-name'] ?? '' ?>" max="50">
+                                <input type="text" name="full-name" id="full-name" class="form-control border-2" maxlength="50" value="<?php echo $inputs['full-name'] ?? '' ?>" max="50">
                                 <small><?php echo $errors['full-name'] ?? ' ' ?></small>
                             </li>
                             <li>
                                 <label class="text-white" for="telefono">Número de teléfono</label>
-                                <input type="text" name="telefono" id="telefono" class="form-control border-2" value="<?php echo $inputs['telefono'] ?? '' ?>" max="9">
+                                <input type="text" name="telefono" id="telefono" class="form-control border-2" maxlength="9" value="<?php echo $inputs['telefono'] ?? '' ?>" max="9">
                                 <small><?php echo $errors['telefono'] ?? ' ' ?></small>
                             </li>
                             <li>
                                 <label class="text-white" for="correo">Correo</label>
-                                <input type="text" name="correo" id="correo" class="form-control border-2" value="<?php echo $inputs['correo'] ?? '' ?>">
+                                <input type="email" name="correo" id="correo" class="form-control border-2" maxlength="50" value="<?php echo $inputs['correo'] ?? '' ?>">
                                 <small><?php echo $errors['correo'] ?? ' ' ?></small>
                             </li>
                             <li>
@@ -97,14 +97,14 @@ if (isset($_SESSION['errors'])) {
                             <li class="d-flex align-items-center p-1">
                                 <label for="numeroTarjeta" class="text-white pr-2 w-25">Número de la tarjeta</label>
                                 <div>
-                                    <input type="text" name="numeroTarjeta" id="numeroTarjeta" class="form-control border-2" style="width: 500px;" max="16">
+                                    <input type="text" name="numeroTarjeta" id="numeroTarjeta" class="form-control border-2" style="width: 500px;" maxlength="16" value="<?php echo $inputs['numeroTarjeta'] ?? '' ?>">
                                     <small class=""><?php echo $errors['numeroTarjeta'] ?? ' ' ?></small>
                                 </div>
                             </li>
                             <li class="d-flex align-items-center p-1">
                                 <label for="nombreTarjeta" class="text-white pr-2 w-25">Nombre en la tarjeta</label>
                                 <div>
-                                    <input type="text" name="nombreTarjeta" id="nombreTarjeta" class="form-control border-2" style="width: 500px;">
+                                    <input type="text" name="nombreTarjeta" id="nombreTarjeta" class="form-control border-2" minlength="10" maxlength="50" style="width: 500px;" value="<?php echo $inputs['nombreTarjeta'] ?? '' ?>">
                                     <small><?php echo $errors['nombreTarjeta'] ?? ' ' ?></small>
                                 </div>
                             </li>
@@ -137,7 +137,7 @@ if (isset($_SESSION['errors'])) {
                             <li class="d-flex align-items-center p-1">
                                 <label for="codigoSeguridadTarjeta" class="text-white pr-2 w-25">Codigo de seguridad (CVV)</label>
                                 <div>
-                                    <input type="number" name="codigoSeguridadTarjeta" id="codigoSeguridadTarjeta" class="form-control border-2" id="codigoSeguridadTarjeta" style="width: 500px;" min="100" max="999">
+                                    <input type="number" name="codigoSeguridadTarjeta" id="codigoSeguridadTarjeta" class="form-control border-2" style="width: 500px;" min="100" max="999" value="<?php echo $inputs['codigoSeguridadTarjeta'] ?? '' ?>">
                                     <small><?php echo $errors['codigoSeguridadTarjeta'] ?? ' ' ?></small>
                                 </div>
                             </li>
@@ -145,7 +145,7 @@ if (isset($_SESSION['errors'])) {
                     </div>
                 </div>
 
-                <!-- Ofertars Personalizadas -->
+                <!-- Ofertars del dia -->
                 <div class="row justify-content-center mb-5">
                     <div class="col-xxl-7 p-5" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
                         <ul>
@@ -156,6 +156,7 @@ if (isset($_SESSION['errors'])) {
                                         <?php $contador = 0 ?>
                                         <?php foreach ($vapers as $nombreVaper => $precio) : ?>
                                             <?php $contador++; ?>
+
                                             <div class="justify-content-center">
                                                 <img src="./img/oferta<?php echo $contador ?>.jpg" width="180px" height="180px" style="border-radius: 30px;" class="mb-4">
                                                 <div class="d-flex align-items-center justify-content-center">
@@ -188,16 +189,14 @@ if (isset($_SESSION['errors'])) {
                 <!-- Form vaper personalizado-->
                 <div class="row justify-content-center">
                     <div class="col-xxl-7 p-5" style="background:linear-gradient(180deg, #D65573 -0.35%, #DC1040 -0.34%, #F59448 99.65%); border-radius: 23px;">
-                        <ul>
+                        <div class="form-floating d-flex align-items-center">
+                            <input id="vaperChecked" class="me-3" type="checkbox" name="vaperChecked" width="100px" onclick="alternarVaperPersonalizado()" <?php echo checked("vaperChecked", $_SESSION['vaperChecked'] ?? []) ?>>
+                            <h2 class="text-white">Vaper personalizado</h2>
+                        </div>
+                        <ul id="personalizacionVaper" class="d-none">
                             <li>
-                                <div class="form-floating mb-5 d-flex align-items-center">
-                                    <input class="me-3" type="checkbox" name="vaperChecked" width="100px" checked>
-                                    <h2 style="color: white;">Vaper personalizado</h2>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-floating mb-3">
-                                    <h2 style="color: white;">Cantidad<input type="number" name="cantidadVaper" class="mx-4" value="<?php echo $inputs['cantidadVaper'] ?? '' ?>" min="0"></h2><br>
+                                <div class="form-floating mt-5 mb-4">
+                                    <h2 style="color: white;">Cantidad<input type="number" name="cantidadVaper" min="1" max="10" class="mx-4" value="<?php echo $inputs['cantidadVaper'] ?? '1' ?>"></h2><br>
                                     <small><?php echo $errors['cantidadVaper'] ?? '' ?></small>
                                 </div>
                             </li>
@@ -210,12 +209,15 @@ if (isset($_SESSION['errors'])) {
                                         <div class="justify-content-center">
                                             <img src="./img/tamaño<?php echo $contador ?>.png" width="180px" height="180px" style="border-radius: 30px;" class="mb-4">
                                             <div class="d-flex align-items-center justify-content-center">
-                                                <input type="radio" name="tamaños" id="tamaño_<?php echo $tamaño ?>" value="<?php echo $tamaño ?>" />
+                                                <input type="radio" name="tamaños" id="tamaño_<?php echo $tamaño ?>" value="<?php echo $tamaño ?>" <?php echo checked($tamaño, $_SESSION['selected_tamaño'] ?? []) ?> />
                                                 <label class="mx-2" style="color: white;" for="tamaño<?php echo $tamaño ?>"><?php echo ucfirst($tamaño) ?></label>
                                                 <span style="color: white;"> <?php echo $precio  . '€' ?></span>
                                             </div>
                                         </div>
                                     <?php endforeach ?>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <small><?php echo $errors['tamaño'] ?? '' ?></small>
                                 </div>
                             </li>
 
@@ -264,10 +266,32 @@ if (isset($_SESSION['errors'])) {
             </form>
         </div>
     </div>
+    <script>
+        alternarVaperPersonalizado()
+
+        function alternarVaperPersonalizado() {
+            const btnVaperPersonalizado = document.getElementById('vaperChecked'); // radioBtn vaper personalizdo
+            const ulPersonalizacionVape = document.getElementById('personalizacionVaper'); // lista vapers personalizados
+            if (btnVaperPersonalizado.checked) {
+                ulPersonalizacionVape.classList.replace("d-none", "d-block");
+            } else if (!btnVaperPersonalizado.checked) {
+                ulPersonalizacionVape.classList.replace("d-block", "d-none");
+            }
+        }
+    </script>
 </body>
 <?php
 unset($_SESSION['inputs']);
 unset($_SESSION['errors']);
+unset($_SESSION['selected_vapers']);
+unset($_SESSION['vaperChecked']);
+unset($_SESSION['selected_tamaño']);
+unset($_SESSION['selected_sabor']);
+unset($_SESSION['selected_complementos']);
+unset($_SESSION['selected_ciudad']);
+unset($_SESSION['selected_anyo']);
+unset($_SESSION['selected_provincia']);
+unset($_SESSION['selected_mes']);
 ?>
 <?php
 myFooter();

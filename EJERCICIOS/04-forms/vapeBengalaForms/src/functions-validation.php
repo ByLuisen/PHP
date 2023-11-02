@@ -5,7 +5,8 @@ const FILTERS = [
 ];
 
 /**
- * Recursively trim strings in an array
+ * Recoge un array y lo devuelve en string 
+ * y sin espacios
  * @param array $items
  * @return array
  */
@@ -22,11 +23,13 @@ function array_trim(array $items): array
 }
 
 /**
- * Sanitize the inputs based on the rules an optionally trim the string
+ * Se encarga aplicar filtros de saneamiento a los datos de entrada, 
+ * eliminando caracteres no deseados o aplicando ciertos formatos a 
+ * los valores proporcionados.
  * @param array $inputs
  * @param array $fields
- * @param int $default_filter FILTER_SANITIZE_STRING
- * @param array $filters FILTERS
+ * @param int $default_filter 
+ * @param array $filters 
  * @param bool $trim
  * @return array
  */
@@ -48,7 +51,8 @@ const DEFAULT_VALIDATION_ERRORS = [
 ];
 
 /**
- * Validate
+ * Valida los datos con reglas específicas, proporcionadas como parámetros, 
+ * y devuelve un array que contiene los errores de validación, si los hay.
  * @param array $data
  * @param array $fields
  * @param array $messages
@@ -56,13 +60,12 @@ const DEFAULT_VALIDATION_ERRORS = [
  */
 function validate(array $data, array $fields, array $messages = []): array
 {
-    // Split the array by a separator, trim each element
-    // and return the array
+
     $split = fn ($str, $separator) => array_map('trim', explode($separator, $str));
 
-    // get the message rules
+   
     $rule_messages = array_filter($messages, fn ($message) => is_string($message));
-    // overwrite the default message
+  
     $validation_errors = array_merge(DEFAULT_VALIDATION_ERRORS, $rule_messages);
 
     $errors = [];
@@ -72,23 +75,22 @@ function validate(array $data, array $fields, array $messages = []): array
         $rules = $split($option, '|');
 
         foreach ($rules as $rule) {
-            // get rule name params
+         
             $params = [];
-            // if the rule has parameters e.g., min: 1
+           
             if (strpos($rule, ':')) {
                 [$rule_name, $param_str] = $split($rule, ':');
                 $params = $split($param_str, ',');
             } else {
                 $rule_name = trim($rule);
             }
-            // by convention, the callback should be is_<rule> e.g.,is_required
+            
             $fn = 'is_' . $rule_name;
 
             if (is_callable($fn)) {
                 $pass = $fn($data, $field, ...$params);
                 if (!$pass) {
-                    // get the error message for a specific field and rule if exists
-                    // otherwise get the error message from the $validation_errors
+                  
                     $errors[$field] = sprintf(
                         $messages[$field][$rule_name] ?? $validation_errors[$rule_name],
                         $field,
@@ -103,7 +105,8 @@ function validate(array $data, array $fields, array $messages = []): array
 }
 
 /**
- * Return true if a string is not empty
+ * Verifica si un campo específico dentro de un array de 
+ * datos es obligatorio y no está vacío. 
  * @param array $data
  * @param string $field
  * @return bool
@@ -114,7 +117,7 @@ function is_required(array $data, string $field): bool
 }
 
 /**
- * Return true if a string is alphanumeric
+ * Comprueba si el valor de un campo específico dentro de un array de datos es alfanumérico, 
  * @param array $data
  * @param string $field
  * @return bool
@@ -129,7 +132,8 @@ function is_alphanumeric(array $data, string $field): bool
 }
 
 /**
- * Sanitize and validate data
+ * Coordina la sanitizacion y validacion de los datos de acuerdo con las 
+ * reglas definidas en un conjunto de campos y reglas específicas. 
  * @param array $data
  * @param array $fields
  * @param array $messages
@@ -140,7 +144,6 @@ function filter(array $data, array $fields, array $messages = []): array
     $sanitization = [];
     $validation = [];
 
-    // extract sanitization & validation rules
     foreach ($fields as $field => $rules) {
         if (strpos($rules, '|')) {
             [$sanitization[$field], $validation[$field]] = explode('|', $rules, 2);

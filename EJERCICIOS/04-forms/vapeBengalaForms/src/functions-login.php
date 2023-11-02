@@ -1,12 +1,19 @@
 <?php
 
 require_once('functions.php');
-
+/**
+ * La funcion devuelve un valor booleano (bool) 
+ * que indica si el usuario está logueado o no. 
+ */
 function is_user_logged_in(): bool
 {
     return isset($_SESSION['username']);
 }
 
+/**
+ * Devuelve el nombre del usuario si esta logueado, 
+ * sino devuelve null 
+ */
 function current_user()
 {
     if (is_user_logged_in()) {
@@ -14,14 +21,20 @@ function current_user()
     }
     return null;
 }
-
+/**
+ * Si el user no esta logueado re redirige al login
+ * asi evitamos que entre al formulario
+ */
 function require_login(): void
 {
     if (!is_user_logged_in()) {
         redirect_to('login.php');
     }
 }
-
+/**
+ * Esta funcion te cierra la sesion del usuario y
+ * te devuelve al login
+ */
 function logout(): void
 {
     if (is_user_logged_in()) {
@@ -30,30 +43,34 @@ function logout(): void
         redirect_to('../login.php');
     }
 }
-
+/**
+ * Esta funcion lee un archivo CSV que contiene datos de usuarios 
+ * y los devuelve en forma de array 
+ */
 function obtenerUserDatosCSV()
 {
     $filename = '../data/datosUsers.csv';
     $data = [];
 
-    // open the file
     $f = fopen($filename, 'r');
 
     if ($f === false) {
         die('No se ha podido abrir el archivo ' . $filename);
     }
 
-    // read each line in CSV file at a time
     while (($row = fgetcsv($f)) !== false) {
         $data[] = $row;
     }
 
-    // close the file
     fclose($f);
 
     return $data;
 }
-
+/**
+ * Busca al usuario por su nombre 
+ * y devuelve su fila
+ * @param string username
+ */
 function find_user_by_username(string $username)
 {
     $users = obtenerUserDatosCSV();
@@ -66,18 +83,20 @@ function find_user_by_username(string $username)
     }
     return false;
 }
-
+/**
+ *  Se encarga de verificar las credenciales de un usuario 
+ * (nombre de usuario y contraseña) para permitir o denegar el acceso
+ * @param string username
+ * @param string password
+ */
 function login(string $username, string $password): bool
 {
     $user = find_user_by_username($username);
 
-    // if user found, check the password
     if ($user && password_verify($password, password_hash($user[1], PASSWORD_DEFAULT))) {
 
-        // prevent session fixation attack
         session_regenerate_id();
 
-        // set username in the session
         $_SESSION['username'] = $user[0];
         $_SESSION['user_id']  = $user['id'];
 
@@ -86,5 +105,3 @@ function login(string $username, string $password): bool
 
     return false;
 }
-
-

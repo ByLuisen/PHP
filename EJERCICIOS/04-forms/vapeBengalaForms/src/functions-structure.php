@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Cabecera
+ */
 function myHead($title)
 {
     echo <<< HEAD
@@ -30,7 +32,9 @@ function myHead($title)
 
     HEAD;
 }
-
+/**
+ * Barra de Menú
+ */
 function myMenu()
 {
     $current_user = current_user();
@@ -48,11 +52,17 @@ function myMenu()
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <p>Welcome $current_user <a href="src/logout.php">Logout</a></p>
-                        </li>
-                    </ul>
+                    <div class="d-flex ms-auto py-3">
+                        <ul class="navbar-nav flex-column ms-auto text-white">
+                            <li class="nav-item d-flex align-items-end">
+                                <img src="./img/usuario.png" alt="Usuario icono" height="30px">
+                                <h5 class="lh-1 ms-1">$current_user</h5>
+                            </li>
+                            <li class="nav-item">
+                                <a href="src/logout.php" class="text-decoration-none text-white"><p class="lh-1">Cerrar sesión</p></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
@@ -61,7 +71,9 @@ function myMenu()
     MENU;
 }
 
-// Función herecode que determina la estructura del footer
+/**
+ * Footer de la página
+ */
 function myFooter(): void
 {
     echo <<<FOOTER

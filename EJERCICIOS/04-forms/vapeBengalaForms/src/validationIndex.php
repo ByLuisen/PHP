@@ -1,72 +1,78 @@
 <?php
-
+// Inicia la sesision
 session_start();
+
+// Requiere de los archivos necesarios
 require_once('../data/datos.php');
 require_once('functions.php');
+
+// Inicializa los arrays para almacenar los datos del formulario
 $inputs = [];
 $errors = [];
 
 $inputs['total'] = 0;
 $_SESSION['productos'] = [];
 
+// Definicion de mensaje de error
 define('VALIDATION_ERRORS', [
     'required' => 'El campo de %s es requerido',
     'full-name' => 'El %s introducido no es válido',
-    'telefono' => 'El %s no es un número de teléfono válido',
-    'correo' => 'El %s no es una dirección válida',
+    'telefono' => 'El %s de telefono tiene que contener 9 digitos',
+    'correo' => 'El %s no es una direccion válida',
     'direccion' => 'La %s no es válida',
-    'codigo-postal' => 'El %s no es un código válido',
+    'codigo-postal' => 'El %s no es un codigo válido',
     'ciudad' => 'La %s no es válida',
     'provincia' => 'La %s no es válida',
-    'numeroTarjeta' => 'El %s no es un número válido',
+    'numeroTarjeta' => 'El %s no es un numero válido',
     'nombreTarjeta' => 'El %s no es un nombre válido',
-    'codigoSeguridadTarjeta' => 'El %s no es un código de seguridad válido.',
+    'codigoSeguridadTarjeta' => 'El %s no es un codigo de seguridad válido.',
     'cantidadVaper' => 'Por favor, ingrese una cantidad válida para el vaper personalizado.',
-    'complemento' => 'No se ha seleccionado ninguna opción.',
-    'tamaño' => 'Selecciona almenos un tamaño de vape'
+    'complemento' => 'No se ha seleccionado ninguna opcion.',
+    'tamaño' => 'Selecciona almenos un tamaño de vaper'
 ]);
 
+// Verifica si la solicitud es un POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validación y saneamiento del campo "Nombre Completo"
+    // Validacion y saneamiento del campo "Nombre Completo"
     if (isset($_POST['full-name'])) {
+        //Sanea y almacena el nombre completo
         $full_name = htmlspecialchars($_POST['full-name'], ENT_QUOTES, 'UTF-8');
-
         if (!empty($full_name)) {
-            // Validar el nombre si es necesario
-            if (preg_match("/^[\p{L}' ]+$/u", $full_name)) {
-                $inputs['full-name'] = trim($full_name);;
+            if (strlen($full_name) > 10) {
+                if (preg_match("/^[\p{L}' ]+$/u", $full_name)) {
+                    $inputs['full-name'] = trim($full_name);
+                } else {
+                    $errors['full-name'] = sprintf(VALIDATION_ERRORS['full-name'], 'nombre');
+                }
             } else {
-                $errors['full-name'] = sprintf(VALIDATION_ERRORS['full-name'], ucfirst('nombre'));
+                $errors['full-name'] = 'El nombre debe contener 12 caracteres como mínimo';
             }
         } else {
             $errors['full-name'] = sprintf(VALIDATION_ERRORS['required'], 'nombre');
         }
     }
 
-    // Validación y saneamiento del campo "Número de teléfono"
+    // Validacion y saneamiento del campo "Numero de telefono"
     if (isset($_POST['telefono'])) {
+        // Sanea y valida el numero de telefono
         $telefono = filter_input(INPUT_POST, 'telefono', FILTER_SANITIZE_NUMBER_INT);
 
-        // Verifica si el número de teléfono tiene el formato válido
+        // Verifica si el numero de telefono tiene el formato válido
         if (!empty($telefono)) {
-            // El número de teléfono tiene 9 dígitos, que es un formato común
-            if (preg_match('/^\d{9}$/', $telefono)) { // TODO cambiar el patron y validar la longitud del telefono
-                if (filter_var($telefono, FILTER_VALIDATE_INT)) {
-                    $inputs['telefono'] = trim($telefono);
-                } else {
-                    $errors['telefono'] = sprintf(VALIDATION_ERRORS['telefono'], 'número');
-                }
+            // El numero de telefono tiene 9 digitos, que es un formato comun
+            if (preg_match('/^\d{9}$/', $telefono)) {
+                $inputs['telefono'] = trim($telefono);
             } else {
-                $errors['telefono'] = sprintf(VALIDATION_ERRORS['telefono'], 'número');
-                // $errors['telefono'] = 'El número debe tener 10 dígitos numéricos.';
+                $errors['telefono'] = sprintf(VALIDATION_ERRORS['telefono'], 'numero');
             }
         } else {
-            $errors['telefono'] = sprintf(VALIDATION_ERRORS['required'], 'número');
+            $errors['telefono'] = sprintf(VALIDATION_ERRORS['required'], 'numero');
         }
     }
 
-    // Validación y saneamiento del campo "Correo"
+    // Validacion y saneamiento del campo "Correo"
     if (isset($_POST['correo'])) {
+        // Sanea y valida la direccion de correo
         $correo = filter_input(INPUT_POST, 'correo', FILTER_SANITIZE_EMAIL);
 
         if (!empty($correo)) {
@@ -80,13 +86,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Validación y saneamiento del campo "Línea de dirección 1"
+    // Validacion y saneamiento del campo "Linea de direccion 1"
     if (isset($_POST['direccion'])) {
-        $direccion = filter_input(INPUT_POST, 'direccion', FILTER_SANITIZE_STRING);
+        // Si se indica el campo 'direccion' esta presenta en la solicitud 'POST'
+        $direccion = htmlspecialchars($_POST['direccion'], ENT_QUOTES, 'UTF-8'); // Sanea el campo para evitar ataques de seguridad
 
         if (!empty($direccion)) {
-            if (preg_match('/^.{10,}$/', $direccion)) {
-                // La dirección tiene almenos 5 caracteres
+            // Si la 'direccion' no esta vacia
+            if (preg_match('/^.{15,}$/', $direccion)) {
                 $inputs['direccion'] = trim($direccion);
             } else {
                 $errors['direccion'] = sprintf(VALIDATION_ERRORS['direccion'], 'direccion');
@@ -96,67 +103,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Validación y saneamiento del campo "Código postal"
+    // Validacion y saneamiento del campo "Codigo postal"
     if (isset($_POST['codigo-postal'])) {
-        $codigo_postal = filter_input(INPUT_POST, 'codigo-postal', FILTER_SANITIZE_NUMBER_INT);
+        // Sanea y valida el codigo postal
+        $codigo_postal = filter_input(INPUT_POST, 'codigo-postal', FILTER_SANITIZE_NUMBER_INT); // Sanea el campo y elimina caracteres no numericos
 
         if (!empty($codigo_postal)) {
-            // Puedes realizar validaciones adicionales para el código postal según tus requisitos
+            // Si el campo 'codigo-postal' no es valido
+
             if (preg_match('/^[0-9]{5}$/', $codigo_postal)) {
-                $inputs['codigo-postal'] = trim($codigo_postal);
+                // La expresion regular verifica que el codigo postal contenga exactamente 5 digitos numericos.
+
+                $inputs['codigo-postal'] = trim($codigo_postal); // Se almacena el codigo postal saneado y sin espacios en blanco.
             } else {
-                $errors['codigo-postal'] = sprintf(VALIDATION_ERRORS['codigo-postal'], 'codigo postal');
+                // Si el codigo postal no cumple con el formato esperado...
+
+                $errors['codigo-postal'] = sprintf(VALIDATION_ERRORS['codigo-postal'], 'codigo postal'); // Genera un mensaje de error indicando que el 'codigo postal' no es valido
             }
         } else {
-            $errors['codigo-postal'] = sprintf(VALIDATION_ERRORS['required'], 'codigo postal');
+            // Si el campo 'codigo-postal' esta vacio...
+            $errors['codigo-postal'] = sprintf(VALIDATION_ERRORS['required'], 'codigo postal'); // Generamos un mensaje de error indicando que el 'codigo postal' es un campo requerido.
         }
     }
 
-    // Validación y saneamiento del campo "Ciudad"
-    if (isset($_POST['ciudad'])) {
-        $ciudad = htmlspecialchars($_POST['ciudad'], ENT_QUOTES, 'UTF-8');
+    // Validacion y saneamiento del select "Ciudad"
+    $selected_ciudad = filter_input(
+        INPUT_POST,
+        'seleccionCiudad',
+        FILTER_SANITIZE_STRING,
+        FILTER_REQUIRE_ARRAY
+    );
 
-        if (!empty($ciudad)) {
-            // Puedes realizar validaciones adicionales para la ciudad según tus requisitos
-            if (preg_match("/^[\p{L}' ]+$/u", $ciudad)) {
-                $inputs['ciudad'] = trim($ciudad);
-            } else {
-                $errors['ciudad'] = sprintf(VALIDATION_ERRORS['ciudad'], 'ciudad');
-            }
-        } else {
-            $errors['ciudad'] = sprintf(VALIDATION_ERRORS['required'], 'ciudad');
-        }
+    $_SESSION['selected_ciudad'] = [];
+
+    foreach ($selected_ciudad as $ciudad) {
+        $_SESSION['selected_ciudad'][] = $ciudad;
     }
 
-    // Validación del campo "Provincia" sin realizar saneamiento adicional
-    if (isset($_POST['provincia'])) {
-        $provincia = htmlspecialchars($_POST['provincia'], ENT_QUOTES, 'UTF-8');
+    // Validacion y saneamiento del select "Provincia"
+    $selected_provincia = filter_input(
+        INPUT_POST,
+        'seleccionProvincia',
+        FILTER_SANITIZE_STRING,
+        FILTER_REQUIRE_ARRAY
+    );
 
-        // Puedes realizar validaciones adicionales para la provincia según tus requisitos
-        if (!empty($provincia)) {
-            if (preg_match("/^[\p{L}' ]+$/u", $provincia)) {
-                $inputs['provincia'] = trim($provincia);
-            } else {
-                $errors['provincia'] = sprintf(VALIDATION_ERRORS['provincia'], 'provincia');
-            }
-        } else {
-            $errors['provincia'] = sprintf(VALIDATION_ERRORS['required'], 'provincia');
-        }
+    $_SESSION['selected_provincia'] = [];
+
+    foreach ($selected_provincia as $provincia) {
+        $_SESSION['selected_provincia'][] = $provincia;
     }
 
-    //------------------------------------------------------- VAIDAR CAMPOS MÉTODO DE PAGO -------------------------------------------------------
+    //------------------------------------------------------- VAIDAR CAMPOS METODO DE PAGO -------------------------------------------------------
 
-    // Validación y saneamiento del campo "Número de tarjeta"
+    // Validacion y saneamiento del campo "Numero de tarjeta"
     if (isset($_POST['numeroTarjeta'])) {
         $numeroTarjeta = filter_input(INPUT_POST, 'numeroTarjeta', FILTER_SANITIZE_NUMBER_INT);
 
         if (!empty($numeroTarjeta)) {
-            // Puedes realizar validaciones adicionales para el número de tarjeta según tus requisitos
+            // Puedes realizar validaciones adicionales para el numero de tarjeta segun tus requisitos
             if (preg_match('/^\d{16}$/', $numeroTarjeta)) {
                 if (filter_var($numeroTarjeta, FILTER_VALIDATE_INT)) {
                     $inputs['numeroTarjeta'] = trim($numeroTarjeta);
                 } else {
-                    $errors['numeroTarjeta'] = 'El número de tarjeta no és válido';
+                    $errors['numeroTarjeta'] = 'El numero de tarjeta no es válido';
                 }
             } else {
                 $errors['numeroTarjeta'] = sprintf(VALIDATION_ERRORS['numeroTarjeta'], 'numero de la tarjeta');
@@ -166,7 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Validación y saneamiento del campo "Nombre en la tarjeta"
+    // Validacion y saneamiento del campo "Nombre en la tarjeta"
     if (isset($_POST['nombreTarjeta'])) {
         $nombreTarjeta = htmlspecialchars($_POST['nombreTarjeta'], ENT_QUOTES, 'UTF-8');
         if (!empty($nombreTarjeta)) {
@@ -180,7 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Validación y saneamiento del campo "mes Vencimiento"
+    // Validacion y saneamiento del campo "mes Vencimiento"
     $selected_mes = filter_input(
         INPUT_POST,
         'mesVencimiento',
@@ -194,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['selected_mes'][] = $mes;
     }
 
-    // Validación y saneamiento del campo "anyo Vencimiento"
+    // Validacion y saneamiento del campo "anyo Vencimiento"
     $selected_anyo = filter_input(
         INPUT_POST,
         'anyoVencimiento',
@@ -209,35 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-    $selected_ciudad = filter_input(
-        INPUT_POST,
-        'seleccionCiudad',
-        FILTER_SANITIZE_STRING,
-        FILTER_REQUIRE_ARRAY
-    );
-
-    $_SESSION['selected_ciudad'] = [];
-
-    foreach ($selected_ciudad as $ciudad) {
-        $_SESSION['selected_ciudad'][] = $ciudad;
-    }
-
-
-    $selected_provincia = filter_input(
-        INPUT_POST,
-        'seleccionProvincia',
-        FILTER_SANITIZE_STRING,
-        FILTER_REQUIRE_ARRAY
-    );
-
-    $_SESSION['selected_provincia'] = [];
-
-    foreach ($selected_provincia as $provincia) {
-        $_SESSION['selected_provincia'][] = $provincia;
-    }
-
-
-    // Validación y saneamiento del campo "Código de Seguridad de la Tarjeta"
+    // Validacion y saneamiento del campo "Codigo de Seguridad de la Tarjeta"
     if (isset($_POST['codigoSeguridadTarjeta'])) {
         $codigoSeguridadTarjeta = filter_input(INPUT_POST, 'codigoSeguridadTarjeta', FILTER_SANITIZE_NUMBER_INT);
 
@@ -284,14 +266,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $total += $vapers[$vaper] * $cantidadOferta;
                 $_SESSION['productos'][] = array(
                     'Nombre' => $vaper,
-                    'Precio' => $vapers[$vaper]
+                    'Precio' => $vapers[$vaper],
+                    'Cantidad' => $cantidadOferta
                 );
             }
         }
         $inputs['total'] += $total;
     }
     if (!$_SESSION['selected_vapers']) {
-        $errors['vapers'] = "No has seleccionado ningún vaper";
+        $errors['vapers'] = "No has seleccionado ningun vaper";
     }
 
     $marcado = htmlspecialchars($_POST['vaperChecked'], ENT_QUOTES, 'UTF-8');
@@ -349,9 +332,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($selected_sabor) {
             $_SESSION['productos'][] = array(
-                'Sabor' => $_SESSION['selected_sabor'][0],
+                'Nombre' => 'Vaper ' . $_SESSION['selected_sabor'][0],
                 'Tamaño' => $_SESSION['selected_tamaño'][0],
-                'Precio' => $tamaños[$_SESSION['selected_tamaño'][0]]
+                'Precio' => $tamaños[$_SESSION['selected_tamaño'][0]],
+                'Cantidad' => $inputs['cantidadVaper']
             );
         }
 

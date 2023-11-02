@@ -9,11 +9,9 @@ myMenu();
 require_login();
 if (isset($_SESSION['inputs'])) {
     $inputs = $_SESSION['inputs'];
-    // Haz algo con $inputs, por ejemplo, mostrar los datos en el formulario
 }
 if (isset($_SESSION['errors'])) {
     $errors = $_SESSION['errors'];
-    // Haz algo con $errors, por ejemplo, mostrar los mensajes de error
 }
 ?>
 
@@ -28,26 +26,31 @@ if (isset($_SESSION['errors'])) {
                             <li class="mb-4">
                                 <h2 class="text-white">Dirección de envío</h2>
                             </li>
+                            <!-- Nombre -->
                             <li>
                                 <label class="text-white" for="full-name">Nombre completo (nombre y apellidos)</label>
                                 <input type="text" name="full-name" id="full-name" class="form-control border-2" maxlength="50" value="<?php echo $inputs['full-name'] ?? '' ?>" max="50">
                                 <small><?php echo $errors['full-name'] ?? ' ' ?></small>
                             </li>
+                            <!-- Telefono -->
                             <li>
                                 <label class="text-white" for="telefono">Número de teléfono</label>
                                 <input type="text" name="telefono" id="telefono" class="form-control border-2" maxlength="9" value="<?php echo $inputs['telefono'] ?? '' ?>" max="9">
                                 <small><?php echo $errors['telefono'] ?? ' ' ?></small>
                             </li>
+                            <!-- Correo-->
                             <li>
                                 <label class="text-white" for="correo">Correo</label>
                                 <input type="email" name="correo" id="correo" class="form-control border-2" maxlength="50" value="<?php echo $inputs['correo'] ?? '' ?>">
                                 <small><?php echo $errors['correo'] ?? ' ' ?></small>
                             </li>
+                            <!-- Direccion -->
                             <li>
                                 <label class="text-white" for="direccion">Línea de dirección 1</label>
                                 <input type="text" name="direccion" id="direccion" class="form-control border-2" value="<?php echo $inputs['direccion'] ?? '' ?>">
                                 <small><?php echo $errors['direccion'] ?? ' ' ?></small>
                             </li>
+                            <!-- Código postal -->
                             <li>
                                 <div class="d-flex">
                                     <div class="me-5">
@@ -55,7 +58,7 @@ if (isset($_SESSION['errors'])) {
                                         <input type="text" name="codigo-postal" id="codigo-postal" class="form-control border-2" value="<?php echo $inputs['codigo-postal'] ?? '' ?>" maxlength="5">
                                         <small><?php echo $errors['codigo-postal'] ?? ' ' ?></small>
                                     </div>
-
+                                    <!-- Select de ciudades -->
                                     <div class="w-100">
                                         <label class="text-white" for="ciudad">Ciudad</label>
                                         <select name="seleccionCiudad[]" id="seleccionCiudad" class="form-control border-2">
@@ -70,7 +73,7 @@ if (isset($_SESSION['errors'])) {
                                     </div>
                                 </div>
                             </li>
-
+                            <!-- Select de Provincias -->
                             <li>
                                 <label class="text-white" for="provincia">Provincia</label>
                                 <select name="seleccionProvincia[]" id="seleccionProvincia" class="form-control border-2">
@@ -94,6 +97,7 @@ if (isset($_SESSION['errors'])) {
                             <li class="mb-3">
                                 <h2 class="text-white">Método de pago</h2>
                             </li>
+                            <!-- Número de la tarjeta -->
                             <li class="d-flex align-items-center p-1">
                                 <label for="numeroTarjeta" class="text-white pr-2 w-25">Número de la tarjeta</label>
                                 <div>
@@ -101,6 +105,7 @@ if (isset($_SESSION['errors'])) {
                                     <small class=""><?php echo $errors['numeroTarjeta'] ?? ' ' ?></small>
                                 </div>
                             </li>
+                            <!-- Nombre de la tarjeta -->
                             <li class="d-flex align-items-center p-1">
                                 <label for="nombreTarjeta" class="text-white pr-2 w-25">Nombre en la tarjeta</label>
                                 <div>
@@ -108,10 +113,11 @@ if (isset($_SESSION['errors'])) {
                                     <small><?php echo $errors['nombreTarjeta'] ?? ' ' ?></small>
                                 </div>
                             </li>
+                            <!-- Fecha de Vencimiento -->
                             <li class="d-flex align-items-center p-1">
                                 <label for="fechaVencimiento" class="text-white pr-2 w-25">Fecha vencimiento</label>
                                 <div>
-
+                                    <!-- Select de los meses -->
                                     <select name="mesVencimiento[]" id="fechaVencimiento" class="form-control border-2" style="width: 250px; background-color: #b5b5b5;" value="mesVencimiento[04]">
                                         <?php
                                         foreach ($meses as $mes) {
@@ -123,7 +129,7 @@ if (isset($_SESSION['errors'])) {
                                     <small><?php echo $errors['mesVencimiento'] ?? ' ' ?></small>
                                 </div>
                                 <div>
-
+                                    <!-- Select de los años -->
                                     <select name="anyoVencimiento[]" id="fechaVencimiento" class="form-control border-2" style="width: 250px; background-color: #b5b5b5;">
                                         <?php
                                         foreach ($años as $año) {
@@ -134,6 +140,7 @@ if (isset($_SESSION['errors'])) {
                                     <small><?php echo $errors['anyoVencimiento'] ?? ' ' ?></small>
                                 </div>
                             </li>
+                            <!-- Codigo de seguridad -->
                             <li class="d-flex align-items-center p-1">
                                 <label for="codigoSeguridadTarjeta" class="text-white pr-2 w-25">Codigo de seguridad (CVV)</label>
                                 <div>
@@ -153,6 +160,7 @@ if (isset($_SESSION['errors'])) {
                                 <div class="form-floating mb-3">
                                     <h2 style="color: white;">Ofertas del día</h2></br>
                                     <div class="d-flex justify-content-between mx-2 text-center px-5">
+                                        <!--Select de Vapers -->
                                         <?php $contador = 0 ?>
                                         <?php foreach ($vapers as $nombreVaper => $precio) : ?>
                                             <?php $contador++; ?>
@@ -164,7 +172,7 @@ if (isset($_SESSION['errors'])) {
                                                         <input class="me-2" type="checkbox" name="vapers[]" value="<?php echo $nombreVaper ?>" id="vapers_<?php echo $nombreVaper ?>" <?php echo checked($nombreVaper, $_SESSION['selected_vapers'] ?? []) ?> />
                                                         <label for="vapers_<?php echo $nombreVaper ?>" style="color: white;"><?php echo ucfirst($nombreVaper) ?></label>
                                                     </div>
-                                                    <span style="color: white;"><?php echo $precio . '€' ?></span>
+                                                    <span style="color: white;"><?php echo $precio . ' €' ?></span>
                                                 </div>
                                                 <div class="d-flex justify-content-center align-items-center">
                                                     <p class="me-1" style="color: white;">Cantidad</p>
@@ -176,8 +184,8 @@ if (isset($_SESSION['errors'])) {
                                             </div>
                                         <?php endforeach ?>
                                     </div>
-                                    <div class="text-center mt-2">
-                                        <small><?php echo $errors['vapers'] ?? '' ?></small>
+                                    <div class="text-center">
+                                        <p><?php echo $errors['vapers'] ?? '' ?></p>
                                     </div>
                                 </div>
                             </li>
@@ -194,13 +202,14 @@ if (isset($_SESSION['errors'])) {
                             <h2 class="text-white">Vaper personalizado</h2>
                         </div>
                         <ul id="personalizacionVaper" class="d-none">
+                            <!-- Cantidad -->
                             <li>
                                 <div class="form-floating mt-5 mb-4">
                                     <h2 style="color: white;">Cantidad<input type="number" name="cantidadVaper" min="1" max="10" class="mx-4" value="<?php echo $inputs['cantidadVaper'] ?? '1' ?>"></h2><br>
                                     <small><?php echo $errors['cantidadVaper'] ?? '' ?></small>
                                 </div>
                             </li>
-
+                            <!-- Select de Tamaños -->
                             <li>
                                 <div class="d-flex justify-content-between mx-2 text-center px-5">
                                     <?php $contador = 0 ?>
@@ -211,18 +220,17 @@ if (isset($_SESSION['errors'])) {
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <input type="radio" name="tamaños" id="tamaño_<?php echo $tamaño ?>" value="<?php echo $tamaño ?>" <?php echo checked($tamaño, $_SESSION['selected_tamaño'] ?? []) ?> />
                                                 <label class="mx-2" style="color: white;" for="tamaño<?php echo $tamaño ?>"><?php echo ucfirst($tamaño) ?></label>
-                                                <span style="color: white;"> <?php echo $precio  . '€' ?></span>
+                                                <span style="color: white;"> <?php echo $precio  . ' €' ?></span>
                                             </div>
                                         </div>
                                     <?php endforeach ?>
                                 </div>
-                                <div class="text-center mt-2">
-                                    <small><?php echo $errors['tamaño'] ?? '' ?></small>
+                                <div class="text-center mt-4">
+                                    <p><?php echo $errors['tamaño'] ?? '' ?></p>
                                 </div>
                             </li>
-
+                            <!-- Select de Sabores del Vaper -->
                             <li>
-
                                 <div class="form-floating mb-5 d-flex mt-4">
                                     <h2 style="color: white;">Sabores del vaper</h2>
                                     <select type="select" name="seleccionVaper[]" id="seleccionVaper" class="btn btn-light mx-4 ">
@@ -234,7 +242,7 @@ if (isset($_SESSION['errors'])) {
                                     </select>
                                 </div>
                             </li>
-                            <!------------------------------------ COMPLEMENTOS  ------------------------------------>
+                            <!-- Select de Complementos -->
                             <li>
                                 <div class="form-floating mb-3">
                                     <h2 style="color: white;">Complementos</h2></br>
@@ -248,7 +256,7 @@ if (isset($_SESSION['errors'])) {
                                                     <input class="me-3" type="checkbox" name="complementos[]" value="<?php echo $nombreComplemento ?>" id="complementos_<?php echo $nombreComplemento ?>" <?php echo checked($nombreComplemento, $_SESSION['selected_complementos'] ?? []) ?> />
                                                     <label for="complementos_<?php echo $nombreComplemento ?>" style="color: white;"><?php echo ucfirst($nombreComplemento) ?></label>
                                                 </div>
-                                                <span style="color: white;"><?php echo $precio . '€' ?></span>
+                                                <span style="color: white;"><?php echo $precio . ' €' ?></span>
                                             </div>
                                         <?php endforeach ?>
                                     </div>
@@ -257,7 +265,7 @@ if (isset($_SESSION['errors'])) {
                         </ul>
                     </div>
                 </div>
-
+                <!-- Boton de compra -->
                 <div class="text-center py-5">
                     <button type="submit" name="submit" class="btn rounded-pill p-3 text-white">
                         <h5>Comprar ahora</h5>
@@ -266,6 +274,10 @@ if (isset($_SESSION['errors'])) {
             </form>
         </div>
     </div>
+    <?php
+    myFooter();
+    ?>
+    <!-- Muestra o esconde el apartado de vaper personalizados -->
     <script>
         alternarVaperPersonalizado()
 
@@ -280,19 +292,5 @@ if (isset($_SESSION['errors'])) {
         }
     </script>
 </body>
-<?php
-unset($_SESSION['inputs']);
-unset($_SESSION['errors']);
-unset($_SESSION['selected_vapers']);
-unset($_SESSION['vaperChecked']);
-unset($_SESSION['selected_tamaño']);
-unset($_SESSION['selected_sabor']);
-unset($_SESSION['selected_complementos']);
-unset($_SESSION['selected_ciudad']);
-unset($_SESSION['selected_anyo']);
-unset($_SESSION['selected_provincia']);
-unset($_SESSION['selected_mes']);
-?>
-<?php
-myFooter();
-?>
+
+</html>

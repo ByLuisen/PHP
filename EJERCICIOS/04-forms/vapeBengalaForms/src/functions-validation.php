@@ -63,9 +63,9 @@ function validate(array $data, array $fields, array $messages = []): array
 
     $split = fn ($str, $separator) => array_map('trim', explode($separator, $str));
 
-   
+
     $rule_messages = array_filter($messages, fn ($message) => is_string($message));
-  
+
     $validation_errors = array_merge(DEFAULT_VALIDATION_ERRORS, $rule_messages);
 
     $errors = [];
@@ -75,22 +75,22 @@ function validate(array $data, array $fields, array $messages = []): array
         $rules = $split($option, '|');
 
         foreach ($rules as $rule) {
-         
+
             $params = [];
-           
+
             if (strpos($rule, ':')) {
                 [$rule_name, $param_str] = $split($rule, ':');
                 $params = $split($param_str, ',');
             } else {
                 $rule_name = trim($rule);
             }
-            
+
             $fn = 'is_' . $rule_name;
 
             if (is_callable($fn)) {
                 $pass = $fn($data, $field, ...$params);
                 if (!$pass) {
-                  
+
                     $errors[$field] = sprintf(
                         $messages[$field][$rule_name] ?? $validation_errors[$rule_name],
                         $field,

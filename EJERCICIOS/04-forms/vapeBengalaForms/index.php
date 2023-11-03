@@ -28,9 +28,15 @@ if (isset($_SESSION['errors'])) {
                             </li>
                             <!-- Nombre -->
                             <li>
-                                <label class="text-white" for="full-name">Nombre completo (nombre y apellidos)</label>
-                                <input type="text" name="full-name" id="full-name" class="form-control border-2" maxlength="50" value="<?php echo $inputs['full-name'] ?? '' ?>" max="50">
+                                <label class="text-white" for="full-name">Nombre</label>
+                                <input type="text" name="full-name" id="full-name" class="form-control border-2" minlength="1" maxlength="30" value="<?php echo $inputs['full-name'] ?? '' ?>">
                                 <small><?php echo $errors['full-name'] ?? ' ' ?></small>
+                            </li>
+                            <!-- Apellidos -->
+                            <li>
+                                <label class="text-white" for="apellidos">Apellidos</label>
+                                <input type="text" name="apellidos" id="apellidos" class="form-control border-2" minlength="1" maxlength="30" value="<?php echo $inputs['apellidos'] ?? '' ?>">
+                                <small><?php echo $errors['apellidos'] ?? ' ' ?></small>
                             </li>
                             <!-- Telefono -->
                             <li>
@@ -47,7 +53,7 @@ if (isset($_SESSION['errors'])) {
                             <!-- Direccion -->
                             <li>
                                 <label class="text-white" for="direccion">Línea de dirección 1</label>
-                                <input type="text" name="direccion" id="direccion" class="form-control border-2" value="<?php echo $inputs['direccion'] ?? '' ?>">
+                                <input type="text" name="direccion" id="direccion" min="15" class="form-control border-2" value="<?php echo $inputs['direccion'] ?? '' ?>">
                                 <small><?php echo $errors['direccion'] ?? ' ' ?></small>
                             </li>
                             <!-- Código postal -->

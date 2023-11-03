@@ -33,22 +33,41 @@ define('VALIDATION_ERRORS', [
 
 // Verifica si la solicitud es un POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validacion y saneamiento del campo "Nombre Completo"
+    // Validacion y saneamiento del campo "Nombre"
     if (isset($_POST['full-name'])) {
-        //Sanea y almacena el nombre completo
+        //Sanea y almacena el nombre
         $full_name = htmlspecialchars($_POST['full-name'], ENT_QUOTES, 'UTF-8');
         if (!empty($full_name)) {
-            if (strlen($full_name) > 10) {
+            if (strlen($full_name) > 1 && strlen($full_name) < 30) {
                 if (preg_match("/^[\p{L}' ]+$/u", $full_name)) {
                     $inputs['full-name'] = trim($full_name);
                 } else {
                     $errors['full-name'] = sprintf(VALIDATION_ERRORS['full-name'], 'nombre');
                 }
             } else {
-                $errors['full-name'] = 'El nombre debe contener 12 caracteres como mínimo';
+                $errors['full-name'] = 'Los apellidos debe contener entre 1 y 30 caracteres';
             }
         } else {
             $errors['full-name'] = sprintf(VALIDATION_ERRORS['required'], 'nombre');
+        }
+    }
+
+    // Validacion y saneamiento del campo "Apellidos"
+    if (isset($_POST['apellidos'])) {
+        //Sanea y almacena los apellidos
+        $apellidos = htmlspecialchars($_POST['apellidos'], ENT_QUOTES, 'UTF-8');
+        if (!empty($apellidos)) {
+            if (strlen($apellidos) > 1 && strlen($apellidos) < 30) {
+                if (preg_match("/^[\p{L}' ]+$/u", $apellidos)) {
+                    $inputs['apellidos'] = trim($apellidos);
+                } else {
+                    $errors['apellidos'] = sprintf(VALIDATION_ERRORS['full-name'], 'apellido');
+                }
+            } else {
+                $errors['apellidos'] = 'Los apellidos debe contener entre 1 y 30 caracteres';
+            }
+        } else {
+            $errors['apellidos'] = sprintf(VALIDATION_ERRORS['required'], 'apellidos');
         }
     }
 
@@ -89,11 +108,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validacion y saneamiento del campo "Linea de direccion 1"
     if (isset($_POST['direccion'])) {
         // Si se indica el campo 'direccion' esta presenta en la solicitud 'POST'
-        $direccion = htmlspecialchars($_POST['direccion'], ENT_QUOTES, 'UTF-8'); // Sanea el campo para evitar ataques de seguridad
+        $direccion = filter_input(INPUT_POST, 'direccion', FILTER_SANITIZE_STRING); // Sanea el campo para evitar ataques de seguridad
 
         if (!empty($direccion)) {
             // Si la 'direccion' no esta vacia
-            if (preg_match('/^.{15,}$/', $direccion)) {
+            if (ctype_alnum($direccion)) {     
                 $inputs['direccion'] = trim($direccion);
             } else {
                 $errors['direccion'] = sprintf(VALIDATION_ERRORS['direccion'], 'direccion');

@@ -1,8 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once('functions.php');
-require_once('data.php');
+require_once('src/functions.php');
+require_once('data/data.php');
 
 //Generar plantilla de la carta con etiquetas <pre>
 $carta = generarPlantillaCarta(true);

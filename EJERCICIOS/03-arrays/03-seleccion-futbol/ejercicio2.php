@@ -1,11 +1,12 @@
 <?php
 
+
 declare(strict_types=1);
-require_once('functions-structure.php');
-require_once('functions.php');
-require_once('data.php');
+require_once('src/functions-structure.php');
+require_once('src/functions.php');
+require_once('data/data.php');
 //Mostrar HEAD
-myHead();
+myHead('Ejercicio 2');
 ?>
 
 <body class="d-flex flex-column" style="height: 100vh;">

@@ -1,5 +1,5 @@
 <?php
-session_name('Bengala');
+session_name('seleccionFutbol');
 session_start();
 require_once('functions-login.php');
 /**

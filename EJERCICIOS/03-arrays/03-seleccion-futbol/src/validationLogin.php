@@ -1,12 +1,12 @@
 <?php
-session_name('Bengala');
+session_name('seleccionFutbol');
 session_start();
 require_once('functions.php');
 require_once('functions-login.php');
 require_once('functions-validation.php');
 
 if (is_user_logged_in()) {
-    redirect_to('../index.php');
+    redirect_to('../homeEntrenador.php');
 }
 /** 
  * array de inputs y errores 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $errorsLogin['login'] = 'Usuario o contraseña incorrecto';
 
-        redirect_with('../login.php', [
+        redirect_with('../login.php', [ 
             'errorsLogin' => $errorsLogin,
             'inputsLogin' => $inputsLogin
         ]);
@@ -47,5 +47,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     /**
      * Si el login es correcto te lleva al formulario
      */
-    redirect_to('../index.php');
+    redirect_to('../homeEntrenador.php');
 }

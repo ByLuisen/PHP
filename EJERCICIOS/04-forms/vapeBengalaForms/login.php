@@ -1,4 +1,5 @@
 <?php
+session_name('Bengala');
 session_start();
 require_once('src/functions-structure.php');
 myHead('Inicio de sesión');
@@ -50,5 +51,10 @@ if (isset($_SESSION['errorsLogin'])) {
         </div>
     </section>
 </body>
+
+<?php 
+unset($_SESSION['inputsLogin']);
+unset($_SESSION['errorsLogin']);
+?>
 
 </html>

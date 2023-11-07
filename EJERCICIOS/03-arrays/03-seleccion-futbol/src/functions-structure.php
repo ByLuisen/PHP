@@ -83,11 +83,10 @@ function myFooter(): void
     FOOTER;
 }
 // Función herecode que determina la estructura del menú cuando un entrenador hace login
-function myMenuTrainer(): void
-{
+function myMenuTrainer(): void {
     echo <<<MENU
     <header>
-        <nav class="navbar navbar-expand-lg border-bottom border-2 border-black mb-5">
+        <nav class="navbar navbar-expand-lg border-bottom border-2 border-black mb-5" style="background-color:greenyellow;">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -95,13 +94,19 @@ function myMenuTrainer(): void
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+                            <a class="nav-link active" aria-current="page" href="homeEntrenador.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="ejercicio1.php">Listar jugadores</a>
+                            <a class="nav-link active" href="listarJugadores.php">Listar jugadores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="ejercicio2.php">Logout</a>
+                            <a class="nav-link active" href="frasesMotivadoras.php">Frases motivadoras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="src/logout.php">Recuento de Votos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="src/logout.php">Logout</a>
                         </li>
                     </ul>
                 </div>

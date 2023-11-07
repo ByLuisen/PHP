@@ -1,4 +1,5 @@
 <?php
+session_name('Bengala');
 session_start();
 require_once('src/functions-structure.php');
 require_once('data/datos.php');

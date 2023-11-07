@@ -1,10 +1,12 @@
 <?php
 // Inicia la sesision
+session_name('Bengala');
 session_start();
 
 // Requiere de los archivos necesarios
 require_once('../data/datos.php');
 require_once('functions.php');
+require_once('errorMessages.php');
 
 // Inicializa los arrays para almacenar los datos del formulario
 $inputs = [];
@@ -13,23 +15,7 @@ $errors = [];
 $inputs['total'] = 0;
 $_SESSION['productos'] = [];
 
-// Definicion de mensaje de error
-define('VALIDATION_ERRORS', [
-    'required' => 'El campo de %s es requerido',
-    'full-name' => 'El %s introducido no es válido',
-    'telefono' => 'El %s de telefono tiene que contener 9 digitos',
-    'correo' => 'El %s no es una direccion válida',
-    'direccion' => 'La %s no es válida',
-    'codigo-postal' => 'El %s no es un codigo válido',
-    'ciudad' => 'La %s no es válida',
-    'provincia' => 'La %s no es válida',
-    'numeroTarjeta' => 'El %s no es un numero válido',
-    'nombreTarjeta' => 'El %s no es un nombre válido',
-    'codigoSeguridadTarjeta' => 'El %s no es un codigo de seguridad válido.',
-    'cantidadVaper' => 'Por favor, ingrese una cantidad válida para el vaper personalizado.',
-    'complemento' => 'No se ha seleccionado ninguna opcion.',
-    'tamaño' => 'Selecciona almenos un tamaño de vaper'
-]);
+define('VALIDATION_ERRORS', VALIDATION_ERRORS_ES);
 
 // Verifica si la solicitud es un POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

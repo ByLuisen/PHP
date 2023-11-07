@@ -10,16 +10,7 @@ require_once('src/functions.php');
 require_once('data/data.php');
 require_login();
 // Mostrar head
-myHead('Home entrenadores');
-
-
-// Verificar y actualizar el contador de visitas
-if (isset($_SESSION['username'])) {
-    $visits = isset($_COOKIE[$_SESSION['username']]) ? $_COOKIE[$_SESSION['username']] : 0;
-    $visits++;
-    // Establecer la cookie con el contador de visitas
-    setcookie($_SESSION['username'], strval($visits), time() + (86400 * 30), "/"); // Cookie válida por 30 días
-}
+myHead('Recuento de Votos');
 ?>
 
 
@@ -30,14 +21,14 @@ if (isset($_SESSION['username'])) {
     <div class="container">
         <div class="row my-3">
             <div class="text-center">
-                <h1>BIENVENIDO A LA SELECCIÓN DE MONTEPINAR</h1>
+                <h1>Recuento de votos</h1>
             </div>
         </div>
         <div class="row my-5">
             <div class="d-flex flex-wrap justify-content-center mb-5">
                 <?php
-                //Mostrar selección y todos los datos de cada jugador a partir de un array
-                mostrarSeleccion($jugadores); ?>
+
+                ?>
             </div>
         </div>
     </div>

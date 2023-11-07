@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-require_once('src/functions-structure.php');
-require_once('src/functions.php');
-require_once('data/data.php');
-?>
 
-<?php
+declare(strict_types=1);
+session_name('seleccionFutbol');
 session_start();
+
 require_once('src/functions-structure.php');
+
 myHead('Inicio de sesión');
 myMenu();
 
@@ -18,10 +16,11 @@ if (isset($_SESSION['errorsLogin'])) {
     $errorsLogin = $_SESSION['errorsLogin'];
 }
 ?>
-<body>
-    <section class="vh-100">
+
+<body class="vh-100 d-flex flex-column">
+    <section>
         <div class="container py-5">
-            <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <!-- Muestra los errores del logeo -->
                     <?php if (isset($errorsLogin['login'])) : ?>
@@ -57,5 +56,10 @@ if (isset($_SESSION['errorsLogin'])) {
         </div>
     </section>
 </body>
+
+<?php
+unset($_SESSION['inputsLogin']);
+unset($_SESSION['errorsLogin']);
+?>
 
 </html>

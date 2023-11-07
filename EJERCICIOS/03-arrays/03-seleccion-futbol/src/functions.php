@@ -173,19 +173,67 @@ function generarIndexHTML(array $nombres): void
 
 
 /**
- * Función para listar el contenido de entrenadores csv
+ * Función para listar el contenido de un archivo CSV
  */
 
 function listarCsv(string $nombre_archivo)
 {
-
+    $contador = 0;
     if (($gestor = fopen($nombre_archivo, 'r')) !== false) {
         while (($fila = fgetcsv($gestor)) !== false) {
+            $contador ++;
+            echo $contador . "- ";
             foreach ($fila as $valor) {
                 echo $valor . ", "; // Imprime cada valor seguido de una coma y espacio
             }
             echo "<br>"; // Salto de línea para separar las filas
         }
+        fclose($gestor);
+    } else {
+        echo "No se pudo abrir el archivo.";
+    }
+}
+
+function listarTxt()
+{
+    $filename = 'data/frasesMotivadoras.txt';
+    $f = fopen($filename, 'r');
+
+    if ($f) {
+        $contents = fread($f, filesize($filename));
+        fclose($f);
+        echo nl2br($contents);
+    }
+}
+
+function redirect_to(string $url): void
+{
+    header('Location:' . $url);
+    exit;
+}
+
+function redirect_with(string $url, array $items): void
+{
+    foreach ($items as $key => $value) {
+        $_SESSION[$key] = $value;
+    }
+    redirect_to($url);
+}
+
+function añadirTexto($textoAñadir)
+{
+    // Nombre del archivo de texto
+    $archivo = '../data/frasesMotivadoras.txt';
+
+    // Abre el archivo en modo de escritura (si no existe, lo crea; si existe, añade al final)
+    if ($gestor = fopen($archivo, 'a')) {
+        // Escribe el string en el archivo
+        if (fwrite($gestor, $textoAñadir . PHP_EOL) === false) {
+            echo "No se pudo escribir en el archivo.";
+        } else {
+            echo "Se ha añadido el texto al archivo.";
+        }
+        // Cierra el archivo
         fclose($gestor);
     } else {
         echo "No se pudo abrir el archivo.";

@@ -181,7 +181,7 @@ function listarCsv(string $nombre_archivo)
     $contador = 0;
     if (($gestor = fopen($nombre_archivo, 'r')) !== false) {
         while (($fila = fgetcsv($gestor)) !== false) {
-            $contador ++;
+            $contador++;
             echo $contador . "- ";
             foreach ($fila as $valor) {
                 echo $valor . ", "; // Imprime cada valor seguido de una coma y espacio
@@ -194,15 +194,26 @@ function listarCsv(string $nombre_archivo)
     }
 }
 
+/**
+ * Función que lee el contenido de un archivo y lo  muestra en la salida conservando los saltos de línea
+ */
 function listarTxt()
 {
     $filename = 'data/frasesMotivadoras.txt';
     $f = fopen($filename, 'r');
+    $contador = 1; // Iniciamos el contador a 1
 
     if ($f) {
-        $contents = fread($f, filesize($filename));
+        while (!feof($f)) { // feof: verifica si hemos llegado al final
+            $line = fgets($f); // Lee una linea del archivo
+            $line = trim($line); // Eliminamos espacios en blanco innecesarios
+
+            if (!empty($line)) { // Verificamos si la línea no está vacía
+                echo $contador . '. ' . nl2br($line) . '<br>'; // Imprimir el contador, la línea y un salto de línea
+                $contador++; // Incrementa el contador en 1
+            }
+        }
         fclose($f);
-        echo nl2br($contents);
     }
 }
 
@@ -219,7 +230,11 @@ function redirect_with(string $url, array $items): void
     }
     redirect_to($url);
 }
-
+/**
+ * Función que se utiliza para añadir un texto proporcionado como argumento al final del archivo
+ * 'frasesMotivadoras.txt'. Si el archivo no existe lo crea.
+ * Proporciona manejo de errores y mensajes de éxito para informar sobre la operación.
+ */
 function añadirTexto($textoAñadir)
 {
     // Nombre del archivo de texto
@@ -238,4 +253,41 @@ function añadirTexto($textoAñadir)
     } else {
         echo "No se pudo abrir el archivo.";
     }
+}
+
+/**
+ * Función que crea o abre el archivo 'recuentoVotos.csv' y escribe
+ * una fila de datos con el valor 0 en el archivo.
+ * Si se llama múltiples veces, agregará filas adicionales al archivo, sin
+ * borrar el contenido anterior.
+ */
+function inicializarVotoFrase()
+{
+    $filename = '../data/recuentoVotos.csv';
+    $votos = file($filename, FILE_IGNORE_NEW_LINES); // Lee el archivo de recuento de votos
+
+    array_push($votos, 0); // Incrementa el voto para la línea seleccionada
+    file_put_contents($filename, implode("\n", $votos)); // Guarda los votos en el archivo
+}
+
+
+
+
+function votacionDinamica()
+{
+    $filename = 'data/frasesMotivadoras.txt';
+    $lines = [];
+
+    $f = fopen($filename, 'r');
+
+    if (!$f) {
+        return;
+    }
+
+    while (!feof($f)) {
+        $lines[] = fgets($f);
+    }
+
+    fclose($f);
+    return $lines;
 }

@@ -4,5 +4,3 @@ Quieres perder? Pos espabila. Mi Padre
 El fútbol es un juego de errores. Quien cometa el menor error, gana. Johan Cruyff
 No hay nada más peligroso que no arriesgarse. Pep Guardiola
 Cuanto más difícil es la victoria, mayor es la felicidad de ganar. Pelé
-alert(&#34;chumapela&#34;)
-Loco, no me rayes, marca gol. Mi abuelo

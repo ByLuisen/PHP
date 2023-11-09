@@ -103,7 +103,7 @@ function myMenuTrainer(): void {
                             <a class="nav-link active" href="frasesMotivadoras.php">Frases motivadoras</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="src/logout.php">Recuento de Votos</a>
+                            <a class="nav-link active" href="votarFraseMotivadora.php">Votar Frase Motivadora</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="src/logout.php">Logout</a>

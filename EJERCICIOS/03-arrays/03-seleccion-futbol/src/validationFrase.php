@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $frase = $inputFrase['frase'] . PHP_EOL; // Añade un salto de línea al final de la frase
 
         file_put_contents($archivo, $frase, FILE_APPEND | LOCK_EX); // Agrega la frase al archivo
+        inicializarVotoFrase();
     }
 
     redirect_with('../frasesMotivadoras.php', [

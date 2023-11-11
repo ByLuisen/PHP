@@ -47,8 +47,8 @@ myHead('Recuento de Votos');
                     <tbody>
                         <?php
                         // Obtener frases y votos utilizando votacionDinamica
-                        $frases = votacionDinamica('frasesMotivadoras.txt');
-                        $votos = votacionDinamica('recuentoVotos.csv');
+                        $frases = obtenerDataEnArray('frasesMotivadoras.txt');
+                        $votos = obtenerDataEnArray('recuentoVotos.csv');
 
                         // Iterar sobre las frases y votos
                         for ($i = 0; $i < count($frases); $i++) {

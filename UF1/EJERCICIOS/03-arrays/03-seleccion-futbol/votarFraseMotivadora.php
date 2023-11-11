@@ -31,7 +31,7 @@ myHead('Recuento de Votos');
                     <ul>
                         <?php
                         $contador = 0;
-                        foreach (votacionDinamica('frasesMotivadoras.txt') as $frase) : ?>
+                        foreach (obtenerDataEnArray('frasesMotivadoras.txt') as $frase) : ?>
                             <li class="d-flex mb-2 align-items-center justify-content-center">
                                 <p style="width: 30px;"><?php echo $contador + 1 . "-" ?></p>
                                 <p class="w-75 me-5"><?php echo $frase ?></p>

@@ -375,7 +375,7 @@ function inicializarVotoFrase()
  * @return array|false Un array que contiene las frases motivadoras leídas del archivo,
  *                     o false si no se puede abrir el archivo.
  */
-function votacionDinamica($filename)
+function obtenerDataEnArray($filename)
 {
     $filename = "data/{$filename}";
     $lines = [];

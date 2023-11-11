@@ -46,8 +46,8 @@ function sanitize(array $inputs, array $fields = [], int $default_filter = FILTE
 }
 
 const DEFAULT_VALIDATION_ERRORS = [
-    'required' => 'La %s es requerido',
-    'alphanumeric' => 'La %s debe tener solo letras y números',
+    'required' => '%s requerido',
+    'alphanumeric' => 'El %s debe tener solo letras y números',
 ];
 
 /**

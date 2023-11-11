@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($voto >= 0 && $voto <= count($votos) - 1) {
         $votos[$voto] = intval($votos[$voto]) + 1; // Incrementa el voto para la línea seleccionada
         file_put_contents($filename, implode("\n", $votos)); // Guarda los votos en el archivo
-        
     }
-    redirect_to('../votarFraseMotivadora.php');
+    redirect_to('../votarFraseMotivadora.php'); 
 }

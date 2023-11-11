@@ -11,11 +11,11 @@ require_once('data/data.php');
 require_login(); // Función que establece necesario loguearse
 myHead('Frases motivadoras');
 
-if (isset($_SESSION['inputsFrase'])) {
-    $inputsFrase = $_SESSION['inputsFrase'];
+if (isset($_SESSION['inputs'])) {
+    $inputs = $_SESSION['inputs'];
 }
-if (isset($_SESSION['errorsFrase'])) {
-    $errorsFrase = $_SESSION['errorsFrase'];
+if (isset($_SESSION['errors'])) {
+    $errors = $_SESSION['errors'];
 }
 ?>
 
@@ -29,14 +29,14 @@ if (isset($_SESSION['errorsFrase'])) {
             <?php
             listarTxt();
             ?>
-            <?php if (isset($errorsFrase['frase'])) : ?>
+            <?php if (isset($errors['frase'])) : ?>
                 <div class="alert alert-danger">
-                    <?= $errorsFrase['frase'] ?>
+                    <?= $errors['frase'] ?>
                 </div>
             <?php endif ?>
             <form action="src/validationFrase.php" method="post">
                 <div class="mt-3">
-                    <input type="text" id="frase" name="frase" class="form-control form-control-lg" value="<?php echo $inputsFrase['frase'] ?? '' ?>" placeholder="Añade una frase" />
+                    <input type="text" id="frase" name="frase" class="form-control form-control-lg" value="<?php echo $inputs['frase'] ?? '' ?>" placeholder="Añade una frase" />
                     <button class="btn btn-outline-light btn-success btn-lg px-5 mt-3" type="submit">Añadir frase</button>
                 </div>
             </form>

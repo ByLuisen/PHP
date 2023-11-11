@@ -26,19 +26,20 @@ myHead('Recuento de Votos');
             </div>
         </div>
         <div class="row my-5">
-            <div class="d-flex flex-wrap justify-content-center mb-5">
+            <div>
                 <form action="src/votarFrase.php" method="post">
                     <ul>
                         <?php
                         $contador = 0;
-                        foreach (votacionDinamica() as $frase) : ?>
-                            <li class="d-flex mb-2 align-items-center">
+                        foreach (votacionDinamica('frasesMotivadoras.txt') as $frase) : ?>
+                            <li class="d-flex mb-2 align-items-center justify-content-center">
+                                <p style="width: 30px;"><?php echo $contador + 1 . "-" ?></p>
                                 <p class="w-75 me-5"><?php echo $frase ?></p>
                                 <button type="submit" name="botones" value="<?php echo $contador ?>" class="btn" style="background-color: #ADFF2F;">Votar</button>
                             </li>
                         <?php
                             $contador++;
-                        endforeach 
+                        endforeach
                         ?>
                     </ul>
                 </form>

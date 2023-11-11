@@ -1,5 +1,16 @@
 <?php
-//Función para mostrar la selección a partir de un array
+
+/**
+ * Muestra la información de una selección de jugadores en formato HTML.
+ *
+ * Esta función toma un array asociativo que representa una selección de jugadores, donde cada clave es el nombre
+ * de un jugador y el valor es otro array asociativo con información adicional sobre el jugador. La función itera sobre
+ * este array y genera contenido HTML que muestra el nombre del jugador, una imagen asociada, y la información adicional
+ * del jugador, incluyendo su fecha de nacimiento y edad calculada utilizando la función `calcularEdad`.
+ *
+ * @param array $array Un array asociativo que representa una selección de jugadores.
+ * @return void
+ */
 function mostrarSeleccion(array $array): void
 {
     foreach ($array as $key => $value) {
@@ -16,7 +27,15 @@ function mostrarSeleccion(array $array): void
     }
 }
 
-// Función para calcular la edad a partir de la fecha de nacimiento en formato "dd/mm/aaaa"
+/**
+ * Calcula la edad a partir de una fecha de nacimiento.
+ *
+ * Esta función toma una fecha de nacimiento en el formato 'd/m/Y', la convierte en un objeto DateTime,
+ * obtiene la fecha actual, calcula la diferencia en años y devuelve la edad obtenida.
+ *
+ * @param string $fecha_nacimiento La fecha de nacimiento en formato 'd/m/Y'.
+ * @return int La edad calculada.
+ */
 function calcularEdad($fecha_nacimiento): int
 {
     // Convertir la fecha de nacimiento a un objeto DateTime
@@ -101,9 +120,10 @@ function generarFicheros(array $cartas): bool
 }
 
 /**
- * Función que almacena en un string el contenido de una carta
- * @param array $cartas             Array con cartas 
- * @return string                   Devuelve un string del contenido de las cartas
+ * Función que almacena en un string el contenido de una carta.
+ *
+ * @param array $cartas Un array asociativo donde las claves son los nombres de los jugadores y los valores son el contenido de sus cartas.
+ * @return string Devuelve un string que contiene el contenido de todas las cartas concatenadas.
  */
 function obtenerContenidoCartas(array $cartas): string
 {
@@ -116,7 +136,17 @@ function obtenerContenidoCartas(array $cartas): string
     return $contenido;
 }
 
-//Función que genera un html con el contenido de las cartas como main
+/**
+ * Genera un archivo HTML de vista principal a partir de un array de cartas de jugador.
+ *
+ * Esta función toma un array de cartas de jugadores como parámetro y crea un archivo HTML de vista principal
+ * llamado 'index.view.html'. Se establece un título en el contenido del HTML, se concatenan las cartas obtenidas
+ * a través de la función `obtenerContenidoCartas`, y se utiliza una plantilla HTML para generar el contenido final.
+ * El archivo HTML se crea utilizando el contenido modificado de la plantilla.
+ *
+ * @param array $cartas Un array asociativo donde las claves son los nombres de los jugadores y los valores son el contenido de sus cartas.
+ * @return void
+ */
 function generarVistaHTML(array $cartas): void
 {
     //Establecemos la ruta/nombre del archivo
@@ -131,7 +161,18 @@ function generarVistaHTML(array $cartas): void
     file_put_contents($nombre_archivo, $contenido);
 }
 
-//Función que genera archivos HTML para cada carta
+/**
+ * Genera archivos HTML individuales para cada carta de jugador a partir de un array de cartas.
+ *
+ * Esta función toma un array de cartas de jugadores como parámetro y crea archivos HTML individuales
+ * para cada carta en el directorio 'players'. Si el directorio no existe, lo crea. Luego, recorre el array
+ * de cartas, establece la ruta y el nombre del archivo para cada carta, y crea el archivo utilizando una plantilla
+ * HTML. La plantilla HTML utiliza la etiqueta {{contenido}} para incluir el contenido específico de cada carta.
+ *
+ * @param array $cartas Un array asociativo donde las claves son los nombres de los jugadores y los valores son el contenido de sus cartas.
+ * @return void
+ */
+
 function generarHTMLS(array $cartas): void
 {
     // Crear el directorio si no existe
@@ -147,7 +188,17 @@ function generarHTMLS(array $cartas): void
     }
 }
 
-//Función que genera un indice HTML para los enlaces de cada carta HTML
+/**
+ * Genera un archivo HTML de índice a partir de un array de nombres de jugadores.
+ *
+ * Esta función toma un array de nombres de jugadores como parámetro y utiliza una plantilla HTML
+ * para crear un archivo index.html que contiene enlaces a las páginas individuales de cada jugador.
+ * La plantilla HTML utiliza la etiqueta <ul> para crear una lista no ordenada de enlaces <li> a cada
+ * jugador. El contenido de la plantilla se almacena en el archivo index.html.
+ *
+ * @param array $nombres Un array de nombres de jugadores.
+ * @return void
+ */
 function generarIndexHTML(array $nombres): void
 {
     //Plantilla de etiqueta li 
@@ -172,30 +223,50 @@ function generarIndexHTML(array $nombres): void
 }
 
 
-/**
- * Función para listar el contenido de un archivo CSV
- */
 
+/**
+ * Lee un archivo CSV y muestra sus contenidos en el formato: 
+ * "n- valor1, valor2, ..., valorN" donde "n" es el número de fila.
+ *
+ * Esta función toma el nombre de un archivo CSV como parámetro, lo abre en modo lectura,
+ * lee cada fila del archivo utilizando la función fgetcsv, y muestra cada valor en la fila
+ * seguido de una coma y un espacio. El número de fila se imprime antes de los valores.
+ *
+ * @param string $nombre_archivo El nombre del archivo CSV que se va a listar.
+ * @return void
+ */
 function listarCsv(string $nombre_archivo)
 {
     $contador = 0;
+
+    // Intenta abrir el archivo en modo lectura
     if (($gestor = fopen($nombre_archivo, 'r')) !== false) {
         while (($fila = fgetcsv($gestor)) !== false) {
             $contador++;
             echo $contador . "- ";
+
+            // Itera sobre cada valor en la fila
             foreach ($fila as $valor) {
                 echo $valor . ", "; // Imprime cada valor seguido de una coma y espacio
             }
             echo "<br>"; // Salto de línea para separar las filas
         }
+        // Cierra el archivo después de la lectura
         fclose($gestor);
     } else {
+        // Mensaje si no se pudo abrir el archivo
         echo "No se pudo abrir el archivo.";
     }
 }
 
 /**
- * Función que lee el contenido de un archivo y lo  muestra en la salida conservando los saltos de línea
+ * Lee un archivo de texto que contiene frases motivadoras y muestra cada frase numerada en el formato "1. Frase".
+ *
+ * Esta función abre el archivo especificado en modo lectura, lee cada línea del archivo,
+ * elimina espacios en blanco innecesarios, y muestra las frases numeradas en el formato
+ * "1. Frase" en el navegador. El contador se incrementa con cada frase no vacía.
+ *
+ * @return void
  */
 function listarTxt()
 {
@@ -217,12 +288,34 @@ function listarTxt()
     }
 }
 
+/**
+ * Redirige el flujo de ejecución a la URL especificada.
+ *
+ * Esta función utiliza el encabezado HTTP "Location" para redirigir el navegador del usuario a la URL proporcionada.
+ * Después de enviar el encabezado de redirección, la función finaliza la ejecución del script utilizando la función exit().
+ *
+ * @param string $url La URL a la que se debe redirigir.
+ * @return void
+ */
 function redirect_to(string $url): void
 {
     header('Location:' . $url);
     exit;
 }
 
+/**
+ * Almacena datos en la sesión y redirige a una nueva página.
+ *
+ * Esta función toma una URL y un array de items, luego establece cada par clave-valor
+ * del array en la superglobal $_SESSION. Después, redirige a la URL especificada utilizando
+ * una función llamada redirect_to.
+ *
+ * @param string $url   La URL a la que se redirigirá.
+ * @param array  $items Un array asociativo de datos a almacenar en la sesión.
+ *                      Las claves del array se utilizan como nombres de variables de sesión,
+ *                      y los valores asociados se almacenan en esas variables.
+ * @return void
+ */
 function redirect_with(string $url, array $items): void
 {
     foreach ($items as $key => $value) {
@@ -272,10 +365,19 @@ function inicializarVotoFrase()
 
 
 
-
-function votacionDinamica()
+/**
+ * Realiza la lectura de un archivo de texto que contiene frases motivadoras y devuelve
+ * esas frases en un array.
+ *
+ * El archivo de texto debe contener una frase por línea. Cada línea se lee y almacena
+ * en un array, que se devuelve al final de la función.
+ *
+ * @return array|false Un array que contiene las frases motivadoras leídas del archivo,
+ *                     o false si no se puede abrir el archivo.
+ */
+function votacionDinamica($filename)
 {
-    $filename = 'data/frasesMotivadoras.txt';
+    $filename = "data/{$filename}";
     $lines = [];
 
     $f = fopen($filename, 'r');

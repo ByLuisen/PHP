@@ -2,7 +2,12 @@
 session_name('Bengala');
 session_start();
 require_once('src/functions-structure.php');
+require_once('src/functions-login.php');
 myHead('Inicio de sesión');
+
+if (is_user_logged_in()) {
+    redirect_to('index.php');
+}
 
 if (isset($_SESSION['inputsLogin'])) {
     $inputsLogin = $_SESSION['inputsLogin'];

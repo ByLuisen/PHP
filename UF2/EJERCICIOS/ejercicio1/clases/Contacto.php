@@ -5,25 +5,25 @@ require_once('../src/functions.php');
 class Contacto
 {
     //Variables o atributos
-    private $nombre;
-    private $apellidos;
-    private $fechaNacimiento;
-    private $email;
+    protected $nombre;
+    protected $apellidos;
+    protected $fechaNacimiento;
+    protected $email;
 
     function __construct($miNombre, $miApellidos, $miFechaNacimiento, $miEmail)
     {
         if ($miEmail == null && calcularEdad($this->getFechaNacimiento() > 17)) {
         }
         if ($miNombre == null || $miApellidos == null || $miFechaNacimiento == null) {
-            $this->nombre = "Valores incompletos";
-            $this->apellidos = "Valores incompletos";
-            $this->fechaNacimiento = "Valores incompletos";
+            $this->__destruct();
         } else {
             $this->nombre = $miNombre;
             $this->apellidos = $miApellidos;
             $this->fechaNacimiento = $miFechaNacimiento;
         }
     }
+
+    function __destruct()
 
     //Funciones o métodos
     function setNombre($miNombre)

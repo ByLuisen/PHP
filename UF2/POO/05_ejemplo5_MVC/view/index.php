@@ -27,5 +27,5 @@
             <td><?php echo $row->color ?></td>
             <td><?php echo $row->propietario ?></td>
         </tr>
-     <?php endforeach; ?>
+    <?php endforeach; ?>
 </table>

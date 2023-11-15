@@ -1,4 +1,8 @@
 <?php
+/**
+ * Luis Enrique Ledesma Ollague
+ * Plantilla para la informacación de cada jugador
+ */
 session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');

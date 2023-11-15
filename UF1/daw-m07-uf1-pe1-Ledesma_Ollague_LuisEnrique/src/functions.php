@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Luis Enrique Ledesma Ollague
  * Este fichero contiene las funcinonalidades que se llamaran al index
@@ -33,6 +34,28 @@ function obtenerDataEnArray($filename)
     return $lines;
 }
 
+function readCSV($filename)
+{
+    $filename = "data/{$filename}.csv";
+    $data = [];
+
+    // open the file
+    $f = fopen($filename, 'r');
+
+    if ($f === false) {
+        die('Cannot open the file ' . $filename);
+    }
+
+    // read each line in CSV file at a time
+    while (($row = fgetcsv($f)) !== false) {
+        $data[] = $row;
+    }
+
+    // close the file
+    fclose($f);
+    return $data;
+}
+
 /**
  * Genera un archivo HTML de índice a partir de un array de nombres de jugadores.
  *
@@ -51,7 +74,8 @@ function generarJugadoresClubPHP(): void
     file_put_contents("listarBarça.php", strtr(file_get_contents('templates/generator.php'), ['{{color}}' => 'blue', '{{contenido}}' => 'BARÇA']));
 }
 
-function contadorVisitas(){
+function contadorVisitas()
+{
     if (!isset($_SESSION['visitas'])) {
         $_SESSION['visitas'] = 0;
     } else {

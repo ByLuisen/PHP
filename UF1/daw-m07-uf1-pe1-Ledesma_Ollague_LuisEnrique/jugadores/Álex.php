@@ -1,4 +1,8 @@
 <?php
+/**
+ * Luis Enrique Ledesma Ollague
+ * Plantilla para la informacación de cada jugador
+ */
 session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
@@ -13,8 +17,7 @@ contadorVisitas();
 <div class="container">
     <div class="row my-5">
         <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/155983pre7342.jpg
-" alt='Álex Abrines'>
+            <img src="../images/jugadores/155983pre7342.jpg" alt='Álex Abrines'>
             <p>Álex Abrines</p>
         </div>
     </div>

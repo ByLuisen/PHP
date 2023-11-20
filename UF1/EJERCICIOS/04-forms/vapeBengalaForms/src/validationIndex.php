@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (!empty($direccion)) {
             // Si la 'direccion' no esta vacia
-            if (ctype_alnum($direccion)) {     
+            if (ctype_alnum($direccion)) {
                 $inputs['direccion'] = trim($direccion);
             } else {
                 $errors['direccion'] = sprintf(VALIDATION_ERRORS['direccion'], 'direccion');

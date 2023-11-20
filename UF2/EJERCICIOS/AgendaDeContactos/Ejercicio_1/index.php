@@ -12,10 +12,10 @@ $contacto3 = new Contacto('Paco', 'Fernandéz Gracia', '7/9/2006', 'paco32@gmail
 // Añadimos los contactos a un array
 $contactos = [$contacto1, $contacto2, $contacto3];
 
-// Ordenamos el array contactos por edad
+// Ordenamos el array contactos por edad usando una función que compara edades.
 usort($contactos, 'compararPorEdad');
 
-// Mostramos por pantalla los contactos ordenados
+// Mostramos por pantalla los contactos ordenados.
 foreach ($contactos as $contacto) {
     echo $contacto . "<br>";
 }

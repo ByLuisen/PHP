@@ -1,0 +1,13 @@
+/*
+style.css 
+Contiene el código de estilos de la página
+*/
+
+body * {
+    margin: 0; 
+    padding: 0;
+}
+
+button {
+    background: radial-gradient(circle, #654cb2, #b04579, #fca635);
+}

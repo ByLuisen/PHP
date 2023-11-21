@@ -53,7 +53,7 @@ if (isset($_SESSION['errors'])) {
                                         <p style="height: 30px;"><?= $errors['email'] ?? '' ?></p>
                                     </div>
                                     <!-- Boton dar de alta -->
-                                    <button class="btn btn-danger btn-outline-light btn-lg px-5" type="submit">Dar de alta</button>
+                                    <button class="btn btn-danger btn-outline-light btn-lg px-5" type="submit">Editar</button>
                                 </div>
                             </form>
                         </div>

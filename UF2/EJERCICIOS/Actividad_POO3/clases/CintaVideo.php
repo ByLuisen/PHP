@@ -14,7 +14,7 @@ class CintaVideo extends Soporte
 
     public function muestraResumen(): void
     {
-        echo "<p style='margin: 0;'>Película en VHS:</p>";
+        echo "Película en VHS:<br>";
         parent::muestraResumen();
         echo "<p style='margin: 0;'>Duración: {$this->duracion} minutos</p>";
     }

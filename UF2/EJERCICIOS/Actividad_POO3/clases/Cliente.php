@@ -6,7 +6,7 @@ class Cliente
     private int $numero;
     /** @var Soporte[] */
     private array $soportesAlquilados = [];
-    private int $numSoportesAlquilados;
+    private int $numSoportesAlquilados = 0;
     private int $maxAlquilerConcurrente;
 
     public function __construct(string $nombre, int $numero, int $maxAlquilerConcurrente = 3)
@@ -33,8 +33,8 @@ class Cliente
 
     public function muestraResumen(): void
     {
-        echo "<p>Nombre: {$this->nombre}</p>";
-        echo "<p>Soportes alquilados: {$this->numSoportesAlquilados}</p>";
+        echo "<strong>Cliente {$this->numero}</strong>: {$this->nombre}<br>";
+        echo "Alquileres actuales: {$this->numSoportesAlquilados}<br>";
     }
 
     public function tieneAlquilado(Soporte $s): bool

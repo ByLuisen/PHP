@@ -31,7 +31,7 @@ class Juego extends Soporte
 
     public function muestraResumen(): void
     {
-        echo "<p style='margin: 0;'>Juego para: {$this->consola}</p>";
+        echo "Juego para: {$this->consola}<br>";
         parent::muestraResumen();
         echo "<p style='margin: 0;'>{$this->muestraJugadoresPosibles()}</p>";
     }

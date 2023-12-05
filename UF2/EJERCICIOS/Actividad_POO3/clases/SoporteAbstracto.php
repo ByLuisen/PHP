@@ -1,8 +1,8 @@
 <?php
 
-include_once('interfaces/Resumible.php');
+include_once ('interfaces/Resumible.php');
 
-class Soporte implements Resumible
+abstract class SoporteAbstracto implements Resumible
 {
     public string $titulo;
     protected int $numero;

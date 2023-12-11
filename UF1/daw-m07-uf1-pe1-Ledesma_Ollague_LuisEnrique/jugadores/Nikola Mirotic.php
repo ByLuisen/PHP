@@ -7,18 +7,18 @@ session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
 require_once('../src/functions.php');
-myHead('Inicio de sesión');
+myHead('Nikola Mirotic', '..');
 
-myMenu();
+myMenu('..');
 contadorVisitas();
 ?>
 
 <body>
 <div class="container">
     <div class="row my-5">
-        <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/156990pre7491.jpg" alt='Guillem Vives'>
-            <p>Guillem Vives</p>
+        <div class="col text-center mb-5">
+            <img src="../images/jugadores/156430pre7354.jpg" alt='Nikola Mirotic'>
+            <p>Nikola Mirotic</p>
         </div>
     </div>
 </div>

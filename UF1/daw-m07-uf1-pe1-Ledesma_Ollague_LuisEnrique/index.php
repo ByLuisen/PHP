@@ -7,7 +7,7 @@ session_name('LLigaBasquet');
 session_start();
 require_once('src/functions-structure.php');
 require_once('src/functions.php');
-myHead('Inicio de sesión');
+myHead('Clubes');
 
 myMenu();
 contadorVisitas();

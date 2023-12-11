@@ -7,18 +7,18 @@ session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
 require_once('../src/functions.php');
-myHead('Inicio de sesión');
+myHead('Rolands Smits', '..');
 
-myMenu();
+myMenu('..');
 contadorVisitas();
 ?>
 
 <body>
 <div class="container">
     <div class="row my-5">
-        <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/157167pre7437.jpg" alt='Maurice Ndour'>
-            <p>Maurice Ndour</p>
+        <div class="col text-center mb-5">
+            <img src="../images/jugadores/156550pre7303.jpg" alt='Rolands Smits'>
+            <p>Rolands Smits</p>
         </div>
     </div>
 </div>

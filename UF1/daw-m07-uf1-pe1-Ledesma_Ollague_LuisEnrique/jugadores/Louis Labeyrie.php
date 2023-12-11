@@ -7,18 +7,18 @@ session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
 require_once('../src/functions.php');
-myHead('Inicio de sesión');
+myHead('Louis Labeyrie', '..');
 
-myMenu();
+myMenu('..');
 contadorVisitas();
 ?>
 
 <body>
 <div class="container">
-    <div class="row my-5">
-        <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/155646pre7194.jpg" alt='Sergio Llull'>
-            <p>Sergio Llull</p>
+    <div class="row justify-content-center my-5">
+        <div class="col-12 mb-5">
+            <img src="../images/jugadores/157110pre7452.jpg" alt='Louis Labeyrie'>
+            <p>Louis Labeyrie</p>
         </div>
     </div>
 </div>

@@ -7,18 +7,18 @@ session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
 require_once('../src/functions.php');
-myHead('Inicio de sesión');
+myHead('Víctor Claver', '..');
 
-myMenu();
+myMenu('..');
 contadorVisitas();
 ?>
 
 <body>
 <div class="container">
     <div class="row my-5">
-        <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/157110pre7452.jpg" alt='Louis Labeyrie'>
-            <p>Louis Labeyrie</p>
+        <div class="col text-center mb-5">
+            <img src="../images/jugadores/156664pre7300.jpg" alt='Víctor Claver'>
+            <p>Víctor Claver</p>
         </div>
     </div>
 </div>

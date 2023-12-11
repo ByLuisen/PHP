@@ -7,18 +7,18 @@ session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
 require_once('../src/functions.php');
-myHead('Inicio de sesión');
+myHead('Vanja Marinkovic', '..');
 
-myMenu();
+myMenu('..');
 contadorVisitas();
 ?>
 
 <body>
 <div class="container">
-    <div class="row my-5">
-        <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/155793pre7185.jpg" alt='Trey Thompkins'>
-            <p>Trey Thompkins</p>
+    <div class="row justify-content-center my-5">
+        <div class="col-12 mb-5">
+            <img src="../images/jugadores/157308pre7401.jpg" alt='Vanja Marinkovic'>
+            <p>Vanja Marinkovic</p>
         </div>
     </div>
 </div>

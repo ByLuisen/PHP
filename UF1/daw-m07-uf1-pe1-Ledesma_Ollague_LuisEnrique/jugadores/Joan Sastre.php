@@ -7,18 +7,18 @@ session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
 require_once('../src/functions.php');
-myHead('Inicio de sesión');
+myHead('Joan Sastre', '..');
 
-myMenu();
+myMenu('..');
 contadorVisitas();
 ?>
 
 <body>
 <div class="container">
-    <div class="row my-5">
-        <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/156115pre7327.jpg" alt='Brandon Davies'>
-            <p>Brandon Davies</p>
+    <div class="row justify-content-center my-5">
+        <div class="col-12 mb-5">
+            <img src="../images/jugadores/157029pre7509.jpg" alt='Joan Sastre'>
+            <p>Joan Sastre</p>
         </div>
     </div>
 </div>

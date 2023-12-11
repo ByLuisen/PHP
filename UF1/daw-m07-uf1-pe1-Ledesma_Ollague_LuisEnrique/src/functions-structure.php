@@ -7,7 +7,7 @@
 /**
  * Cabecera
  */
-function myHead($title)
+function myHead($title, $bootstrapPath = '.')
 {
     echo <<< HEAD
     <!DOCTYPE html>
@@ -26,8 +26,8 @@ function myHead($title)
         crossorigin="anonymous"></script> -->
 
     <!-- Bootstrap local links -->
-    <link rel="stylesheet" href="./vendor/bootstrap-5.3.2-dist/css/bootstrap.min.css">
-    <script type="text/javascript" src="./vendor/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="$bootstrapPath/vendor/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="$bootstrapPath/vendor/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- files CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -37,10 +37,11 @@ function myHead($title)
 
     HEAD;
 }
+
 /**
  * Barra de Menú
  */
-function myMenu()
+function myMenu($filesPath = '.')
 {
 
     echo <<< MENU
@@ -50,7 +51,7 @@ function myMenu()
             <div class="container">
                         <ul class="navbar-nav f-flex justify-content-between text-white w-100 mx-5">
                             <li class="nav-item d-flex align-items-end">
-                                <a class="text-decoration-none text-white"><p class="lh-1">CLUBES</p></a>
+                                <a href="$filesPath/index.php" class="text-decoration-none text-white"><p class="lh-1">CLUBES</p></a>
                             </li>
                             <li class="nav-item d-flex align-items-end">
                                 <a class="text-decoration-none text-white"><p class="lh-1">LIGA ENDESA</p></a>

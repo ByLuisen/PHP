@@ -7,18 +7,18 @@ session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
 require_once('../src/functions.php');
-myHead('Inicio de sesión');
+myHead('Ante Tomic', '..');
 
-myMenu();
+myMenu('..');
 contadorVisitas();
 ?>
 
 <body>
 <div class="container">
     <div class="row my-5">
-        <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/155028pre7275.jpg" alt='Gabriel Deck'>
-            <p>Gabriel Deck</p>
+        <div class="col text-center mb-5">
+            <img src="../images/jugadores/156046pre7324.jpg" alt='Ante Tomic'>
+            <p>Ante Tomic</p>
         </div>
     </div>
 </div>

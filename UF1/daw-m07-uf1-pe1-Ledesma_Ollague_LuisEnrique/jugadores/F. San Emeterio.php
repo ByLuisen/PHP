@@ -7,18 +7,18 @@ session_name('LLigaBasquet');
 session_start();
 require_once('../src/functions-structure.php');
 require_once('../src/functions.php');
-myHead('Inicio de sesión');
+myHead('F. San Emeterio', '..');
 
-myMenu();
+myMenu('..');
 contadorVisitas();
 ?>
 
 <body>
 <div class="container">
-    <div class="row my-5">
-        <div class="d-flex flex-wrap justify-content-center mb-5">
-            <img src="../images/jugadores/156147pre7167.jpg" alt='Edy Tavares'>
-            <p>Edy Tavares</p>
+    <div class="row justify-content-center my-5">
+        <div class="col-12 mb-5">
+            <img src="../images/jugadores/156930pre7500.jpg" alt='F. San Emeterio'>
+            <p>F. San Emeterio</p>
         </div>
     </div>
 </div>

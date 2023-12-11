@@ -69,9 +69,9 @@ function readCSV($filename)
  */
 function generarJugadoresClubPHP(): void
 {
-    file_put_contents("listarValencia.php", strtr(file_get_contents('templates/generator.php'), ['{{color}}' => 'orange', '{{contenido}}' => 'VALENCIA BASKET CLUB']));
-    file_put_contents("listarRealMadrid.php", strtr(file_get_contents('templates/generator.php'), ['{{color}}' => 'white', '{{contenido}}' => 'REAL MADRID']));
-    file_put_contents("listarBarça.php", strtr(file_get_contents('templates/generator.php'), ['{{color}}' => 'blue', '{{contenido}}' => 'BARÇA']));
+    file_put_contents("listarValencia.php", strtr(file_get_contents('templates/generator.php'), ['{{estil}}' => 'VALÈNCIA', '{{contenido}}' => 'VALENCIA BASKET CLUB']));
+    file_put_contents("listarRealMadrid.php", strtr(file_get_contents('templates/generator.php'), ['{{estil}}' => 'MADRID', '{{contenido}}' => 'REAL MADRID']));
+    file_put_contents("listarBarça.php", strtr(file_get_contents('templates/generator.php'), ['{{estil}}' => 'BARÇA', '{{contenido}}' => 'BARÇA']));
 }
 
 function contadorVisitas()

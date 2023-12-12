@@ -15,8 +15,8 @@ contadorVisitas();
 
 <body>
 <div class="container">
-    <div class="row justify-content-center my-5">
-        <div class="col-12 mb-5">
+    <div class="row my-5">
+        <div class="text-center">
             <img src="../images/jugadores/157188pre7473.jpg" alt='Mike Tobey'>
             <p>Mike Tobey</p>
         </div>

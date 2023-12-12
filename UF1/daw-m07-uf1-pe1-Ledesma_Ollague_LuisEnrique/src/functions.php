@@ -95,3 +95,20 @@ function selected($needle, $haystack)
 
     return '';
 }
+
+/**
+ * Función que recibe dos arrays y devuelve "checked" si $needle está en $haystack, de lo contrario, devuelve una cadena vacía.
+ *
+ * @param mixed $needle   El valor que se busca en el arreglo.
+ * @param array $haystack El arreglo en el que se busca $needle.
+ *
+ * @return string   "checked" si $needle está en $haystack, de lo contrario, una cadena vacía.
+ */
+function checked($needle, $haystack)
+{
+    if ($haystack) {
+        return in_array($needle, $haystack) ? 'checked' : '';
+    }
+
+    return '';
+}

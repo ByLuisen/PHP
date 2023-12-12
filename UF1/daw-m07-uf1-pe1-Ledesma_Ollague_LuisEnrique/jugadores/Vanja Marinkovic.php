@@ -15,8 +15,8 @@ contadorVisitas();
 
 <body>
 <div class="container">
-    <div class="row justify-content-center my-5">
-        <div class="col-12 mb-5">
+    <div class="row my-5">
+        <div class="text-center">
             <img src="../images/jugadores/157308pre7401.jpg" alt='Vanja Marinkovic'>
             <p>Vanja Marinkovic</p>
         </div>

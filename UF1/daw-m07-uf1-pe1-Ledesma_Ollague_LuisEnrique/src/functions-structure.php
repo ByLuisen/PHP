@@ -43,36 +43,33 @@ function myHead($title, $bootstrapPath = '.')
  */
 function myMenu($filesPath = '.')
 {
-
+    $estil = null;
     echo <<< MENU
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark p-0" style="background-color: blue; height: 80px">
-            <div class="container">
-                        <ul class="navbar-nav f-flex justify-content-between text-white w-100 mx-5">
-                            <li class="nav-item d-flex align-items-end">
-                                <a href="$filesPath/index.php" class="text-decoration-none text-white"><p class="lh-1">CLUBES</p></a>
-                            </li>
-                            <li class="nav-item d-flex align-items-end">
-                                <a class="text-decoration-none text-white"><p class="lh-1">LIGA ENDESA</p></a>
-                            </li>
-                            <li class="nav-item d-flex align-items-end">
-                                <a class="text-decoration-none text-white"><p class="lh-1">ACB</p></a>
-                            </li>
-                            <li class="nav-item d-flex align-items-end">
-                                <a class="text-decoration-none text-white"><p class="lh-1">COPA DEL REY</p></a>
-                            </li>
-                            <li class="nav-item d-flex align-items-end">
-                                <a class="text-decoration-none text-white"><p class="lh-1">SUPERCOPA</p></a>
-                            </li>
-                            <li class="nav-item d-flex align-items-end">
-                                <a class="text-decoration-none text-white"><p class="lh-1">ENDESA</p></a>
-                            </li>
-                            <li class="nav-item d-flex align-items-end">
-                                <a href="comprarEntradas.php" class="text-decoration-none text-white"><p class="lh-1">COMPRAR ENTRADAS</p></a>
-                            </li>
-                        </ul>
-            </div>
+                <div class="container">
+                    <ul class="navbar-nav f-flex justify-content-between text-white w-100 mx-5">
+                        <li class="nav-item d-flex align-items-end">
+                            <a href="$filesPath/index.php" class="text-decoration-none text-white"><p class="lh-1">CLUBES</p></a>
+                        </li>
+                        <li class="nav-item d-flex align-items-end">
+                            <a class="text-decoration-none text-white"><p class="lh-1">LIGA ENDESA</p></a>
+                        </li>
+                        <li class="nav-item d-flex align-items-end">
+                            <a class="text-decoration-none text-white"><p class="lh-1">ACB</p></a>
+                        </li>
+                        <li class="nav-item d-flex align-items-end">
+                            <a class="text-decoration-none text-white"><p class="lh-1">COPA DEL REY</p></a>
+                        </li>
+                        <li class="nav-item d-flex align-items-end">
+                            <a class="text-decoration-none text-white"><p class="lh-1">SUPERCOPA</p></a>
+                        </li>
+                        <li class="nav-item d-flex align-items-end">
+                            <a class="text-decoration-none text-white"><p class="lh-1">ENDESA</p></a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </header>
     MENU;

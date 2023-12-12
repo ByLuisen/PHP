@@ -15,8 +15,8 @@ contadorVisitas();
 
 <body>
 <div class="container">
-    <div class="row justify-content-center my-5">
-        <div class="col-12 mb-5">
+    <div class="row my-5">
+        <div class="text-center">
             <img src="../images/jugadores/156930pre7500.jpg" alt='F. San Emeterio'>
             <p>F. San Emeterio</p>
         </div>

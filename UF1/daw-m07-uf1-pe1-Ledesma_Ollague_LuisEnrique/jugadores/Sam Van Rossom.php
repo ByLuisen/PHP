@@ -15,8 +15,8 @@ contadorVisitas();
 
 <body>
 <div class="container">
-    <div class="row justify-content-center my-5">
-        <div class="col-12 mb-5">
+    <div class="row my-5">
+        <div class="text-center">
             <img src="../images/jugadores/157284pre7464.jpg" alt='Sam Van Rossom'>
             <p>Sam Van Rossom</p>
         </div>

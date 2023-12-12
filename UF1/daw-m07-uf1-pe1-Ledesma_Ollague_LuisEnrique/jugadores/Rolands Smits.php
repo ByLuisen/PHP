@@ -16,7 +16,7 @@ contadorVisitas();
 <body>
 <div class="container">
     <div class="row my-5">
-        <div class="col text-center mb-5">
+        <div class="text-center">
             <img src="../images/jugadores/156550pre7303.jpg" alt='Rolands Smits'>
             <p>Rolands Smits</p>
         </div>

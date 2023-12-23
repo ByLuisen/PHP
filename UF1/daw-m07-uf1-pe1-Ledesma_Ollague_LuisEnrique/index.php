@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Luis Enrique Ledesma Ollague
  * indice donde se presentan os clubes
@@ -20,13 +21,15 @@ contadorVisitas();
                 <h1 class='text-primary'>CLUBES</h1>
                 <div class="d-flex">
                     <?php
-                    foreach (obtenerDataEnArray('clubs.txt') as $club) : ?>
-                        <a href="listar<?php echo trim($club) ?>.php"><div class="mb-2 text-center justify-content-center">
-                            <img src="images/logos_clubs/<?php echo $club?>.png" alt="<?php echo $club ?>" width="100px">
-                            <p><?php echo $club?></p>
-                        </div></a>
+                    foreach (obtenerClubs() as $club) : ?>
+                        <a href="listar<?php echo trim($club->getNombre()) ?>.php">
+                            <div class="mb-2 text-center justify-content-center">
+                                <img src="images/logos_clubs/<?php echo $club->getNombre() ?>.png" alt="<?php echo $club->getNombre() ?>" width="100px">
+                                <p><?php echo $club->getNombre() ?></p>
+                            </div>
+                        </a>
                     <?php endforeach;
-                    generarJugadoresClubPHP();?>
+                    generarJugadoresClubPHP(); ?>
                 </div>
             </div>
         </div>

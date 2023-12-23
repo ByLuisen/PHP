@@ -64,7 +64,7 @@ class Videoclub
     public function listarSocios()
     {
         echo "Listado de los " . count($this->socios) . " socios del videoclub:<br>";
-        for ($i=0; $i < count($this->socios); $i++) { 
+        for ($i = 0; $i < count($this->socios); $i++) {
             echo $i + 1 . ".- ";
             echo $this->socios[$i]->muestraResumen();
         }

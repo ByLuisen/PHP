@@ -1,5 +1,8 @@
 <?php
 
+require_once "clases/Club.php";
+require_once "clases/Jugador.php";
+
 /**
  * Luis Enrique Ledesma Ollague
  * Este fichero contiene las funcinonalidades que se llamaran al index
@@ -15,10 +18,10 @@
  * @return array|false Un array que contiene las frases motivadoras leídas del archivo,
  *                     o false si no se puede abrir el archivo.
  */
-function obtenerDataEnArray($filename)
+function obtenerClubs()
 {
-    $filename = "data/{$filename}";
-    $lines = [];
+    $filename = "data/clubs.txt";
+    $clubs = [];
 
     $f = fopen($filename, 'r');
 
@@ -27,17 +30,18 @@ function obtenerDataEnArray($filename)
     }
 
     while (!feof($f)) {
-        $lines[] = fgets($f);
+        $club = new Club(fgets($f));
+        $clubs[] = $club;
     }
 
     fclose($f);
-    return $lines;
+    return $clubs;
 }
 
-function readCSV($filename)
+function obtenerJugadores()
 {
-    $filename = "data/{$filename}.csv";
-    $data = [];
+    $filename = "data/lligaACB - lligaACB.csv";
+    $jugadores = [];
 
     // open the file
     $f = fopen($filename, 'r');
@@ -46,14 +50,18 @@ function readCSV($filename)
         die('Cannot open the file ' . $filename);
     }
 
+    // Leemos la primera línea para descartarla 
+    fgetcsv($f);
+
     // read each line in CSV file at a time
     while (($row = fgetcsv($f)) !== false) {
-        $data[] = $row;
+        $jugador = new Jugador($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8], $row[9]);
+        $jugadores[] = $jugador;
     }
 
     // close the file
     fclose($f);
-    return $data;
+    return $jugadores;
 }
 
 /**

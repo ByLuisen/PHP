@@ -107,21 +107,18 @@ switch ($estil) {
                     </thead>
                     <tbody>
                         <?php
-                        // Obtener los jugadores
-                        $jugadores = (readCSV('lligaACB - lligaACB'));
-
-                        for ($i = 1; $i < count($jugadores); $i++) {
-                            if ($jugadores[$i][2] == 'REAL MADRID') {
-                                file_put_contents("jugadores/" . $jugadores[$i][0] . ".php", strtr(file_get_contents('templates/jugadorFoto.php'), ['{{nombre}}' => "{$jugadores[$i][0]}", '{{foto}}' => "{$jugadores[$i][9]}"]));
+                        foreach (obtenerJugadores() as $jugador) {
+                            if ($jugador->getClub() == 'REAL MADRID') {
+                                file_put_contents("jugadores/" . $jugador->getNombre() . ".php", strtr(file_get_contents('templates/jugadorFoto.php'), ['{{nombre}}' => "{$jugador->getNombre()}", '{{foto}}' => "{$jugador->getFoto()}"]));
 
                                 echo "<tr>";
-                                echo "<td><a href='jugadores/" . $jugadores[$i][0] . ".php'>{$jugadores[$i][0]}</a></td>";
-                                echo "<td><a href='jugadores/" . $jugadores[$i][0] . ".php'>{$jugadores[$i][3]}</a></td>";
-                                echo "<td><a href='jugadores/" . $jugadores[$i][0] . ".php'>{$jugadores[$i][4]}</a></td>";
-                                echo "<td><a href='jugadores/" . $jugadores[$i][0] . ".php'>{$jugadores[$i][5]}</a></td>";
-                                echo "<td><a href='jugadores/" . $jugadores[$i][0] . ".php'>{$jugadores[$i][6]}</a></td>";
-                                echo "<td><a href='jugadores/" . $jugadores[$i][0] . ".php'>{$jugadores[$i][7]}</a></td>";
-                                echo "<td><a href='jugadores/" . $jugadores[$i][0] . ".php'>{$jugadores[$i][8]}</a></td>";
+                                echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getNombre()}</a></td>";
+                                echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getPosicion()}</a></td>";
+                                echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getNacionalidad()}</a></td>";
+                                echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getLicencia()}</a></td>";
+                                echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getAltura()}</a></td>";
+                                echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getEdad()}</a></td>";
+                                echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getTemp()}</a></td>";
                                 echo "</tr>";
                             };
                         };

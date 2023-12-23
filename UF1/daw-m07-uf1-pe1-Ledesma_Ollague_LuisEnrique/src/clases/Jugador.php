@@ -3,7 +3,7 @@
 class Jugador
 {
     private string $nombre;
-    private int $samarreta;
+    private int $dorsal;
     private string $club;
     private string $posicion;
     private string $nacionalidad;
@@ -15,7 +15,7 @@ class Jugador
 
     public function __construct(
         string $nombre,
-        int $samarreta,
+        int $dorsal,
         string $club,
         string $posicion,
         string $nacionalidad,
@@ -26,7 +26,7 @@ class Jugador
         string $foto
     ) {
         $this->nombre = $nombre;
-        $this->samarreta = $samarreta;
+        $this->dorsal = $dorsal;
         $this->club = $club;
         $this->posicion = $posicion;
         $this->nacionalidad = $nacionalidad;

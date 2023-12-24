@@ -1,13 +1,14 @@
 <?php
 /**
- * Luis Enrique Ledesma Ollague
- * Fichero de estructura de la pagina 
+ * @author Luis Enrique Ledesma Ollague
+ * 
+ * Fichero con funciones de estructura de la página 
  */
 
 /**
  * Cabecera
  */
-function myHead($title, $bootstrapPath = '.')
+function myHead($title, $bootstrapPath = '.'): void
 {
     echo <<< HEAD
     <!DOCTYPE html>
@@ -28,9 +29,6 @@ function myHead($title, $bootstrapPath = '.')
     <!-- Bootstrap local links -->
     <link rel="stylesheet" href="$bootstrapPath/vendor/bootstrap-5.3.2-dist/css/bootstrap.min.css">
     <script type="text/javascript" src="$bootstrapPath/vendor/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- files CSS -->
-    <link rel="stylesheet" href="css/style.css">
     
     <title>$title</title>
     </head>
@@ -41,7 +39,7 @@ function myHead($title, $bootstrapPath = '.')
 /**
  * Barra de Menú
  */
-function myMenu($filesPath = '.')
+function myMenu($filesPath = '.'): void
 {
     $estil = null;
     echo <<< MENU

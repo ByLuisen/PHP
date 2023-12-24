@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Luis Enrique Ledesma Ollague
- * Fichero de formulario para comprar un partido
+ * @author Luis Enrique Ledesma Ollague
+ * 
+ * Fichero de formulario para comprar la entrada de un partido
  */
 session_name('LLigaBasquet');
 session_start();
@@ -12,7 +13,17 @@ require_once('data/data.php');
 myHead('Comprar entradas');
 
 myMenu();
+// Mostrar el número de visitas
 contadorVisitas();
+
+// Almacenar la variable session 'inputs' en la variable $inputs.
+if (isset($_SESSION['inputs'])) {
+    $inputs = $_SESSION['inputs'];
+}
+// Almacenar la variable session 'errors' en la variable $errors.
+if (isset($_SESSION['errors'])) {
+    $errors = $_SESSION['errors'];
+}
 ?>
 
 <body>
@@ -21,6 +32,7 @@ contadorVisitas();
             <div class="col-4">
                 <form action="src/validationComprarEntradas.php" method="post">
                     <ul class="list-unstyled">
+                        <!-------------------------------- Partidos -------------------------------->
                         <li class="my-4">
                             <h2 class="text-center mb-3">Selecciona un partido</h2>
                             <select type="select" name="seleccionPartido[]" id="seleccionPartio" class="btn btn-light">
@@ -31,6 +43,8 @@ contadorVisitas();
                                 } ?>
                             </select>
                         </li>
+
+                        <!-------------------------------- Zonas -------------------------------->
                         <li>
                             <h3>Elige una zona</h3>
                         </li>
@@ -44,17 +58,17 @@ contadorVisitas();
                             </li>
                         <?php endforeach ?>
                         <li>
-                            <p class="text-danger"><?php echo $errors['zona'] ?? '' ?></p>
+                            <small class="text-danger"><?php echo $errors['zona'] ?? '' ?></small>
                         </li>
 
-
-                        <!-- Correo-->
+                        <!-------------------------------- Correo -------------------------------->
                         <li class="my-3">
                             <label for="correo">Correo</label>
                             <input type="email" name="correo" id="correo" class="form-control border-2" maxlength="50" value="<?php echo $inputs['correo'] ?? '' ?>">
-                            <small><?php echo $errors['correo'] ?? ' ' ?></small>
+                            <small class="text-danger"><?php echo $errors['correo'] ?? ' ' ?></small>
                         </li>
-                        <!-- Select número de entradas -->
+
+                        <!------------------------ Select número de entradas ------------------------>
                         <li>
                             <label>Número de entradas</label>
                             <select type="select" name="seleccionEntradas[]" id="seleccionEntradas" class="btn btn-light mx-4 ">
@@ -65,13 +79,15 @@ contadorVisitas();
                                 } ?>
                             </select>
                         </li>
-                        <!-- Telefono -->
+
+                        <!-------------------------------- Telefono -------------------------------->
                         <li class="my-3">
                             <label for="telefono">Número de teléfono</label>
                             <input type="text" name="telefono" id="telefono" class="form-control border-2" maxlength="9" value="<?php echo $inputs['telefono'] ?? '' ?>" max="9">
-                            <small><?php echo $errors['telefono'] ?? ' ' ?></small>
+                            <small class="text-danger"><?php echo $errors['telefono'] ?? ' ' ?></small>
                         </li>
-                        <!-- Botón de comprar -->
+
+                        <!-------------------------------- Botón de comprar -------------------------------->
                         <li class="text-center">
                             <button class="btn btn-primary" type="submit" name="submit">Comprar</button>
                         </li>
@@ -81,3 +97,8 @@ contadorVisitas();
         </div>
     </div>
 </body>
+
+<?php
+// Eliminar variables session en específico.
+eliminarVariablesSession();
+?>

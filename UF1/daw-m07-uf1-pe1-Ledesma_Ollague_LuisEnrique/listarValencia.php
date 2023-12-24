@@ -1,11 +1,13 @@
 <?php
 
 /**
- * Luis Enrique Ledesma Ollague
+ * @author Luis Enrique Ledesma Ollague
+ * 
  * Plantilla para listar los jugadores de cada equipo
  */
 session_name('LLigaBasquet');
 session_start();
+// Establecer la cookie estil
 setcookie('estil', 'VALÈNCIA', time() + (86400 * 30), "/"); // Cookie válida por 30 días
 require_once('src/functions-structure.php');
 require_once('src/functions.php');
@@ -15,7 +17,7 @@ $estil = isset($_COOKIE['estil']) && $_COOKIE['estil'] === 'VALÈNCIA' ? $_COOKI
 $colorFondo = '';
 $tamanoLetra = '';
 
-// Establecer el estilo en función del valor de la cookie
+// Establecer el estilo de la página en función del valor de la cookie
 switch ($estil) {
     case 'BARÇA':
         $colorFondo = 'blue';
@@ -67,6 +69,7 @@ switch ($estil) {
                             <p class="lh-1">ENDESA</p>
                         </a>
                     </li>
+                    <!-- Si la cookie estil es igual a 'BARÇA' aparecera la opción 'COMPRAR ENTRADAS' en el menú -->
                     <?php if ($estil == 'BARÇA') : ?>
                         <li class="nav-item d-flex align-items-end">
                             <a href="comprarEntradas.php" class="text-decoration-none text-white">
@@ -80,10 +83,7 @@ switch ($estil) {
     </header>
 
     <?php
-    /** 
-     * Función que muestra las visitas que tienes en la página 
-     * 
-     */
+    //Función que muestra las visitas que tienes en la página 
     contadorVisitas();
     ?>
 
@@ -107,10 +107,14 @@ switch ($estil) {
                     </thead>
                     <tbody>
                         <?php
+                        // Se llama a la función obtenerJugadores() que te devuelve un array de Jugadores
                         foreach (obtenerJugadores() as $jugador) {
+                            // Si el club del jugador es igual al contenido 
                             if ($jugador->getClub() == 'VALENCIA BASKET CLUB') {
+                                // Se creara una página con la foto y el nombre del jugador a partir de una plantilla
                                 file_put_contents("jugadores/" . $jugador->getNombre() . ".php", strtr(file_get_contents('templates/jugadorFoto.php'), ['{{nombre}}' => "{$jugador->getNombre()}", '{{foto}}' => "{$jugador->getFoto()}"]));
 
+                                // Y se introducirán sus datos en una fila de la tabla
                                 echo "<tr>";
                                 echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getNombre()}</a></td>";
                                 echo "<td><a href='jugadores/" . $jugador->getNombre() . ".php'>{$jugador->getPosicion()}</a></td>";
@@ -122,7 +126,6 @@ switch ($estil) {
                                 echo "</tr>";
                             };
                         };
-
                         ?>
                     </tbody>
                 </table>

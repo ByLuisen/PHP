@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Luis Enrique Ledesma Ollague
- * indice donde se presentan os clubes
+ * @author Luis Enrique Ledesma Ollague
+ * 
+ * indice donde se presentan los clubes
  */
 session_name('LLigaBasquet');
 session_start();
@@ -29,6 +30,7 @@ contadorVisitas();
                             </div>
                         </a>
                     <?php endforeach;
+                    // Genera los archivos donde se listaran los jugadores de los diferentes clubes
                     generarJugadoresClubPHP(); ?>
                 </div>
             </div>

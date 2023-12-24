@@ -56,7 +56,7 @@ class Jugador
      * 
      * @return string El nombre del jugador
      */
-    public function getNombre()
+    public function getNombre(): string
     {
         return $this->nombre;
     }
@@ -66,7 +66,7 @@ class Jugador
      * 
      * @return int El dorsal del jugador
      */
-    public function getDorsal()
+    public function getDorsal(): int
     {
         return $this->dorsal;
     }
@@ -76,7 +76,7 @@ class Jugador
      * 
      * @return string El club del jugador
      */
-    public function getClub()
+    public function getClub(): string
     {
         return $this->club;
     }
@@ -86,7 +86,7 @@ class Jugador
      * 
      * @return string La posición del jugador
      */
-    public function getPosicion()
+    public function getPosicion(): string
     {
         return $this->posicion;
     }
@@ -96,7 +96,7 @@ class Jugador
      * 
      * @return string La nacionalidad del jugador
      */
-    public function getNacionalidad()
+    public function getNacionalidad(): string
     {
         return $this->nacionalidad;
     }
@@ -106,7 +106,7 @@ class Jugador
      * 
      * @return string La licencia del jugador
      */
-    public function getLicencia()
+    public function getLicencia(): string
     {
         return $this->licencia;
     }
@@ -116,7 +116,7 @@ class Jugador
      * 
      * @return string La altura del jugador
      */
-    public function getAltura()
+    public function getAltura(): string
     {
         return $this->altura;
     }
@@ -126,7 +126,7 @@ class Jugador
      * 
      * @return int La edad del jugador
      */
-    public function getEdad()
+    public function getEdad(): int
     {
         return $this->edad;
     }
@@ -136,7 +136,7 @@ class Jugador
      * 
      * @return int El temp del jugador
      */
-    public function getTemp()
+    public function getTemp(): int
     {
         return $this->temp;
     }
@@ -146,7 +146,7 @@ class Jugador
      * 
      * @return string La foto del jugador
      */
-    public function getFoto()
+    public function getFoto(): string
     {
         return $this->foto;
     }

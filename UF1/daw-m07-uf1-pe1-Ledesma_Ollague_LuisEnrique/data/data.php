@@ -1,7 +1,8 @@
 <?php
 /**
- * Luis Enrique Ledesma Ollague
- * Fichero que contiene los datos de la página
+ * @author Luis Enrique Ledesma Ollague
+ * 
+ * Fichero que contiene los datos de la página comprarEntradas.php
  */
 $partidos = [
     'Barça vs AS Monaco',

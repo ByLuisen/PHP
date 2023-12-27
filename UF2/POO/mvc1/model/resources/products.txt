@@ -1,0 +1,6 @@
+1;Teléfono inteligente;
+2;Portátil;
+3;Auriculares inalámbricos;
+4;Cámara digital;
+5;Smartwatch;
+8;Nike Jordan;

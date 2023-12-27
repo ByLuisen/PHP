@@ -1,7 +1,9 @@
 <?php
+
 /**
- * Luis Enrique Ledesma Ollague
- * Plantilla para la informacación de cada jugador
+ * @author Luis Enrique Ledesma Ollague
+ * 
+ * Plantilla donde se mostrará la foto y el nombre del jugador
  */
 session_name('LLigaBasquet');
 session_start();
@@ -14,12 +16,14 @@ contadorVisitas();
 ?>
 
 <body>
-<div class="container">
-    <div class="row my-5">
-        <div class="text-center">
-            <img src="../images/jugadores/156475pre7306.jpg" alt='Pau Ribas'>
-            <p>Pau Ribas</p>
+    <div class="container">
+        <div class="row my-5">
+            <div class="text-center">
+                <!-- Foto del jugador -->
+                <img src="../images/jugadores/156475pre7306.jpg" alt='Pau Ribas'>
+                <!-- Nombre del jugador -->
+                <p>Pau Ribas</p>
+            </div>
         </div>
     </div>
-</div>
 </body>

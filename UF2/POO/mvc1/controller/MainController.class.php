@@ -1,6 +1,7 @@
 <?php
 //per poder fer servir l'únic controlador d'aquesta aplicació
 require_once "controller/CategoryController.class.php";
+require_once "controller/ProductsController.class.php";
 
 class MainController
 {
@@ -37,10 +38,15 @@ class MainController
                 // si hi haguessin molts controladors, faríem un case per cadascun d'ells. Aquí 
                 // per defecte fiquem l'únic controlador que hi ha CategoryController
                 // en el cas que hi haguessin molts:
-                //case "category":
-                //case "products": 
+            case "category":
+                $controlCategory = new CategoryController();
+                $controlCategory->processRequest();
+                break;
+            case "products": 
                 //ficaríem un case per cada controlador
-
+                $controlProducts = new ProductsController();
+                $controlProducts->processRequest();
+                break;
                 //en el cas que volguessim carregar alguna vista per defecte fora de la que ens vindrà dels controladors
                 //per a nosaltres, la vista primera és la que ens ofereix el menú de categories
             default:

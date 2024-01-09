@@ -31,7 +31,7 @@ class ProductDAO implements ModelInterface
             foreach ($linesToFile as $line) {
                 if (!empty($line)) {
                     $pieces = explode(";", $line);
-                    $product = new Product($pieces[0], $pieces[1]);
+                    $product = new Product($pieces[0], $pieces[1], $pieces[2], $pieces[3], $pieces[4], $pieces[5]);
                     $response[] = $product;
                 }
             }

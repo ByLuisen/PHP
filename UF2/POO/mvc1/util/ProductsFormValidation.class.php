@@ -77,21 +77,6 @@ class ProductsFormValidation
                         array_push($_SESSION['error'], ProductsMessage::ERR_FORM['invalid_stock']);
                     }
                     break;
-                case 'xx':
-                    // filter_var retorna los datos filtrados o FALSE si el filtro falla
-                    $id = trim(filter_input(INPUT_POST, 'id'));
-                    $idValid = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-                    if ($idValid == FALSE) {
-                        array_push($_SESSION['error'], ProductsMessage::ERR_FORM['invalid_id']);
-                    }
-                    break;
-                case 'xx':
-                    $name = trim(filter_input(INPUT_POST, 'name'));
-                    $nameValid = filter_var($name, FILTER_SANITIZE_STRING);
-                    if ($nameValid == FALSE) {
-                        array_push($_SESSION['error'], ProductsMessage::ERR_FORM['invalid_name']);
-                    }
-                    break;
             }
         }
 

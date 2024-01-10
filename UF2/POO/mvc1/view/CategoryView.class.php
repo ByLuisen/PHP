@@ -16,7 +16,7 @@ class CategoryView
 
 
         //incloem el menú que ens interessa dels dos que tenim.
-        include("view/menu/MainMenu.html");
+        include("view/menu/CategoryMenu.html");
 
         if (!empty($template)) { //si rebem alguna cosa
             include($template); //simplement la incloem

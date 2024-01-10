@@ -16,10 +16,7 @@ class ProductsView
 
 
         //incloem el menú que ens interessa dels dos que tenim.
-        include("view/menu/MainMenu.html");
-
-
-
+        include("view/menu/ProductsMenu.html");
 
         if (!empty($template)) { //si rebem alguna cosa
             include($template); //simplement la incloem

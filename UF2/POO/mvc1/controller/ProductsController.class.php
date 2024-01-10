@@ -64,6 +64,14 @@ class ProductsController implements ControllerInterface
                 $this->add();
                 break;
 
+            case "form_id":
+                $this->formId();
+                break;
+
+            case "search":
+                $this->searchById();
+                break;
+
             default: //en el cas que vinguem per primer cop a categories o no haguem escollit res de res, $request=NULL;
                 $this->view->display(); //mètode de la classe ProductsView.class.php
         }
@@ -106,6 +114,7 @@ class ProductsController implements ControllerInterface
             //si no hem trobat l'id...
             if (is_null($product)) {
                 //afegim la categoria a l'arxiu
+                $productValid->setPrecio($productValid->getPrecio() . '€');
                 $result = $this->model->add($productValid);
 
                 if ($result == TRUE) {
@@ -120,16 +129,38 @@ class ProductsController implements ControllerInterface
         $this->view->display("view/form/ProductsFormAdd.php", $productValid);
     }
 
+    public function formId()
+    {
+        $this->view->display("view/form/ProductsFormId.php"); //li passem la variable que es diu $template a la vista ProductsView.class.php
+    }
+
+    // ejecuta la acción de buscar categoría por id de categoría
+    public function searchById()
+    {
+        $productValid = ProductsFormValidation::checkData(ProductsFormValidation::SEARCH_FIELDS);
+
+        if (empty($_SESSION['error'])) {
+            $product = $this->model->searchById($productValid->getId());
+
+            if (!is_null($product)) { // is NULL or Category object?
+                $_SESSION['info'] = ProductsMessage::INF_FORM['found'];
+                $productValid = $product;
+                $this->view->display("view/form/ProductsList.php", $productValid);
+            } else {
+                $_SESSION['error'] = ProductsMessage::ERR_FORM['not_found'];
+                $this->view->display("view/form/ProductsFormId.php", $productValid);
+            }
+        } else {
+            $this->view->display("view/form/ProductsFormId.php", $productValid);
+        }
+    }
+
     //aquests mètodes els deixem ara per ara així
     public function modify()
     {
         //to do
     }
     public function delete()
-    {
-        //to do
-    }
-    public function searchById()
     {
         //to do
     }
@@ -187,24 +218,7 @@ class ProductsController implements ControllerInterface
     
     
 
-    // ejecuta la acción de buscar categoría por id de categoría
-    public function searchById() {
-        $categoryValid=CategoryFormValidation::checkData(CategoryFormValidation::SEARCH_FIELDS);
-        
-        if (empty($_SESSION['error'])) {
-            $category=$this->model->searchById($categoryValid->getId());
-
-            if (!is_null($category)) { // is NULL or Category object?
-                $_SESSION['info']=CategoryMessage::INF_FORM['found'];
-                $categoryValid=$category;
-            }
-            else {
-                $_SESSION['error']=CategoryMessage::ERR_FORM['not_found'];
-            }
-        }
-            
-        $this->view->display("view/form/CategoryFormModify.php", $categoryValid);
-    }    
+ 
 
     // carga el formulario de buscar productos por nombre de categoría
     public function formListProducts() {

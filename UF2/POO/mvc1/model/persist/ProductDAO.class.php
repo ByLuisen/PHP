@@ -89,8 +89,20 @@ class ProductDAO implements ModelInterface
      */
     public function searchById($id)
     {
+        $linesToFile = array();
+        $response = array();
+        $linesToFile = $this->dbConnect->realAllLines();
+        if (count($linesToFile) > 0) {
+            foreach ($linesToFile as $line) {
+                if (!empty($line)) {
+                    $pieces = explode(";", $line);
+                    if ($pieces[0] == $id) {
+                        $response[] = new Product($pieces[0], $pieces[1], $pieces[2], $pieces[3], $pieces[4], $pieces[5]);
+                    }
+                }
+            }
+        }
 
-        //to do
-
+        return (!empty($response)) ? $response : NULL;
     }
 }

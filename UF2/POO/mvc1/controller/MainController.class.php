@@ -42,7 +42,7 @@ class MainController
                 $controlCategory = new CategoryController();
                 $controlCategory->processRequest();
                 break;
-            case "products": 
+            case "products":
                 //ficaríem un case per cada controlador
                 $controlProducts = new ProductsController();
                 $controlProducts->processRequest();
@@ -50,8 +50,7 @@ class MainController
                 //en el cas que volguessim carregar alguna vista per defecte fora de la que ens vindrà dels controladors
                 //per a nosaltres, la vista primera és la que ens ofereix el menú de categories
             default:
-                $controlCategory = new CategoryController();
-                $controlCategory->processRequest();
+                include("view/menu/MainMenu.html");
                 break;
         }
     }

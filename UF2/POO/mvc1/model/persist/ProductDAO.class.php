@@ -57,31 +57,6 @@ class ProductDAO implements ModelInterface
         return $result;
     }
 
-
-    /**
-     * Modificar una categoria
-     * @param Product objecte donat
-     * @return TRUE o FALSE
-     */
-    public function modify($product)
-    {
-
-        // to do
-
-    }
-
-
-    /**
-     * Esborra una categoria donat l' id
-     * @param $id identificador de la categoria a buscar
-     * @return TRUE O FALSE
-     */
-    public function delete($id)
-    {
-
-        //to do
-
-    }
     /**
      * Selecionar una categoria per id
      * @param $id identificador de la categoria a buscar
@@ -104,5 +79,52 @@ class ProductDAO implements ModelInterface
         }
 
         return (!empty($response)) ? $response : NULL;
+    }
+
+    /**
+     * Modificar una categoria
+     * @param Product objecte donat
+     * @return TRUE o FALSE
+     */
+    public function modify($product)
+    {
+        $linesToFile = array();
+        $linesToFile = $this->dbConnect->realAllLines();
+        if (count($linesToFile) > 0) {
+            foreach ($linesToFile as $indice => $line) {
+                if (!empty($line)) {
+                    $pieces = explode(";", $line);
+                    if ($pieces[0] == $product->getId()) {
+                        $linesToFile[$indice] = str_replace("\n", "", $product->writingNewLine()) . PHP_EOL;
+                    }
+                }
+            }
+        }
+
+        return $this->dbConnect->writeToFile($linesToFile);
+    }
+
+
+    /**
+     * Esborra una categoria donat l' id
+     * @param $id identificador de la categoria a buscar
+     * @return TRUE O FALSE
+     */
+    public function delete($id)
+    {
+        $linesToFile = array();
+        $linesToFile = $this->dbConnect->realAllLines();
+        if (count($linesToFile) > 0) {
+            foreach ($linesToFile as $indice => $line) {
+                if (!empty($line)) {
+                    $pieces = explode(";", $line);
+                    if ($pieces[0] == $id) {
+                        unset($linesToFile[$indice]);
+                    }
+                }
+            }
+        }
+
+        return $this->dbConnect->writeToFile($linesToFile);
     }
 }

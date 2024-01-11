@@ -92,6 +92,6 @@ class Product
 
     public function writingNewLine()
     {
-        return "\n$this->id;$this->marca;$this->name;$this->descripcion;$this->precio;$this->stock;"; // podríem volem algun mètode extrar de la classe que ens fos interessant i general
+        return "\n$this->id;$this->marca;$this->name;$this->descripcion;$this->precio" . "€;$this->stock;"; // podríem volem algun mètode extrar de la classe que ens fos interessant i general
     }
 }

@@ -1,13 +1,18 @@
 <div id="content">
     <form method="post" action="">
         <fieldset>
-            <legend>Search product by Id</legend>
+            <legend>
+                <?php echo ($_GET['option'] == 'form_delete') ? "Delete" : "Search"?>
+                product by Id</legend>
             <label>Id *:</label>
-            <input type="text" placeholder="Id" name="id" value="<?php if (isset($content)) { echo $content->getId(); } ?>" />
+            <input type="text" placeholder="Id" name="id" value="<?php if (isset($content)) {
+                                                                        echo $content->getId();
+                                                                    } ?>" />
 
             <label>* Required fields</label>
-            <input type="submit" name="action" value="search" />
-            <input type="submit" name="reset" value="reset"  />
+            
+                <input type="submit" name="action" value="<?php echo ($_GET['option'] == 'form_delete') ? "delete" : "search" ?>" />
+            <input type="submit" name="reset" value="reset" />
         </fieldset>
     </form>
 </div>

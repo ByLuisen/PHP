@@ -41,7 +41,7 @@ require_once "controller/MainController.class.php";
 <body>
     <div id="page">
         <header>
-            <a href="http://www.ies-provensana.com"><img src="<?= PATH_IMG ?>proven.jpg" alt="proven.jpg"></a>
+            <a href="https://www.proven.cat/intraweb/index.php"><img src="<?= PATH_IMG ?>proven.jpg" alt="proven.jpg"></a>
             <h1>Institut Provençana Exemple-2 MVC amb PHP</h1>
         </header>
         <?php

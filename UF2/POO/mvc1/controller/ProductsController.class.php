@@ -65,11 +65,21 @@ class ProductsController implements ControllerInterface
                 break;
 
             case "form_id":
+            case "form_modify":
+            case "form_delete":
                 $this->formId();
                 break;
 
             case "search":
                 $this->searchById();
+                break;
+
+            case "modify":
+                $this->modify();
+                break;
+
+            case "delete":
+                $this->delete();
                 break;
 
             default: //en el cas que vinguem per primer cop a categories o no haguem escollit res de res, $request=NULL;
@@ -114,7 +124,6 @@ class ProductsController implements ControllerInterface
             //si no hem trobat l'id...
             if (is_null($product)) {
                 //afegim la categoria a l'arxiu
-                $productValid->setPrecio($productValid->getPrecio() . '€');
                 $result = $this->model->add($productValid);
 
                 if ($result == TRUE) {
@@ -145,7 +154,14 @@ class ProductsController implements ControllerInterface
             if (!is_null($product)) { // is NULL or Category object?
                 $_SESSION['info'] = ProductsMessage::INF_FORM['found'];
                 $productValid = $product;
-                $this->view->display("view/form/ProductsList.php", $productValid);
+                switch ($_GET['option']) {
+                    case 'form_modify':
+                        $this->view->display("view/form/ProductsFormAdd.php", $productValid[0]);
+                        break;
+                    case 'form_id':
+                        $this->view->display("view/form/ProductsList.php", $productValid);
+                        break;
+                }
             } else {
                 $_SESSION['error'] = ProductsMessage::ERR_FORM['not_found'];
                 $this->view->display("view/form/ProductsFormId.php", $productValid);
@@ -155,71 +171,51 @@ class ProductsController implements ControllerInterface
         }
     }
 
-    //aquests mètodes els deixem ara per ara així
+    // executaria la modificació si el programessim al menú 
     public function modify()
     {
-        //to do
+        $productValid = ProductsFormValidation::checkData(ProductsFormValidation::MODIFY_FIELDS);
+
+        if (empty($_SESSION['error'])) {
+            $product = $this->model->searchById($productValid->getId());
+
+            if (!is_null($product)) {
+                $result = $this->model->modify($productValid);
+
+                if ($result == TRUE) {
+                    $_SESSION['info'] = ProductsMessage::INF_FORM['update'];
+                }
+            } else {
+                $_SESSION['error'] = ProductsMessage::ERR_FORM['not_exists_id'];
+            }
+        }
+
+        $this->view->display("view/form/ProductsFormAdd.php", $productValid);
     }
+
     public function delete()
     {
-        //to do
+        $productValid=ProductsFormValidation::checkData(ProductsFormValidation::DELETE_FIELDS);
+        
+        if (empty($_SESSION['error'])) {
+            $product=$this->model->searchById($productValid->getId());
+
+            if (!is_null($product)) {            
+                $result=$this->model->delete($productValid->getId());
+
+                if ($result == TRUE) {
+                    $_SESSION['info']=ProductsMessage::INF_FORM['delete'];
+                    $productValid=NULL;
+                }
+            }
+            else {
+                $_SESSION['error']=ProductsMessage::ERR_FORM['not_exists_id'];
+            }
+        }
+        
+        $this->view->display("view/form/ProductsFormId.php", $productValid);
     }
     /*
-    // carregaria el formulari de modificar si el programessim al menú  
-    public function formModify() {
-        $this->view->display("view/form/CategoryFormModify.php");
-    }    
-
-    // executaria la modificació si el programessim al menú 
-    public function modify() {
-        $categoryValid=CategoryFormValidation::checkData(CategoryFormValidation::MODIFY_FIELDS);        
-        
-        if (empty($_SESSION['error'])) {
-            $category=$this->model->searchById($categoryValid->getId());
-
-            if (!is_null($category)) {            
-                $result=$this->model->modify($categoryValid);
-
-                if ($result == TRUE) {
-                    $_SESSION['info']=CategoryMessage::INF_FORM['update'];
-                }
-            }
-            else {
-                $_SESSION['error']=CategoryMessage::ERR_FORM['not_exists_id'];
-            }
-        }
-        
-        $this->view->display("view/form/CategoryFormModify.php", $categoryValid);        
-    }
-
-    // ejecuta la acción de eliminar categoría    
-    public function delete() {
-        $categoryValid=CategoryFormValidation::checkData(CategoryFormValidation::DELETE_FIELDS);
-        
-        if (empty($_SESSION['error'])) {
-            $category=$this->model->searchById($categoryValid->getId());
-
-            if (!is_null($category)) {            
-                $result=$this->model->delete($categoryValid->getId());
-
-                if ($result == TRUE) {
-                    $_SESSION['info']=CategoryMessage::INF_FORM['delete'];
-                    $categoryValid=NULL;
-                }
-            }
-            else {
-                $_SESSION['error']=CategoryMessage::ERR_FORM['not_exists_id'];
-            }
-        }
-        
-        $this->view->display("view/form/CategoryFormModify.php", $categoryValid);
-    }
-
-    
-    
-
- 
-
     // carga el formulario de buscar productos por nombre de categoría
     public function formListProducts() {
         $this->view->display("view/form/CategoryFormSearchProduct.php");

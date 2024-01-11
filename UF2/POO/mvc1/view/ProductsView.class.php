@@ -21,7 +21,7 @@ class ProductsView
         if (!empty($template)) { //si rebem alguna cosa
             include($template); //simplement la incloem
         }
-
+        
         //sempre incloim una zona de missatgeria
         include("view/form/MessageForm.php");
     }

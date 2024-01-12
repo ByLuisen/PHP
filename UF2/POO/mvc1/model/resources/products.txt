@@ -1,5 +1,4 @@
 11;Marca1;nom1;descripcio1;1001€;3;
-12;Marca2;nom2;descripcio2;1002€;1;
 13;Marca3;nom3;descripcio3;1003€;4;
 15;Marca5;nom5;descripcio5;1005€;3;
 16;Marca6;nom6;descripcio6;1006€;2;
@@ -8,5 +7,5 @@
 19;Marca9;nom9;descripcio9;1009€;2;
 1;Ferrari;Ferrari La Ferrari;Coche deportivo;250000€;2;
 2;Porsche;Porsche 911 GT3;Coche deportivo;223341€;1;
-20;Supreme;Socks;Calcetines;750€;2;
-9;Bugatti;Bugatti La Voiture Noire;Hiperdeportivo de lujo;11000000€;2;
+20;Supreme;Socks;Calcetines;1050€;5;
+9;Bugatti;Bugatti La Voiture Noire;Hiperdeportivo de lujo;11000000€;1;

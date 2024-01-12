@@ -64,6 +64,24 @@ class CategoryController implements ControllerInterface
                 $this->add();
                 break;
 
+            case "form_id":
+            case "form_modify":
+            case "form_delete":
+                $this->formId();
+                break;
+
+            case "search":
+                $this->searchById();
+                break;
+
+            case "modify":
+                $this->modify();
+                break;
+
+            case "delete":
+                $this->delete();
+                break;
+
             default: //en el cas que vinguem per primer cop a categories o no haguem escollit res de res, $request=NULL;
                 $this->view->display(); //mètode de la classe CategoryView.class.php
         }
@@ -120,14 +138,9 @@ class CategoryController implements ControllerInterface
         $this->view->display("view/form/CategoryFormAdd.php", $categoryValid);
     }
 
-    //aquests mètodes els deixem ara per ara així
-    public function modify()
+    public function formId()
     {
-        //to do
-    }
-    public function delete()
-    {
-        //to do
+        $this->view->display("view/form/ProductsFormId.php"); //li passem la variable que es diu $template a la vista ProductsView.class.php
     }
     public function searchById()
     {
@@ -139,12 +152,64 @@ class CategoryController implements ControllerInterface
             if (!is_null($category)) { // is NULL or Category object?
                 $_SESSION['info'] = CategoryMessage::INF_FORM['found'];
                 $categoryValid = $category;
+                switch ($_GET['option']) {
+                    case 'form_modify':
+                        $this->view->display("view/form/CategoryFormAdd.php", $categoryValid[0]);
+                        break;
+                    case 'form_id':
+                        $this->view->display("view/form/CategoryList.php", $categoryValid);
+                        break;
+                }
             } else {
                 $_SESSION['error'] = CategoryMessage::ERR_FORM['not_found'];
+                $this->view->display("view/form/ProductsFormId.php", $categoryValid);
+            }
+        } else {
+            $this->view->display("view/form/ProductsFormId.php", $categoryValid);
+        }
+    }
+
+    //aquests mètodes els deixem ara per ara així
+    public function modify()
+    {
+        $categoryValid = CategoryFormValidation::checkData(CategoryFormValidation::MODIFY_FIELDS);
+
+        if (empty($_SESSION['error'])) {
+            $category = $this->model->searchById($categoryValid->getId());
+
+            if (!is_null($category)) {
+                $result = $this->model->modify($categoryValid);
+
+                if ($result == TRUE) {
+                    $_SESSION['info'] = CategoryMessage::INF_FORM['update'];
+                }
+            } else {
+                $_SESSION['error'] = CategoryMessage::ERR_FORM['not_exists_id'];
             }
         }
 
-        $this->view->display("view/form/CategoryFormModify.php", $categoryValid);
+        $this->view->display("view/form/CategoryFormAdd.php", $categoryValid);
+    }
+    public function delete()
+    {
+        $categoryValid = CategoryFormValidation::checkData(CategoryFormValidation::DELETE_FIELDS);
+
+        if (empty($_SESSION['error'])) {
+            $category = $this->model->searchById($categoryValid->getId());
+
+            if (!is_null($category)) {
+                $result = $this->model->delete($categoryValid->getId());
+
+                if ($result == TRUE) {
+                    $_SESSION['info'] = CategoryMessage::INF_FORM['delete'];
+                    $categoryValid = NULL;
+                }
+            } else {
+                $_SESSION['error'] = CategoryMessage::ERR_FORM['not_exists_id'];
+            }
+        }
+
+        $this->view->display("view/form/ProductsFormId.php", $categoryValid);
     }
     /*
     // carregaria el formulari de modificar si el programessim al menú  

@@ -57,6 +57,29 @@ class CategoryDAO implements ModelInterface
         return $result;
     }
 
+    /**
+     * Selecionar una categoria per id
+     * @param $id identificador de la categoria a buscar
+     * @return Category objecte or NULL
+     */
+    public function searchById($id)
+    {
+        $linesToFile = array();
+        $response = array();
+        $linesToFile = $this->dbConnect->realAllLines();
+        if (count($linesToFile) > 0) {
+            foreach ($linesToFile as $line) {
+                if (!empty($line)) {
+                    $pieces = explode(";", $line);
+                    if ($pieces[0] == $id) {
+                        $response[] = new Category($pieces[0], $pieces[1]);
+                    }
+                }
+            }
+        }
+
+        return (!empty($response)) ? $response : NULL;
+    }
 
     /**
      * Modificar una categoria
@@ -65,9 +88,20 @@ class CategoryDAO implements ModelInterface
      */
     public function modify($category)
     {
+        $linesToFile = array();
+        $linesToFile = $this->dbConnect->realAllLines();
+        if (count($linesToFile) > 0) {
+            foreach ($linesToFile as $indice => $line) {
+                if (!empty($line)) {
+                    $pieces = explode(";", $line);
+                    if ($pieces[0] == $category->getId()) {
+                        $linesToFile[$indice] = str_replace("\n", "", $category->writingNewLine()) . PHP_EOL;
+                    }
+                }
+            }
+        }
 
-        // to do
-
+        return $this->dbConnect->writeToFile($linesToFile);
     }
 
 
@@ -78,19 +112,19 @@ class CategoryDAO implements ModelInterface
      */
     public function delete($id)
     {
+        $linesToFile = array();
+        $linesToFile = $this->dbConnect->realAllLines();
+        if (count($linesToFile) > 0) {
+            foreach ($linesToFile as $indice => $line) {
+                if (!empty($line)) {
+                    $pieces = explode(";", $line);
+                    if ($pieces[0] == $id) {
+                        array_splice($linesToFile, $indice);
+                    }
+                }
+            }
+        }   
 
-        //to do
-
-    }
-    /**
-     * Selecionar una categoria per id
-     * @param $id identificador de la categoria a buscar
-     * @return Category objecte or NULL
-     */
-    public function searchById($id)
-    {
-
-        //to do
-
+        return $this->dbConnect->writeToFile($linesToFile);
     }
 }

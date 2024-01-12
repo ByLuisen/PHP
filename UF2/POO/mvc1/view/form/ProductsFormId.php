@@ -3,7 +3,8 @@
         <fieldset>
             <legend>
                 <?php echo ($_GET['option'] == 'form_delete') ? "Delete" : "Search"?>
-                product by Id</legend>
+                <?php echo ($_GET['menu'] == 'category') ? "category" : "product"?>
+                by Id</legend>
             <label>Id *:</label>
             <input type="text" placeholder="Id" name="id" value="<?php if (isset($content)) {
                                                                         echo $content->getId();

@@ -119,7 +119,7 @@ class ProductDAO implements ModelInterface
                 if (!empty($line)) {
                     $pieces = explode(";", $line);
                     if ($pieces[0] == $id) {
-                        unset($linesToFile[$indice]);
+                        array_splice($linesToFile, $indice);
                     }
                 }
             }

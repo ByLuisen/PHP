@@ -1,5 +1,4 @@
 1;Cosmetic;
-2;Health;
-3;Exemple;
-8;Clothes;
-4;Tecnology;
+2;Nacho;
+6;Coñona;
+8;Manolo;

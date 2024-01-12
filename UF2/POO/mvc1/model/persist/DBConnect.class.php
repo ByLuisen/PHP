@@ -68,11 +68,13 @@ class DBConnect
     public function writeToFile($data)
     {
         $result = FALSE;
-
         if (count($data) > 0) {
             // abre el fichero en modo write
             if ($this->openFile("w")) {
                 foreach ($data as $line) {
+                    if ($data[count($data) - 1] == $line) {
+                        $line = str_replace("\n", "", $line);
+                    }
                     fputs($this->getHandle(), $line);
                 }
             }

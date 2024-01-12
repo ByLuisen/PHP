@@ -7,7 +7,7 @@
             <label>Id *:</label>
             <input type="text" placeholder="Id" name="id" value="<?php if (isset($content)) {
                                                                         echo $content->getId();
-                                                                    } ?>" />
+                                                                    } ?>" style="<?php echo ($_GET['option'] == 'form_modify') ? "pointer-events: none;" : "" ?>" />
             <label>Marca *:</label>
             <input type="text" placeholder="Marca" name="marca" value="<?php if (isset($content)) {
                                                                             echo $content->getMarca();

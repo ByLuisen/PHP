@@ -215,34 +215,4 @@ class ProductsController implements ControllerInterface
         
         $this->view->display("view/form/ProductsFormId.php", $productValid);
     }
-    /*
-    // carga el formulario de buscar productos por nombre de categoría
-    public function formListProducts() {
-        $this->view->display("view/form/CategoryFormSearchProduct.php");
-    }    
-    
-    // ejecuta la acción de buscar productos por nombre de categoría
-    public function listProducts() {
-        $name=trim(filter_input(INPUT_POST, 'name'));
-
-        $result=NULL;
-        if (!empty($name)) { // Category Name is void?
-            $result=$this->model->listProducts($name);            
-
-            if (!empty($result)) { // array void or array of Product objects?
-                $_SESSION['info']="Data found"; 
-            }
-            else {
-                $_SESSION['error']=CategoryMessage::ERR_FORM['not_found'];
-            }
-            
-            $this->view->display("view/form/CategoryListProduct.php", $result);
-        }
-        else {
-            $_SESSION['error']=CategoryMessage::ERR_FORM['invalid_name'];
-            
-            $this->view->display("view/form/CategoryFormSearchProduct.php", $result);
-        }
-    }
-    */
 }

@@ -2,7 +2,6 @@
 //per poder fer servir l'únic controlador d'aquesta aplicació
 require_once "controller/CategoryController.class.php";
 require_once "controller/ProductsController.class.php";
-
 class MainController
 {
 
@@ -19,18 +18,6 @@ class MainController
 
             $request = NULL;
         }
-        // o equivalentment en format comprimit
-        //$request=isset($_GET["menu"])?$request=$_GET["menu"]:NULL;
-
-
-        //SEGONA MANERA - és equivalent a la primera només que utilitzem funcions de filtrat
-        //fent servir una altra notació però equivalent al vist ara:
-        //$request=NULL;
-        //if (filter_has_var(INPUT_GET, 'menu')) {
-        //  $request=filter_input(INPUT_GET, 'menu');
-        //}
-        //equivalentment en format comprimit:
-        //$request=filter_has_var(INPUT_GET, 'menu')?filter_input(INPUT_GET, 'menu'):NULL;
 
 
         //mirem de quin menú venim

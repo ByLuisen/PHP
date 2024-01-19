@@ -21,18 +21,18 @@ class LoginFormValidation
                     $username = trim(filter_input(INPUT_POST, 'username'));
                     $usernameValid = !preg_match(self::ALPHABETIC, $username);
                     if (empty($username)) {
-                        array_push($_SESSION['error'], LoginMessage::ERR_FORM['empty_username']);
+                        array_push($_SESSION['error'], LoginMessage::ERR_FORM['empty_usuario']);
                     } else if ($usernameValid == FALSE) {
-                        array_push($_SESSION['error'], LoginMessage::ERR_FORM['invalid_username']);
+                        array_push($_SESSION['error'], LoginMessage::ERR_FORM['invalid_usuario']);
                     }
                     break;
                 case 'password':
                     $password = trim(filter_input(INPUT_POST, 'password'));
                     $passwordValid = !preg_match(self::ALPHABETIC, $password);
                     if (empty($password)) {
-                        array_push($_SESSION['error'], LoginMessage::ERR_FORM['empty_password']);
+                        array_push($_SESSION['error'], LoginMessage::ERR_FORM['empty_contrasena']);
                     } else if ($passwordValid == FALSE) {
-                        array_push($_SESSION['error'], LoginMessage::ERR_FORM['invalid_password']);
+                        array_push($_SESSION['error'], LoginMessage::ERR_FORM['invalid_contasena']);
                     }
                     break;
             }

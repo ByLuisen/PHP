@@ -39,7 +39,7 @@ class LoginController
         // sinó valdrà $_POST["action"] o $_GET["option"]
         $_SESSION['info'] = array(); //per donar sortida a tots els missatges generals d'informació
         $_SESSION['error'] = array(); ////per donar sortida a tots els missatges d'error
-        
+
         // recupera l'acció SI VENIM DES D'UN FORMULARI --> PER POST, o bé
         // recupera l'opció SI VENIM D'UNA OPCIÓ DEL MENÚ--> PER GET
         //només hi pot haver una d'aquestes dues situacions.
@@ -59,7 +59,7 @@ class LoginController
             case "iniciar_sesion":
                 $this->iniciarSesion();
                 break;
-            
+
             case "logout":
                 $this->logout();
                 break;
@@ -104,7 +104,7 @@ class LoginController
         if (empty($_SESSION['error'])) {
             //busco per id, a veure si n'hi ha un altre d'igual
             if (!$this->login($userValid->getUsuario(), $userValid->getContrasena())) {
-                $_SESSION['error'] = 'Usuario o contraseña incorrecto';
+                $_SESSION['error'] = LoginMessage::ERR_FORM['invalid_usuario'];
                 $this->view->display("view/form/Login.php", $userValid);
             } else {
                 header('Location: index.php');
@@ -116,10 +116,16 @@ class LoginController
 
     public static function is_user_logged_in(): void
     {
-        if(isset($_SESSION['username'])) {
+        if (isset($_SESSION['username'])) {
             include("view/menu/TrainerMenu.html");
         } else {
             include("view/menu/MainMenu.html");
+        }
+    }
+
+    public static function requiredLogin(){
+        if (isset($_SESSION['username'])) {
+            header('Location: index.php');
         }
     }
 

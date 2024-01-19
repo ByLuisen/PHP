@@ -17,5 +17,9 @@ class LoginView
         if (!empty($template)) { //si rebem alguna cosa
             include($template); //simplement la incloem
         }
+        include("view/form/MessageForm.php");
+
+        include("view/footer/footer.php");
+
     }
 }

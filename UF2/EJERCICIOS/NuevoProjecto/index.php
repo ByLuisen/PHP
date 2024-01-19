@@ -7,7 +7,6 @@ Plantilla bàsica per a tota l'aplicació
 session_start();
 require_once "controller/LoginController.class.php";
 //declarem una sèrie de constants
-
 $host = $_SERVER['HTTP_HOST']; // localhost
 //echo $host; 
 

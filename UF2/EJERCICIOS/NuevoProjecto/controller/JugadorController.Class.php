@@ -104,12 +104,6 @@ class JugadorController implements ControllerInterface
         //necessitem cridar al model
         $jugadores = $this->model->listAll();
 
-        if (!empty($jugadores)) { // array void or array of Category objects?
-            $_SESSION['info'] = JugadorMessage::INF_FORM['found'];
-        } else {
-            $_SESSION['error'] = JugadorMessage::ERR_FORM['not_found'];
-        }
-
         $this->view->display("view/form/MostrarSeleccion.php", $jugadores);
     }
     //carrega el llistat de totes les categories
@@ -119,11 +113,6 @@ class JugadorController implements ControllerInterface
         //necessitem cridar al model
         $jugadores = $this->model->listAll();
 
-        if (!empty($categories)) { // array void or array of Category objects?
-            $_SESSION['info'] = JugadorMessage::INF_FORM['found'];
-        } else {
-            $_SESSION['error'] = JugadorMessage::ERR_FORM['not_found'];
-        }
 
         $this->view->display("view/form/JugadoresList.php", $jugadores);
     }
@@ -147,7 +136,7 @@ class JugadorController implements ControllerInterface
             $jugador = $this->model->searchById($jugadorValid->getId());
 
             //si no hem trobat l'id...
-            if (is_null($jugador)) {
+            if (!$jugador) {
                 //afegim la categoria a l'arxiu
                 $result = $this->model->add($jugadorValid);
 
@@ -156,10 +145,9 @@ class JugadorController implements ControllerInterface
                     $jugadorValid = NULL;
                 }
             } else {
-                $_SESSION['error'] = JugadorMessage::ERR_FORM['exists_id'];
+                $_SESSION['error'] = JugadorMessage::ERR_FORM['exists_id'];   
             }
         }
-
         $this->view->display("view/form/JugadorFormAdd.php", $jugadorValid);
     }
 
@@ -227,7 +215,7 @@ class JugadorController implements ControllerInterface
         if (empty($_SESSION['error'])) {
             $jugador = $this->model->searchById($jugadorValid->getId());
 
-            if (!is_null($jugador)) {
+            if (($jugador)) {
                 $result = $this->model->delete($jugadorValid->getId());
 
                 if ($result == TRUE) {
@@ -265,10 +253,4 @@ class JugadorController implements ControllerInterface
         }
     }
 
-    /**
-     * Lista todos los enlaces a los html de las cartas para cada jugador
-     */
-    public function ejercicio4()
-    {
-    }
 }

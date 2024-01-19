@@ -14,10 +14,10 @@ class LoginMessage
 
     const ERR_FORM =
     array(
-        'empty_usuario' => 'Usuario must be filled',
-        'empty_contrasena' => 'Contrasena must be filled',
-        'invalid_usuario' => 'Usuario must be valid values',
-        'invalid_contasena' => 'Contrasena must be valid values',
+
+        'empty_usuario' => 'Usuario debe ser introducido',
+        'empty_contrasena' => 'Contraseña debe ser introducida',
+        'invalid_usuario' => 'Usuario o contraseña no coinciden',
         'not_found' => 'No data found',
         '' => ''
     );

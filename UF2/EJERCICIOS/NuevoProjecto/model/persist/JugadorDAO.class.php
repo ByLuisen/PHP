@@ -94,20 +94,18 @@ class JugadorDAO implements ModelInterface
     {
         $linesToFile = array();
         $linesToFile = $this->dbConnect->realAllLines();
-        
         if (count($linesToFile) > 0) {
             foreach ($linesToFile as $indice => $line) {
                 if (!empty($line)) {
                     if ($line[0] == $id) {
-                        array_splice($linesToFile, $indice);
+                        array_splice($linesToFile, $indice, 1);
                     }
                 }
             }
         }
-
         return $this->dbConnect->writeToFile($linesToFile);
-
     }
+
     /**
      * Selecionar un producto per id
      * @param $id identificador de la categoria a buscar

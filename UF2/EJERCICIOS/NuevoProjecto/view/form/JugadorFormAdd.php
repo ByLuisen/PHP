@@ -19,7 +19,7 @@
         </div>
         <div class="form-group mb-3">
             <label for="nacimiento">Nacimiento *</label>
-            <input type="text" class="form-control" id="nacimiento" placeholder="Nacimiento" name="nacimiento" value="<?php if (isset($content)) echo $content->getNacimiento(); ?>">
+            <input type="date" class="form-control" id="nacimiento" placeholder="Nacimiento" name="nacimiento" value="<?php if (isset($content)) echo $content->getNacimiento(); ?>" min="<?php echo date('Y-m-d', strtotime('-50 years')); ?>" max="<?php echo date('Y-m-d') ?>">
         </div>
         <div class="form-group mb-3">
             <label for="posicion">Posicion *</label>
@@ -38,7 +38,7 @@
             <input type="file" class="form-control" id="customFile" name="customFile" accept="view/img/">
         </div>
         <div class="mb-3">
-        <small class="form-text text-muted">* Campos obligatorios</small>
+            <small class="form-text text-muted">* Campos obligatorios</small>
         </div>
         <div>
             <button type="submit" class="btn btn-success" name="action" value="add">Agregar</button>

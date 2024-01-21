@@ -59,7 +59,6 @@ class LoginController
             case "iniciar_sesion":
                 $this->iniciarSesion();
                 break;
-
             case "logout":
                 $this->logout();
                 break;
@@ -85,7 +84,7 @@ class LoginController
 
         if ($user && password_verify($password, password_hash($user[1], PASSWORD_DEFAULT))) {
 
-            session_regenerate_id();
+            session_start();
 
             $_SESSION['username'] = $user[0];
 
@@ -123,8 +122,10 @@ class LoginController
         }
     }
 
-    public static function requiredLogin(){
-        if (isset($_SESSION['username'])) {
+    public static function requiredLogin(): void
+    {
+        if (!isset($_SESSION['username'])) {
+            // El usuario no está autenticado, redirige al índice
             header('Location: index.php');
         }
     }

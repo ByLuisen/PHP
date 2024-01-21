@@ -2,6 +2,7 @@
 //crido de manera general tot el que necessitaré cridar
 
 require_once "controller/ControllerInterface.php";
+require_once "controller/LoginController.class.php";
 require_once "view/JugadorView.class.php";
 require_once "model/persist/JugadorDAO.class.php";
 require_once "model/Jugador.class.php";
@@ -54,9 +55,11 @@ class JugadorController implements ControllerInterface
         //mirem totes les opcions d'action o d'option ASSIGNADES a la variable $request
         switch ($request) {
             case "listar_jugadores": //opció de menu que trobem a MainMenu.html, menú de la vista que carreguem el primer cop amb el display
+                LoginController::requiredLogin();
                 $this->listAll();
                 break;
             case "añadir_jugador": //opció de menu que trobem a MainMenu.html, menú de la vista que carreguem el primer cop amb el display
+                LoginController::requiredLogin();
                 $this->formAdd();
                 break;
             case "add": //opció de formulari
@@ -64,18 +67,16 @@ class JugadorController implements ControllerInterface
                 break;
             case "buscar_jugador_por_id":
             case "borrar_jugador":
+                LoginController::requiredLogin();
                 $this->formId();
                 break;
             case "buscar":
                 $this->searchById();
                 break;
-            case "modify":
-                $this->modify();
                 break;
             case "borrar":
                 $this->delete();
                 break;
-
             case "ejercicio1":
                 $this->obtenerNombre("Ejercicio1");
                 break;
@@ -84,7 +85,6 @@ class JugadorController implements ControllerInterface
                 break;
             case "ejercicio3":
                 $this->obtenerNombre("Ejercicio3");
-
                 break;
             case "ejercicio4":
                 $this->obtenerNombre("Ejercicio4");
@@ -145,7 +145,7 @@ class JugadorController implements ControllerInterface
                     $jugadorValid = NULL;
                 }
             } else {
-                $_SESSION['error'] = JugadorMessage::ERR_FORM['exists_id'];   
+                $_SESSION['error'] = JugadorMessage::ERR_FORM['exists_id'];
             }
         }
         $this->view->display("view/form/JugadorFormAdd.php", $jugadorValid);
@@ -186,28 +186,6 @@ class JugadorController implements ControllerInterface
         }
     }
 
-    //aquests mètodes els deixem ara per ara així
-    public function modify()
-    {
-        $categoryValid = CategoryFormValidation::checkData(CategoryFormValidation::MODIFY_FIELDS);
-
-        if (empty($_SESSION['error'])) {
-            $category = $this->model->searchById($categoryValid->getId());
-
-            if (!is_null($category)) {
-                $result = $this->model->modify($categoryValid);
-
-                if ($result == TRUE) {
-                    $_SESSION['info'] = CategoryMessage::INF_FORM['update'];
-                }
-            } else {
-                $_SESSION['error'] = CategoryMessage::ERR_FORM['not_exists_id'];
-            }
-        }
-
-        $this->view->display("view/form/CategoryFormAdd.php", $categoryValid);
-    }
-
     public function delete()
     {
         $jugadorValid = JugadorFormValidation::checkData(JugadorFormValidation::DELETE_FIELDS);
@@ -219,8 +197,11 @@ class JugadorController implements ControllerInterface
                 $result = $this->model->delete($jugadorValid->getId());
 
                 if ($result == TRUE) {
+                    $this->eliminarImagen($jugadorValid->getNombre());
                     $_SESSION['info'] = JugadorMessage::INF_FORM['delete'];
                     $jugadorValid = NULL;
+                } else {
+                    $_SESSION['error'] = JugadorMessage::ERR_DAO['delete'];
                 }
             } else {
                 $_SESSION['error'] = JugadorMessage::ERR_FORM['not_exists_id'];
@@ -245,7 +226,6 @@ class JugadorController implements ControllerInterface
             foreach ($jugadores as $jugador) {
                 $nombres[] = $jugador->getNombre();
             }
-            $_SESSION['info'] = JugadorMessage::INF_FORM['found'];
         } else {
             $_SESSION['error'] = JugadorMessage::ERR_FORM['not_found'];
         }
@@ -253,4 +233,17 @@ class JugadorController implements ControllerInterface
         }
     }
 
+    public function eliminarImagen($nombreImagen)
+    {
+        $nombreArchivo = "view/img/{$nombreImagen}.png";
+
+        if (file_exists($nombreArchivo)) {
+            unlink($nombreArchivo);
+        }
+    }
+
+    //aquests mètodes els deixem ara per ara així
+    public function modify()
+    {
+    }
 }

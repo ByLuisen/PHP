@@ -19,7 +19,7 @@ class JugadorFormValidation
         $nombre = NULL;
         $pais = NULL;
         $dorsal = NULL;
-        $nacimiento = NULL;
+        $fechaFormateada = NULL;
         $posicion = NULL;
         $goles = NULL;
         $partidos = NULL;
@@ -65,11 +65,14 @@ class JugadorFormValidation
                     break;
                 case 'nacimiento':
                     $nacimiento = trim(filter_input(INPUT_POST, 'nacimiento'));
-                    $nacimientoValid = !preg_match(self::FECHA, $nacimiento);
-                    if (empty($nacimiento)) {
+                    if (!empty($nacimiento)) {
+                        $fechaFormateada = DateTime::createFromFormat('Y-m-d', $nacimiento)->format('n/j/Y');
+                        $nacimientoValid = !preg_match(self::FECHA, $fechaFormateada);
+                        if (!$nacimientoValid) {
+                            array_push($_SESSION['error'], JugadorMessage::ERR_FORM['invalid_nacimiento']);
+                        }
+                    } else {
                         array_push($_SESSION['error'], JugadorMessage::ERR_FORM['empty_nacimiento']);
-                    } else if ($nacimientoValid == FALSE) {
-                        array_push($_SESSION['error'], JugadorMessage::ERR_FORM['invalid_nacimiento']);
                     }
                     break;
                 case 'posicion':
@@ -103,45 +106,45 @@ class JugadorFormValidation
                     // Manejar el archivo subido
                     if (isset($_FILES['customFile'])) {
                         $archivoOriginal = $_FILES['customFile'];
-                        $nombreArchivo = $nombre . '.png';
+                        if ($archivoOriginal) {
+                            $nombreArchivo = $nombre . '.png';
 
-                        // Directorio de destino
-                        $directorioDestino = 'view/img/';
-                        $rutaDestino = $directorioDestino . $nombreArchivo;
-                        
-
-                            // Validar el tipo de archivo
-                            $tipoPermitido = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
-                            if (!in_array($archivoOriginal['type'], $tipoPermitido)) {
-                                // Tipo de archivo no permitido
-                                // Puedes agregar un mensaje de error a $_SESSION o manejarlo de otra manera
-                                array_push($_SESSION['error'], JugadorMessage::ERR_FORM['empty_imagen']);
-                            }
+                            // Directorio de destino
+                            $directorioDestino = 'view/img/';
+                            $rutaDestino = $directorioDestino . $nombreArchivo;
 
                             // Validar el tamaño del archivo (por ejemplo, 2 MB)
                             $tamanioMaximo = 2 * 1024 * 1024; // 2 MB
                             if ($archivoOriginal['size'] > $tamanioMaximo) {
                                 // Tamaño del archivo excede el límite
                                 // Puedes agregar un mensaje de error a $_SESSION o manejarlo de otra manera
-                                die('Tamaño de archivo excede el límite permitido');
+                                array_push($_SESSION['error'], JugadorMessage::ERR_FORM['tamaño_archivo']);
                             }
 
-                            // Mover el archivo a tu directorio de destino
-                            if (move_uploaded_file($archivoOriginal['tmp_name'], $rutaDestino)) {
+                            // Validar el tipo de archivo
+                            $tipoPermitido = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
+                            if (!in_array($archivoOriginal['type'], $tipoPermitido)) {
+                                // Tipo de archivo no permitido
+                                // Puedes agregar un mensaje de error a $_SESSION o manejarlo de otra manera
+                                array_push($_SESSION['error'], JugadorMessage::ERR_FORM['invalid_imagen']);
+                            } else if (move_uploaded_file($archivoOriginal['tmp_name'], $rutaDestino)) {
                                 // Archivo subido con éxito
                                 // Puedes realizar cualquier otra acción necesaria aquí
                             } else {
                                 // Error al mover el archivo
                                 // Puedes agregar un mensaje de error a $_SESSION o manejarlo de otra manera
                                 // array_push($_SESSION['error'], JugadorMessage::ERR_FORM['error_archivo']);
-                                array_push($_SESSION['error'], JugadorMessage::ERR_FORM['empty_imagen']);
+                                array_push($_SESSION['error'], JugadorMessage::ERR_FORM['error_archivo']);
                             }
-                    } 
+                        } else {
+                            array_push($_SESSION['error'], JugadorMessage::ERR_FORM['empty_imagen']);
+                        }
+                    }
                     break;
             }
         }
 
-        $jugador = new Jugador($id, $nombre, $pais, $dorsal, $nacimiento, $posicion, $goles, $partidos);
+        $jugador = new Jugador($id, $nombre, $pais, $dorsal, $fechaFormateada, $posicion, $goles, $partidos);
 
         return $jugador;
     }

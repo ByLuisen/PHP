@@ -46,6 +46,7 @@ class MainController
                 break;
             case "list_books":
             case "add_book":
+            case "delete":
                 $controlBooks= new BooksController();
                 $controlBooks->processRequest();
                 break;

@@ -14,7 +14,7 @@ class BooksDAO
         // Simulación de conexión a base de datos con ficheros
         $this->dbConnect = new DBConnect("model/resources/books.csv");
     }
-    
+
     /**
      * Recull totes les products
      * @param void
@@ -28,8 +28,13 @@ class BooksDAO
         if (count($linesToFile) > 0) { // Si el array cuenta con mas de 0 líneas...
             foreach ($linesToFile as $line) { // Recorrer el array
                 if (!empty($line)) { // Y mientras la linea no esté vacía
-                    $libro = new Book($line[0], $line[1], $line[2], $line[3]
-                    , $line[4]); // A la variable categorias, genera un objeto de la clase Categoria.
+                    $libro = new Book(
+                        $line[0],
+                        $line[1],
+                        $line[2],
+                        $line[3],
+                        $line[4]
+                    ); // A la variable categorias, genera un objeto de la clase Categoria.
                     $response[] = $libro; // Añado al array de respuestas, la instancia.
                 }
             }
@@ -38,7 +43,7 @@ class BooksDAO
         return $response; // Retorna el array de objetos de Categoria
     }
 
-        /**
+    /**
      * Selecionar un producto per id
      * @param $id identificador de la categoria a buscar
      * @return Product objecte or NULL
@@ -58,7 +63,7 @@ class BooksDAO
         return $response; // Retorna el array de objetos de Categoria
     }
 
-        /**
+    /**
      * Afegeix una categoria
      * @param Jugador objecte
      * @return TRUE O FALSE
@@ -74,7 +79,7 @@ class BooksDAO
         return $result;
     }
 
-        /**
+    /**
      * Esborra un jugador donat l' id
      * @param $id identificador de la categoria a buscar
      * @return TRUE O FALSE
@@ -94,5 +99,4 @@ class BooksDAO
         }
         return $this->dbConnect->writeToFile($linesToFile);
     }
-
 }

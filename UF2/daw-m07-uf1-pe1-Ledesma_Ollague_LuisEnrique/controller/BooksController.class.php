@@ -65,7 +65,7 @@ class BooksController
                 $this->add();
                 break;
             case "delete":
-                $this->add();
+                $this->delete();
                 break;
 
             default: //en el cas que vinguem per primer cop a categories o no haguem escollit res de res, $request=NULL;
@@ -122,7 +122,7 @@ class BooksController
             $libro = $this->model->searchByIsbn($_GET['isbn']);
 
             if (($libro)) {
-                $result = $this->model->delete($libro);
+                $result = $this->model->delete($libro[0]->getIsbn());
 
                 if ($result == TRUE) {
                     $_SESSION['info'] = BookMessage::INF_FORM['delete'];
@@ -134,7 +134,7 @@ class BooksController
             }
         
 
-        $this->listAll();
+        header('Location: home.php?option=list_books');
     }
 
     // public function formId()

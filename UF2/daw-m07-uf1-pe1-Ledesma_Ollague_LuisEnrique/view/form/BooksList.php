@@ -39,7 +39,7 @@ EOT;
                         echo <<<EOT
                         <td>
                             <button class="btn btn-primary">Update</button>
-                            <a href="home.php?option=list_books&isbn={$books->getIsbn()}"><button class="btn btn-danger" name="action" value="delete">Delete</button></a>
+                            <a href="home.php?option=delete&isbn={$books->getIsbn()}"><button class="btn btn-danger" name="action" value="delete">Delete</button></a>
                         </td>                    
                         EOT;
                     }

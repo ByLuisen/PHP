@@ -28,7 +28,7 @@ class BookFormValidation
             switch ($field) {
                 case 'isbn':
                     // filter_var retorna los datos filtrados o FALSE si el filtro falla
-                    $isbn = $_GET['isbn'];
+                    $isbn = trim(filter_input(INPUT_POST, 'isbn'));
                     $isbnValid = !preg_match(self::NUMERIC, $isbn);
                     if (empty($isbn)) {
                         array_push($_SESSION['error'], BookMessage::ERR_FORM['empty_isbn']);

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Footer que se le añade algunas paginas
+ * @author Luis Enrique
+ */
 date_default_timezone_set('Europe/Madrid');
 $fechaHora = "La fecha es: " . date("d-m-Y") . " y la hora es " . date("h:i:s");
 ?>

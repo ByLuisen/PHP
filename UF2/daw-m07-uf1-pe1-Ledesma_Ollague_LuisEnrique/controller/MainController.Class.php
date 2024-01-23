@@ -1,7 +1,13 @@
 <?php
+/**
+ * Controllador Main
+ * @author Luis Enrique
+ */
 //per poder fer servir l'únic controlador d'aquesta aplicació
 // require_once "controller/CategoryController.class.php";
-require_once "controller/JugadorController.class.php";
+require_once "controller/LoginController.class.php";
+require_once "controller/CategoryController.class.php";
+require_once "controller/BooksController.class.php";
 
 class MainController
 {
@@ -16,7 +22,6 @@ class MainController
 
             $request = $_GET["option"];
         } else {
-
             $request = NULL;
         }
         // o equivalentment en format comprimit
@@ -35,14 +40,27 @@ class MainController
 
         //mirem de quin menú venim
         switch ($request) {
+            case "category":
+                $controlCategory = new CategoryController();
+                $controlCategory->processRequest();
+                break;
+            case "list_books":
+            case "add_book":
+                $controlBooks= new BooksController();
+                $controlBooks->processRequest();
+                break;
+            case "logout":
+                $controlLogin = new LoginController();
+                $controlLogin->processRequest();
+                break;
                 // si hi haguessin molts controladors, faríem un case per cadascun d'ells. Aquí
                 // per defecte fiquem l'únic controlador que hi ha CategoryController
                 // en el cas que hi haguessin molts:
                 //en el cas que volguessim carregar alguna vista per defecte fora de la que ens vindrà dels controladors
                 //per a nosaltres, la vista primera és la que ens ofereix el menú de categories
             default:
-                $controlJugador = new JugadorController();
-                $controlJugador->processRequest();
+                $controlLogin = new LoginController();
+                $controlLogin->processRequest();
                 break;
         }
     }

@@ -38,12 +38,11 @@ class PetController implements ControllerInterface
     public function processRequest()
     {
         // CHECK GET AND POST
-                                          $request = NULL;
-             if (isset($_POST["action"])) $request = $_POST["action"]; // POST "action" PARAMETER EXISTS (SUBMIT BUTTON WAS CLICKED) --> SET $request TO ITS VALUE
-        else if (isset($_GET ["option"])) $request = $_GET ["option"]; // URL "menu" PARAMETER EXISTS --> SET $request TO ITS VALUE (USER IS IN A SPECIFIC SUB-PAGE)
+        $request = NULL;
+        if (isset($_POST["action"])) $request = $_POST["action"]; // POST "action" PARAMETER EXISTS (SUBMIT BUTTON WAS CLICKED) --> SET $request TO ITS VALUE
+        else if (isset($_GET["option"])) $request = $_GET["option"]; // URL "menu" PARAMETER EXISTS --> SET $request TO ITS VALUE (USER IS IN A SPECIFIC SUB-PAGE)
 
-        switch ($request)
-        {
+        switch ($request) {
             case "list_all":
                 $this->listAll();
                 break;
@@ -60,6 +59,14 @@ class PetController implements ControllerInterface
                 $this->formAddHistory();
                 break;
 
+            case "form_add":
+                $this->formAddPet();
+                break;
+
+            case "add":
+                $this->add();
+                break;
+
             case "add_history":
                 $this->addHistory();
                 break;
@@ -72,19 +79,22 @@ class PetController implements ControllerInterface
                 $this->modify();
                 break;
 
-            // DEFAULT
+            case "delete":
+                $this->delete();
+                break;
+                // DEFAULT
 
             default:
-            // if (str_contains($request, "modify_pet_"))
-            // {
-            //     $id = explode('_', $request)[2];
-                
-            // }
-            // else
-            // {
+                // if (str_contains($request, "modify_pet_"))
+                // {
+                //     $id = explode('_', $request)[2];
+
+                // }
+                // else
+                // {
                 // URL PARAM "option" DOES NOT EXIST AND THE FORM SUBMIT BUTTON WAS NOT PRESSED --> DISPLAY VIEW (ONLY PET MENU)
-                    $this->view->display();
-            // }
+                $this->view->display();
+                // }
         }
     }
 
@@ -107,9 +117,9 @@ class PetController implements ControllerInterface
     }
 
     /**
-    * Display single pet by id.
-    */
-    public function searchById ()
+     * Display single pet by id.
+     */
+    public function searchById()
     {
         $id = $_POST["id"];
 
@@ -117,18 +127,14 @@ class PetController implements ControllerInterface
         $owner = null;
         $history = array();
 
-        if ($id==null)
-        {
+        if ($id == null) {
             $_SESSION["error"][] = PetMessage::FORM_EMPTY_ID;
-        }
-        else
-        {
+        } else {
             // SEARCH PET IN DB
             $pet = $this->model->searchById($id);
 
             if (!isset($pet)) $_SESSION["error"][] = PetMessage::SELECT_ERROR;
-            else
-            {
+            else {
                 $_SESSION["info"][]  = PetMessage::SELECT_SUCCESS;
 
                 // SEARCH PET'S OWNER IN DB
@@ -136,7 +142,7 @@ class PetController implements ControllerInterface
                 $owner = $ownerModel->searchById($pet->getIdOwner());
                 if (!empty($owner)) $_SESSION["info"][]  = OwnerMessage::SELECT_SUCCESS;
                 else                $_SESSION["error"][] = OwnerMessage::SELECT_ERROR;
-                
+
                 // SEARCH PET'S HISTORY IN DB
                 $historyModel = new HistoryDAO();
                 $history = $historyModel->searchByPetId($id);
@@ -160,10 +166,18 @@ class PetController implements ControllerInterface
     }
 
     /**
+     * Display the form adding a pet, using the view.
+     */
+    public function formAddPet()
+    {
+        $this->view->display("view/form/PetFormUpdate.php");
+    }
+
+    /**
      * Add new history.
      * Access user's form input through $_POST, and access database through the History DAO. Then display the result using the view.
      **/
-    public function addHistory ()
+    public function addHistory()
     {
         // WILL NEED TO ACCESS HISTORY MODEL
         $historyModel = new HistoryDAO();
@@ -177,11 +191,10 @@ class PetController implements ControllerInterface
             // CHECK IF PET EXISTS
             $petFound = $this->model->searchById($historyInput->getIdPet());
             if (!$petFound) $_SESSION["error"][] = PetMessage::ID_DOES_NOT_EXIST;
-            else
-            {
+            else {
                 // ADD HISTORY TO DB
                 $success = $historyModel->add($historyInput);
-               
+
                 if ($success) $_SESSION["info"][]  = HistoryMessage::INSERT_SUCCESS;
                 else          $_SESSION["error"][] = HistoryMessage::INSERT_ERROR;
             }
@@ -194,57 +207,49 @@ class PetController implements ControllerInterface
     /**
      * Click on "modify" button on the list of pets. Show a form.
      */
-    public function formModify ()
+    public function formModify()
     {
         $petInput = PetFormValidation::checkData(PetFormValidation::SELECT);
         $petFinal = $petInput;
-        
+
         if (empty($_SESSION["error"])) // If the validation didn't have any errors...
         {
             // SELECT PET
             $petFound = $this->model->searchById($petInput->getId());
-            if ($petFound == NULL)
-            {
+            if ($petFound == NULL) {
                 $_SESSION["error"][] = PetMessage::ID_DOES_NOT_EXIST;
-            }
-            else
-            {
+            } else {
                 $petFinal = $petFound;
             }
         }
 
-        $this->view->display("view/form/PetFormUpdate.php", $petFinal);
+        $this->view->display("view/form/
+        .php", $petFinal);
     }
 
     /**
      * Modify pet.
      * Access user's form input through $_POST, and access database through the DAO. Then display the result using the view.
-    */
-    public function modify ()
+     */
+    public function modify()
     {
         // VALIDATE INPUT
         $petInput = PetFormValidation::checkData(PetFormValidation::UPDATE);
         $petFinal = $petInput;
-        
+
         if (empty($_SESSION["error"])) // If the validation didn't have any errors...
         {
             // CHECK IF PET EXISTS
             $petFound = $this->model->searchById($petInput->getId());
-            if ($petFound == NULL)
-            {
+            if ($petFound == NULL) {
                 $_SESSION["error"][] = PetMessage::ID_DOES_NOT_EXIST;
-            }
-            else
-            {
+            } else {
                 // CHECK IF OWNER EXISTS
                 $ownerModel = new OwnerDAO();
                 $ownerFound = $ownerModel->searchById($petInput->getIdOwner());
-                if ($ownerFound == NULL)
-                {
+                if ($ownerFound == NULL) {
                     $_SESSION["error"][] = OwnerMessage::NIF_DOES_NOT_EXIST;
-                }
-                else
-                {
+                } else {
                     $petFinal = $petFound;
                     $petFinal->setIdOwner($petInput->getIdOwner());
                     $petFinal->setName($petInput->getName());
@@ -269,11 +274,57 @@ class PetController implements ControllerInterface
      * Add new pet.
      * Access user's form input through $_POST, and access database through the DAO. Then display the result using the view.
      **/
-    public function add () {}
+    public function add()
+    {
+        // VALIDATE INPUT
+        $petInput = PetFormValidation::checkData(PetFormValidation::INSERT);
+        $petFinal = $petInput;
+
+        if (empty($_SESSION["error"])) // If the validation didn't have any errors...
+        {
+            // CHECK IF PET EXISTS
+            $petFound = $this->model->searchById($petInput->getId());
+            if ($petFound != NULL) {
+                $_SESSION["error"][] = PetMessage::ID_ALREADY_EXISTS;
+            } else {
+                // CHECK IF OWNER EXISTS
+                $ownerModel = new OwnerDAO();
+                $ownerFound = $ownerModel->searchById($petInput->getIdOwner());
+                if ($ownerFound == NULL) {
+                    $_SESSION["error"][] = OwnerMessage::NIF_DOES_NOT_EXIST;
+                } else {
+                    // ADD PET TO DB
+                    $success = $this->model->add($petFinal);
+                    if ($success) $_SESSION["info"][]  = PetMessage::INSERT_SUCCESS;
+                    else          $_SESSION["error"][] = PetMessage::INSERT_ERROR;
+                }
+            }
+        }
+        $this->view->display("view/form/PetFormUpdate.php");
+    }
 
     /**
      * Delete pet.
      * Access user's form input through $_POST, and access database through the DAO. Then display the result using the view.
-    */
-    public function delete () {}
+     */
+    public function delete()
+    {
+        $id = $_POST["id"];
+
+        if ($id == null) {
+            $_SESSION["error"][] = PetMessage::FORM_EMPTY_ID;
+        } else {
+            // SEARCH PET IN DB
+            $pet = $this->model->delete($id);
+
+            if (!$pet) {
+                $_SESSION["error"][] = PetMessage::DELETE_ERROR;
+            } else {
+                $_SESSION["info"][]  = PetMessage::DELETE_SUCCESS;
+            }
+        }
+
+        // DISPLAY FORM AGAIN WITH ITEM'S PARAMETERS, AND SUCCESS/ERROR MESSAGES
+        $this->listAll();
+    }
 }

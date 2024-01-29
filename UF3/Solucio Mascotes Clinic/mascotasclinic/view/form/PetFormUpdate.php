@@ -1,9 +1,9 @@
 <form method="post" action="">
 
-    <h1>Update Pet</h1>
+    <h1><?php echo ($_GET['option'] == 'form_add') ? "Añadir" : "Update" ?> Pet</h1>
 
     <div class="form-group form-inline"> ID *:
-        <input contentEditable="false" readonly type="text" placeholder="ID" name="id" value="<?php if (isset($content)) echo $content->getId(); ?>">
+        <input contentEditable="false" <?php echo ($_GET['option'] == 'form_add') ? "" : "readonly" ?> type="text" placeholder="ID" name="id" value="<?php if (isset($content)) echo $content->getId(); ?>">
     </div>
 
     <div class="form-group form-inline"> Owner's NIF *:
@@ -16,7 +16,7 @@
 
     <p>* Required fields</p>
 
-    <input class="btn-success mr-2" type="submit" name="action" value="update_pet">
+    <input class="btn-success mr-2" type="submit" name="action" value="<?php echo ($_GET['option'] == 'form_add') ? "add" : "update_pet" ?>">
     <input class="btn-danger" type="submit" name="reset" value="reset">
 
 </form>

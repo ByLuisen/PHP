@@ -6,7 +6,7 @@ require_once "model/persist/ModelInterface.php";
 class PetDAO implements ModelInterface
 {
     private $dbConnection;
-    
+
     private $sqlListPetsByOwner = "SELECT * FROM mascotas WHERE nifpropietario=?"; // Buscar mascotas dado un propietario (1,5 punts)
 
     public function __construct()
@@ -30,11 +30,9 @@ class PetDAO implements ModelInterface
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
-            foreach ($sentence as $line)
-            {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
+            foreach ($sentence as $line) {
                 $pet = new Pet($line["id"], $line["nifpropietario"], $line["nom"]);
                 $response[] = $pet;
             }
@@ -51,14 +49,13 @@ class PetDAO implements ModelInterface
     public function add($pet)
     {
         // myQuery params
-        $sql = "INSERT INTO mascotas (nom, email, movil) VALUES (?, ?, ?)";
-        $vector = array( $pet->getName(), $pet->getEmail(), $pet->getPhone() );
+        $sql = "INSERT INTO mascotas (id, nifpropietario, nom) VALUES (?, ?, ?)";
+        $vector = array($pet->getId(), $pet->getIdOwner(), $pet->getName());
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
             return true;
         }
 
@@ -76,15 +73,13 @@ class PetDAO implements ModelInterface
         $pet = null;
         // $owner = null;
         // $history = array();
-        
+
         // get pet's data (based on $id param)
         $sql = "SELECT * FROM mascotas WHERE id=?";
         $vector = array($id);
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
-            foreach ($sentence as $line)
-            {
+        if ($sentence != null && $sentence->rowCount() != 0) {
+            foreach ($sentence as $line) {
                 $pet = new Pet($line["id"], $line["nifpropietario"], $line["nom"]);
             }
         }
@@ -110,11 +105,9 @@ class PetDAO implements ModelInterface
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
-            foreach ($sentence as $line)
-            {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
+            foreach ($sentence as $line) {
                 $pet = new Pet($line["id"], $line["nifpropietario"], $line["nom"]);
                 $response[] = $pet;
             }
@@ -132,13 +125,12 @@ class PetDAO implements ModelInterface
     {
         // myQuery params
         $sql = "UPDATE mascotas SET nifpropietario=?, nom=? WHERE id=?";
-        $vector = array( $pet->getIdOwner(), $pet->getName(), $pet->getId() );
+        $vector = array($pet->getIdOwner(), $pet->getName(), $pet->getId());
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
             return true;
         }
 
@@ -158,12 +150,26 @@ class PetDAO implements ModelInterface
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
             return true;
         }
 
         return false;
     }
+    // Modificar la configuración de la restricción de clave externa:
+    //     Puedes modificar la configuración de la restricción de clave externa para permitir acciones en cascada (ON DELETE CASCADE), lo que significa que al eliminar una fila principal, todas las filas secundarias relacionadas se eliminarán automáticamente. Sin embargo, ten cuidado con esta opción, ya que puede tener consecuencias no deseadas si no se maneja adecuadamente.
+
+    //     Ejemplo de cómo modificar la restricción:
+
+    //     sql
+    //     Copy code
+    //     ALTER TABLE lineas_de_historial
+    //     DROP FOREIGN KEY lineas_de_historial_ibfk_1;
+
+    //     ALTER TABLE lineas_de_historial
+    //     ADD CONSTRAINT lineas_de_historial_ibfk_1
+    //     FOREIGN KEY (idmascota)
+    //     REFERENCES mascotas(id)
+    //     ON DELETE CASCADE;
 }

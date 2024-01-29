@@ -23,7 +23,7 @@ class HistoryDAO implements ModelInterface
         $response = array();
 
         // myQuery params
-        $sql = "SELECT * FROM lineas_de_historial";
+        $sql = "SELECT * FROM lineas_de_historial ORDER BY fecha ASC";
         $vector = array(); // empty array because no params are needed for a 'select all' query
 
         // prepare sentence

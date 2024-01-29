@@ -18,7 +18,7 @@ START TRANSACTION;
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `mascotasclinic`
+-- Base de dades: `mascotasclinic` 
 --
 
 -- --------------------------------------------------------

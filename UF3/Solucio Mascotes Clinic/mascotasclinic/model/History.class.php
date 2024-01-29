@@ -15,7 +15,7 @@ class History
 
     // CONSTRUCTOR
 
-    public function __construct ($id, $idPet, $date, $motive=NULL, $desc=NULL)
+    public function __construct($id, $idPet, $date, $motive = NULL, $desc = NULL)
     {
         $this->id = $id;
         $this->idPet = $idPet;
@@ -23,27 +23,54 @@ class History
         $this->motive = $motive;
         $this->desc = $desc;
     }
-    
+
     // GETTERS & SETTERS
 
-    public function getId     (      ) { return $this->id;       }
+    public function getId()
+    {
+        return $this->id;
+    }
 
-    public function getIdPet  (      ) { return $this->idPet;    }
-    public function setIdPet  ($value) { $this->idPet = $value;  }
+    public function getIdPet()
+    {
+        return $this->idPet;
+    }
+    public function setIdPet($value)
+    {
+        $this->idPet = $value;
+    }
 
-    public function getDate   (      ) { return $this->date;     }
-    public function setDate   ($value) { $this->date = $value;   }
+    public function getDate()
+    {
+        return $this->date;
+    }
+    public function setDate($value)
+    {
+        $this->date = $value;
+    }
 
-    public function getMotive (      ) { return $this->motive;   }
-    public function setMotive ($value) { $this->motive = $value; }
+    public function getMotive()
+    {
+        return $this->motive;
+    }
+    public function setMotive($value)
+    {
+        $this->motive = $value;
+    }
 
-    public function getDesc   (      ) { return $this->desc;     }
-    public function setDesc   ($value) { $this->desc = $value;   }
+    public function getDesc()
+    {
+        return $this->desc;
+    }
+    public function setDesc($value)
+    {
+        $this->desc = $value;
+    }
 
     // WRITE
 
-    public function write ()
+    public function write()
     {
-        return "\n".$this->id . ";" . $this->idPet . ";" . $this->date . ";" . $this->motive . ";" . $this->desc;
+        return "\n" . $this->id . ";" . $this->idPet . ";" . $this->date . ";" . $this->motive . ";" . $this->desc;
     }
 }

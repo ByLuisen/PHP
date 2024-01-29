@@ -1,12 +1,12 @@
 <form method="post" action="">
 
-    <h1>Update Owner</h1>
+<h1><?php echo ($_GET['option'] == 'form_add') ? "Add" : "Update" ?> Owner</h1>
 
     <div class="form-group form-inline"> NIF *:
-        <input  contentEditable="false" readonly type="text" placeholder="NIF" name="nif" value="<?php if (isset($content)) echo $content->getNif(); ?>">
+        <input contentEditable="false" <?php echo ($_GET['option'] == 'form_add') ? "" : "readonly" ?> type="text" placeholder="NIF" name="nif" value="<?php if (isset($content)) echo $content->getNif(); ?>">
     </div>
 
-    <div style="display: none;" class="form-group form-inline"> Name *:
+    <div class="form-group form-inline"> Name *:
         <input type="text" placeholder="Name" name="name" value="<?php if (isset($content)) echo $content->getName(); ?>">
     </div>
 
@@ -20,7 +20,7 @@
 
     <p>* Required fields</p>
 
-    <input class="btn-success mr-2" type="submit" name="action" value="update_owner">
+    <input class="btn-success mr-2" type="submit" name="action" value="<?php echo ($_GET['option'] == 'form_add') ? "add" : "update_owner" ?>">
     <input class="btn-danger" type="submit" name="reset" value="reset">
 
 </form>

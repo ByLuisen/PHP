@@ -77,8 +77,8 @@ class OwnerDAO implements ModelInterface
     public function modify($owner)
     {
         // myQuery params
-        $sql = "UPDATE propietarios SET email=?, movil=? WHERE nif=?"; // Modificar propietario (1,5 punts)
-        $vector = array( $owner->getEmail(), $owner->getPhone(), $owner->getNif() );
+        $sql = "UPDATE propietarios SET nom=?, email=?, movil=? WHERE nif=?"; // Modificar propietario (1,5 punts)
+        $vector = array( $owner->getName(), $owner->getEmail(), $owner->getPhone(), $owner->getNif() );
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
@@ -143,4 +143,20 @@ class OwnerDAO implements ModelInterface
 
         return false;
     }
+
+    // Modificar la configuración de la restricción de clave externa:
+    //     Puedes modificar la configuración de la restricción de clave externa para permitir acciones en cascada (ON DELETE CASCADE), lo que significa que al eliminar una fila principal, todas las filas secundarias relacionadas se eliminarán automáticamente. Nuevamente, ten cuidado con esta opción.
+        
+    //     Ejemplo de cómo modificar la restricción:
+        
+    //     sql
+    //     Copy code
+    //     ALTER TABLE mascotas
+    //     DROP FOREIGN KEY mascotas_ibfk_1;
+        
+    //     ALTER TABLE mascotas
+    //     ADD CONSTRAINT mascotas_ibfk_1
+    //     FOREIGN KEY (nifpropietario)
+    //     REFERENCES propietarios(nif)
+    //     ON DELETE CASCADE;
 }

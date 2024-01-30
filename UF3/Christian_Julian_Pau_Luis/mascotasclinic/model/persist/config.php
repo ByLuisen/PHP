@@ -5,9 +5,9 @@
  * @author Luis Enrique, Christian Sastre, Julian Ortega, Pau López 
  */
 
-const CONSTDSN = "mysql:host=localhost;dbname=mascotasclinic";
-const CONSTUSER = "m07";
-const CONSTPASSWORD = "m07";
+const DSN = "mysql:host=localhost;dbname=mascotasclinic";
+const USER = "m07";
+const PASSWORD = "m07";
 
 
 

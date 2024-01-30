@@ -31,7 +31,7 @@ class DBConnection
         $flag = true;
 
         try {
-            $this->dbh = new PDO(CONSTDSN, CONSTUSER, CONSTPASSWORD);
+            $this->dbh = new PDO(DSN, USER, PASSWORD);
         } catch (PDOException $e) {
             $flag = false;
         }

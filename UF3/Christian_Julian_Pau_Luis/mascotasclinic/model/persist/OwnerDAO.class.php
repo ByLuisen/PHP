@@ -13,26 +13,24 @@ class OwnerDAO implements ModelInterface
     }
 
     /**
-     * Gather all owners
+     * Recopilar todos los propietarios
      * @param void
-     * @return array with all owners
+     * @return array Con todos los owners
      */
     public function listAll()
     {
-        // declare array for results
+        // declarar array para los resultados
         $response = array();
 
-        // myQuery params
-        $sql = "SELECT * FROM propietarios"; // Listar todos los propietarios (1 punt)
-        $vector = array(); // empty array because no params are needed for a 'select all' query
+        // myQuery parametros
+        $sql = "SELECT * FROM propietarios"; // Listar todos los propietarios 
+        $vector = array(); // array vacío porque no se necesitan parámetros para una consulta 'seleccionar todo'
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
-            foreach ($sentence as $line)
-            {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
+            foreach ($sentence as $line) {
                 $owner = new Owner($line["nif"], $line["nom"], $line["email"], $line["movil"]);
                 $response[] = $owner;
             }
@@ -42,26 +40,24 @@ class OwnerDAO implements ModelInterface
     }
 
     /**
-     * Retrieves a owner from the DB given its $nif
-     * @param $nif of owner to retrieve
-     * @return owner found with that nif in the database. If none found, returns null
+     * Recupera un propietario de la base de datos dado su $nif
+     * @param $nif del propietario a recuperar
+     * @return owner propietario encontrado con ese nif en la base de datos. Si no se encuentra ninguno, devuelve null
      */
     public function searchById($nif)
     {
-        // declare array for results
+        // Declarar array para resultados
         $owner = NULL;
 
-        // myQuery params
+        // myQuery parametros
         $sql = "SELECT * FROM propietarios WHERE nif=?";
         $vector = array($nif);
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
-            foreach ($sentence as $line)
-            {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
+            foreach ($sentence as $line) {
                 $owner = new Owner($line["nif"], $line["nom"], $line["email"], $line["movil"]);
             }
         }
@@ -78,27 +74,17 @@ class OwnerDAO implements ModelInterface
     {
         // myQuery params
         $sql = "UPDATE propietarios SET nom=?, email=?, movil=? WHERE nif=?"; // Modificar propietario (1,5 punts)
-        $vector = array( $owner->getName(), $owner->getEmail(), $owner->getPhone(), $owner->getNif() );
+        $vector = array($owner->getName(), $owner->getEmail(), $owner->getPhone(), $owner->getNif());
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
             return true;
         }
 
         return false;
     }
-
-
-
-
-    // ============== UNUSED METHODS ============== //
-
-
-
-
 
     /**
      * Writes a new owner into the database
@@ -109,13 +95,12 @@ class OwnerDAO implements ModelInterface
     {
         // myQuery params
         $sql = "INSERT INTO propietarios (nif, nom, email, movil) VALUES (?, ?, ?, ?)";
-        $vector = array( $owner->getNif(), $owner->getName(), $owner->getEmail(), $owner->getPhone() );
+        $vector = array($owner->getNif(), $owner->getName(), $owner->getEmail(), $owner->getPhone());
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
             return true;
         }
 
@@ -135,9 +120,8 @@ class OwnerDAO implements ModelInterface
 
         // prepare sentence
         $sentence = $this->dbConnection->myQuery($sql, $vector);
-        
-        if ($sentence != null && $sentence->rowCount() != 0)
-        {
+
+        if ($sentence != null && $sentence->rowCount() != 0) {
             return true;
         }
 
@@ -145,15 +129,14 @@ class OwnerDAO implements ModelInterface
     }
 
     // Modificar la configuración de la restricción de clave externa:
-    //     Puedes modificar la configuración de la restricción de clave externa para permitir acciones en cascada (ON DELETE CASCADE), lo que significa que al eliminar una fila principal, todas las filas secundarias relacionadas se eliminarán automáticamente. Nuevamente, ten cuidado con esta opción.
-        
+    //     Puedes modificar la configuración de la restricción de clave externa para permitir acciones en cascada (ON DELETE CASCADE), 
+    //     lo que significa que al eliminar una fila principal, todas las filas secundarias relacionadas se eliminarán automáticamente. Nuevamente, ten cuidado con esta opción.
+
     //     Ejemplo de cómo modificar la restricción:
-        
-    //     sql
-    //     Copy code
+
     //     ALTER TABLE mascotas
     //     DROP FOREIGN KEY mascotas_ibfk_1;
-        
+
     //     ALTER TABLE mascotas
     //     ADD CONSTRAINT mascotas_ibfk_1
     //     FOREIGN KEY (nifpropietario)

@@ -9,11 +9,11 @@
     <div class="form-group form-inline"> Visit Date * (YYYY-MM-DD):
         <input type="text" placeholder="YYYY-MM-DD" name="date" value="<?php if (isset($content)) echo $content->getDate(); ?>">
     </div>
-    
+
     <div class="form-group form-inline"> Motive:
         <input type="text" placeholder="Motive" name="motive" value="<?php if (isset($content)) echo $content->getMotive(); ?>">
     </div>
-    
+
     <div class="form-group form-inline"> Description:
         <input type="text" placeholder="Description" name="desc" value="<?php if (isset($content)) echo $content->getDesc(); ?>">
     </div>

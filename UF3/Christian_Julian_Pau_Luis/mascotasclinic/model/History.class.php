@@ -1,11 +1,14 @@
 <?php
 
 /**
- * History DTO class.
+ * Clase que define un objeto de transferencia de datos (DTO) para representar la información del historial
+ * de una mascota en el sistema. Contiene atributos y métodos para acceder y manipular dicha información.
+ *
+ * @author [Autores: Luis Enrique, Christian Sastre, Julian Ortega, Pau López]
  */
 class History
 {
-    // ATTRIBUTES
+    // ATRIBUTOS
 
     private $id;
     private $idPet;
@@ -67,7 +70,7 @@ class History
         $this->desc = $value;
     }
 
-    // WRITE
+    // ESCRIBE
 
     public function write()
     {

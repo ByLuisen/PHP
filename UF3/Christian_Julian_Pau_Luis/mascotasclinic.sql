@@ -1,15 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Temps de generació: 28-01-2021 a les 15:48:18
--- Versió del servidor: 8.0.22-0ubuntu0.20.04.3
--- Versió de PHP: 7.4.3
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-01-2024 a las 11:09:57
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,25 +18,28 @@ START TRANSACTION;
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `mascotasclinic` 
+-- Base de datos: `mascotasclinic`
 --
+CREATE DATABASE IF NOT EXISTS `mascotasclinic` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `mascotasclinic`;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `lineas_de_historial`
+-- Estructura de tabla para la tabla `lineas_de_historial`
 --
 
+DROP TABLE IF EXISTS `lineas_de_historial`;
 CREATE TABLE `lineas_de_historial` (
-  `id` int NOT NULL,
-  `idmascota` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `idmascota` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `motivo_visita` varchar(300) DEFAULT NULL,
   `descripcion` varchar(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Bolcament de dades per a la taula `lineas_de_historial`
+-- Volcado de datos para la tabla `lineas_de_historial`
 --
 
 INSERT INTO `lineas_de_historial` (`id`, `idmascota`, `fecha`, `motivo_visita`, `descripcion`) VALUES
@@ -53,17 +56,18 @@ INSERT INTO `lineas_de_historial` (`id`, `idmascota`, `fecha`, `motivo_visita`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `mascotas`
+-- Estructura de tabla para la tabla `mascotas`
 --
 
+DROP TABLE IF EXISTS `mascotas`;
 CREATE TABLE `mascotas` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `nifpropietario` varchar(25) NOT NULL,
   `nom` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Bolcament de dades per a la taula `mascotas`
+-- Volcado de datos para la tabla `mascotas`
 --
 
 INSERT INTO `mascotas` (`id`, `nifpropietario`, `nom`) VALUES
@@ -74,18 +78,19 @@ INSERT INTO `mascotas` (`id`, `nifpropietario`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `propietarios`
+-- Estructura de tabla para la tabla `propietarios`
 --
 
+DROP TABLE IF EXISTS `propietarios`;
 CREATE TABLE `propietarios` (
   `nif` varchar(25) NOT NULL,
   `nom` varchar(25) NOT NULL,
   `email` varchar(25) DEFAULT NULL,
   `movil` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Bolcament de dades per a la taula `propietarios`
+-- Volcado de datos para la tabla `propietarios`
 --
 
 INSERT INTO `propietarios` (`nif`, `nom`, `email`, `movil`) VALUES
@@ -93,60 +98,60 @@ INSERT INTO `propietarios` (`nif`, `nom`, `email`, `movil`) VALUES
 ('02258461E', 'Mario', 'mario1@mail.com', '111111112');
 
 --
--- Índexs per a les taules bolcades
+-- Índices para tablas volcadas
 --
 
 --
--- Índexs per a la taula `lineas_de_historial`
+-- Indices de la tabla `lineas_de_historial`
 --
 ALTER TABLE `lineas_de_historial`
   ADD PRIMARY KEY (`id`,`idmascota`),
   ADD KEY `idmascota` (`idmascota`);
 
 --
--- Índexs per a la taula `mascotas`
+-- Indices de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
   ADD PRIMARY KEY (`id`,`nifpropietario`),
   ADD KEY `nifpropietario` (`nifpropietario`);
 
 --
--- Índexs per a la taula `propietarios`
+-- Indices de la tabla `propietarios`
 --
 ALTER TABLE `propietarios`
   ADD PRIMARY KEY (`nif`);
 
 --
--- AUTO_INCREMENT per les taules bolcades
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT per la taula `lineas_de_historial`
+-- AUTO_INCREMENT de la tabla `lineas_de_historial`
 --
 ALTER TABLE `lineas_de_historial`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT per la taula `mascotas`
+-- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Restriccions per a les taules bolcades
+-- Restricciones para tablas volcadas
 --
 
 --
--- Restriccions per a la taula `lineas_de_historial`
+-- Filtros para la tabla `lineas_de_historial`
 --
 ALTER TABLE `lineas_de_historial`
-  ADD CONSTRAINT `lineas_de_historial_ibfk_1` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`id`);
+  ADD CONSTRAINT `lineas_de_historial_ibfk_1` FOREIGN KEY (`idmascota`) REFERENCES `mascotas` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `mascotas`
+-- Filtros para la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  ADD CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`nifpropietario`) REFERENCES `propietarios` (`nif`);
+  ADD CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`nifpropietario`) REFERENCES `propietarios` (`nif`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

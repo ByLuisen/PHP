@@ -1,5 +1,9 @@
 <?php
 
+/**
+ *Constantes de mensajes de error y de succes para la clase History
+ * @author Luis Enrique, Christian Sastre, Julian Ortega, Pau López
+ */
 class HistoryMessage
 {
     // DDBB SUCCESS/ERROR MESSAGES

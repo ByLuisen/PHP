@@ -4,7 +4,7 @@ require_once "util/PetMessage.class.php";
 
 /**
  * Class used to validate user's input form for an Pet object
- * (most patterns taken from regexpal.com)
+ * @author Luis Enrique, Christian Sastre, Julian Ortega, Pau López
  */
 class PetFormValidation
 {

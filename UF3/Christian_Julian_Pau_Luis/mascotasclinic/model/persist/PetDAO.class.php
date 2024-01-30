@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * PetDAO - Objeto de Acceso a Datos para gestionar datos relacionados con mascotas en la base de datos.
+ *
+ * Esta clase implementa la interfaz ModelInterface.
+ * Interactúa con DBConnection para el acceso a la base de datos.
+ *
+ * @author Luis Enrique, Christian Sastre, Julian Ortega, Pau López
+ */
 require_once "model/Pet.class.php";
 require_once "model/persist/DBConnection.class.php";
 require_once "model/persist/ModelInterface.php";
@@ -15,20 +24,20 @@ class PetDAO implements ModelInterface
     }
 
     /**
-     * Gather all pets
+     * Recopilar todas las mascotas
      * @param void
-     * @return array with all pets
+     * @return array con todas las mascotas
      */
     public function listAll()
     {
-        // declare array for results
+        // declarar array para los resultados
         $response = array();
 
-        // myQuery params
-        $sql = "SELECT * FROM mascotas"; // Listar todas las mascotas (1 punt)
-        $vector = array(); // empty array because no params are needed for a 'select all' query
+        // myQuery parametros
+        $sql = "SELECT * FROM mascotas"; // Listar todas las mascotas 
+        $vector = array(); // array vacío porque no se necesitan parámetros para una consulta 'seleccionar todo'
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
 
         if ($sentence != null && $sentence->rowCount() != 0) {
@@ -42,17 +51,17 @@ class PetDAO implements ModelInterface
     }
 
     /**
-     * Writes a new pet into the database
-     * @param pet to add
-     * @return true if the pet was added successfully, false otherwise
+     * Escribe una nueva mascota en la base de datos
+     * @param pet para añadir
+     * @return true true si la mascota se añadió con éxito, false en caso contrario
      */
     public function add($pet)
     {
-        // myQuery params
+        // myQuery parametros
         $sql = "INSERT INTO mascotas (id, nifpropietario, nom) VALUES (?, ?, ?)";
         $vector = array($pet->getId(), $pet->getIdOwner(), $pet->getName());
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
 
         if ($sentence != null && $sentence->rowCount() != 0) {
@@ -63,18 +72,16 @@ class PetDAO implements ModelInterface
     }
 
     /**
-     * Retrieves a pet from the DB given its $id
-     * @param $id of pet to retrieve
-     * @return pet found with that id in the database. If none found, returns null
+     * Recupera una mascota de la base de datos dado su $id
+     * @param $id de la mascota a recuperar
+     * @return pet encontrada con ese id en la base de datos. Si no se encuentra ninguna, devuelve null
      */
     public function searchById($id)
     {
-        // declare result variables
+        // declarar variables de resultado
         $pet = null;
-        // $owner = null;
-        // $history = array();
 
-        // get pet's data (based on $id param)
+        // Obtener los datos de la mascota (basado en el parámetro $id)
         $sql = "SELECT * FROM mascotas WHERE id=?";
         $vector = array($id);
         $sentence = $this->dbConnection->myQuery($sql, $vector);
@@ -90,20 +97,20 @@ class PetDAO implements ModelInterface
     }
 
     /**
-     * Retrieves a pet from the DB given its owner's $nif
-     * @param $nif of pet's owner
-     * @return pet found with that owner's nif in the database. If none found, returns null
+     * Recupera una mascota de la base de datos dado el $nif del propietario
+     * @param $nif del propietario de la mascota
+     * @return pet mascota encontrada con ese nif del propietario en la base de datos. Si no se encuentra ninguna, devuelve null
      */
     public function searchByOwnerNif($nif)
     {
-        // declare array for results
+        // declarar array para los resultados
         $response = array();
 
-        // myQuery params
+        // myQuery parametros
         $sql = "SELECT * FROM mascotas WHERE nifpropietario=?";
         $vector = array($nif);
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
 
         if ($sentence != null && $sentence->rowCount() != 0) {
@@ -111,23 +118,22 @@ class PetDAO implements ModelInterface
                 $pet = new Pet($line["id"], $line["nifpropietario"], $line["nom"]);
                 $response[] = $pet;
             }
-        }
-
+        } 
         return $response;
     }
 
     /**
-     * Modifies a pet in the DB given its $id and params
-     * @param pet to modify
-     * @return true if the pet was modified successfully, false otherwise
+     * Modifica una mascota en la base de datos dado su $id y parámetros
+     * @param pet a modificar
+     * @return true true si la mascota se modificó con éxito, false en caso contrario
      */
     public function modify($pet)
     {
-        // myQuery params
+        // myQuery parametros
         $sql = "UPDATE mascotas SET nifpropietario=?, nom=? WHERE id=?";
         $vector = array($pet->getIdOwner(), $pet->getName(), $pet->getId());
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
 
         if ($sentence != null && $sentence->rowCount() != 0) {
@@ -138,17 +144,17 @@ class PetDAO implements ModelInterface
     }
 
     /**
-     * Deletes a pet from the DB given its $id
-     * @param $id of pet to delete
-     * @return true if the pet was deleted successfully, false otherwise
+     * Elimina una mascota de la base de datos dado su $id
+     * @param $id de la mascota a borrar
+     * @return true si la mascota se eliminó con éxito, false en caso contrario
      */
     public function delete($id)
     {
-        // myQuery params
+        // myQuery parametros
         $sql = "DELETE FROM mascotas WHERE id=?";
         $vector = array($id);
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
 
         if ($sentence != null && $sentence->rowCount() != 0) {
@@ -157,19 +163,18 @@ class PetDAO implements ModelInterface
 
         return false;
     }
-    // Modificar la configuración de la restricción de clave externa:
+
+    //     Modificar la configuración de la restricción de clave externa:
     //     Puedes modificar la configuración de la restricción de clave externa para permitir acciones en cascada (ON DELETE CASCADE), lo que significa que al eliminar una fila principal, todas las filas secundarias relacionadas se eliminarán automáticamente. Sin embargo, ten cuidado con esta opción, ya que puede tener consecuencias no deseadas si no se maneja adecuadamente.
 
     //     Ejemplo de cómo modificar la restricción:
 
-    //     sql
-    //     Copy code
-    //     ALTER TABLE lineas_de_historial
-    //     DROP FOREIGN KEY lineas_de_historial_ibfk_1;
+        // ALTER TABLE lineas_de_historial
+        // DROP FOREIGN KEY lineas_de_historial_ibfk_1;
 
-    //     ALTER TABLE lineas_de_historial
-    //     ADD CONSTRAINT lineas_de_historial_ibfk_1
-    //     FOREIGN KEY (idmascota)
-    //     REFERENCES mascotas(id)
-    //     ON DELETE CASCADE;
+        // ALTER TABLE lineas_de_historial
+        // ADD CONSTRAINT lineas_de_historial_ibfk_1
+        // FOREIGN KEY (idmascota)
+        // REFERENCES mascotas(id)
+        // ON DELETE CASCADE;
 }

@@ -1,29 +1,37 @@
 <?php
 
+/**
+ * Controlador Principal 
+ * Este archivo controla las solicitudes de los usuarios enviadas a la sección principal del sitio web.
+ * 
+ * @author Luis Enrique, Christian Sastre, Julian Ortega, Pau López 
+ */
+
 require_once "controller/OwnerController.class.php";
 require_once "controller/PetController.class.php";
 require_once "controller/HistoryController.class.php";
 
 /**
- * Class that controls the user's requests sent to the main section of the website.
+ * Clase que controla las solicitudes de los usuarios enviadas a la sección principal del sitio web.
  */
 class MainController
 {
 	/**
-	 * This method is called by the index.php and it is the first method called in the application.
-	 * It displays the Main Menu, and calls a controller's processRequest() method depending on the $_GET variable (URL menu param).
+	 * Este método es llamado por index.php y es el primer método llamado en la aplicación.
+	 * Muestra el Menú Principal y llama al método processRequest() de un controlador dependiendo de la variable $_GET (parámetro de menú URL).
 	 */
+	
 	public function processRequest()
 	{
-		// Always display Main Menu:
+		// Mostrar siempre el Menú Principal:
 		include("view/menu/MainMenu.html");
 
-		// Set $request depending on the $_GET variable (URL menu param):
+		// Establecer $request dependiendo de la variable $_GET (parámetro de menú URL):
 
 		if (isset($_GET["menu"])) $request = $_GET["menu"];
 		else $request = NULL;
 
-		// Process the $request by calling the processRequest() method of a controller:
+		// Procesar la $request llamando al método processRequest() de un controlador:
 
 		switch ($request) {
 			case "owner": // URL: [...]/index.php?menu=owner

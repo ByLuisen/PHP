@@ -1,5 +1,8 @@
 <?php
-
+/**
+ *Constantes de mensajes de error y de succes para la clase Pet.
+ * @author Luis Enrique, Christian Sastre, Julian Ortega, Pau López
+ */
 class PetMessage
 {
     // DDBB SUCCESS/ERROR MESSAGES

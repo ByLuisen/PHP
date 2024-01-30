@@ -13,20 +13,20 @@ class HistoryDAO implements ModelInterface
     }
 
     /**
-     * Gather all visits
+     * Recopila todas las visitas
      * @param void
-     * @return array with all visits
+     * @return array con todas las visitas
      */
     public function listAll()
     {
-        // declare array for results
+        // declarar array para los resultados
         $response = array();
 
-        // myQuery params
+        // parámetros para myQuery
         $sql = "SELECT * FROM lineas_de_historial ORDER BY fecha ASC";
-        $vector = array(); // empty array because no params are needed for a 'select all' query
+        $vector = array(); // array vacío porque no se necesitan parámetros para una consulta 'seleccionar todo'
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
         
         if ($sentence != null && $sentence->rowCount() != 0)
@@ -42,17 +42,17 @@ class HistoryDAO implements ModelInterface
     }
 
     /**
-     * Writes a new history into the database
-     * @param history to add
-     * @return true if the history was added successfully, false otherwise
+     * Escribe una nueva historia en la base de datos
+     * @param historia a añadir
+     * @return true si la historia se añadió con éxito, false en caso contrario
      */
     public function add($history)
     {
-        // myQuery params
+        // parámetros para myQuery
         $sql = "INSERT INTO lineas_de_historial (idmascota, fecha, motivo_visita, descripcion) VALUES (?, ?, ?, ?)";
         $vector = array($history->getIdPet(), $history->getDate(), $history->getMotive(), $history->getDesc() );
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
         
         if ($sentence != null && $sentence->rowCount() != 0)
@@ -64,20 +64,20 @@ class HistoryDAO implements ModelInterface
     }
 
     /**
-     * Retrieves a history from the DB given its $id
-     * @param $id of history to retrieve
-     * @return history found with that id in the database. If none found, returns null
+     * Recupera una historia de la base de datos dado su $id
+     * @param $id de la historia a recuperar
+     * @return historia encontrada con ese id en la base de datos. Si no se encuentra ninguna, devuelve null
      */
     public function searchById($id)
     {
-        // declare array for results
+        // declarar array para los resultados
         $response = array();
 
-        // myQuery params
+        // parámetros para myQuery
         $sql = "SELECT * FROM lineas_de_historial WHERE id=?";
         $vector = array($id);
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
         
         if ($sentence != null && $sentence->rowCount() != 0)
@@ -93,20 +93,20 @@ class HistoryDAO implements ModelInterface
     }
 
     /**
-     * Retrieves a history from the DB given its $idPet
-     * @param $idPet of history to retrieve
-     * @return history found with that idPet in the database. If none found, returns null
+     * Recupera una historia de la base de datos dado su $idPet
+     * @param $idPet de la historia a recuperar
+     * @return historia encontrada con ese idPet en la base de datos. Si no se encuentra ninguna, devuelve null
      */
     public function searchByPetId($idPet)
     {
-        // declare array for results
+        // declarar array para los resultados
         $response = array();
 
-        // myQuery params
+        // parámetros para myQuery
         $sql = "SELECT * FROM lineas_de_historial WHERE idmascota=?";
         $vector = array($idPet);
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
         
         if ($sentence != null && $sentence->rowCount() != 0)
@@ -124,24 +124,23 @@ class HistoryDAO implements ModelInterface
 
 
 
-    // ============== UNUSED METHODS ============== //
-
+    // ============== MÉTODOS NO UTILIZADOS ============== //
 
 
 
 
     /**
-     * Modifies a history in the DB given its $id and params
-     * @param history to modify
-     * @return true if the history was modified successfully, false otherwise
+     * Modifica una historia en la base de datos dado su $id y parámetros
+     * @param historia a modificar
+     * @return true si la historia se modificó con éxito, false en caso contrario
      */
     public function modify($history)
     {
-        // myQuery params
-        $sql = "UPDATE lineas_de_historial SET idMascota=?, fecha=`?`, motivo_visita=`?`, descripcion=`?` WHERE id=?";
+        // parámetros para myQuery
+        $sql = "UPDATE lineas_de_historial SET idMascota=?, fecha=?, motivo_visita=?, descripcion=? WHERE id=?";
         $vector = array( $history->getIdPet(), $history->getDate(), $history->getMotive(), $history->getDesc(), $history->getId() );
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
         
         if ($sentence != null && $sentence->rowCount() != 0)
@@ -153,17 +152,17 @@ class HistoryDAO implements ModelInterface
     }
 
     /**
-     * Deletes a history from the DB given its $id
-     * @param $id of history to delete
-     * @return true if the history was deleted successfully, false otherwise
+     * Elimina una historia de la base de datos dado su $id
+     * @param $id de la historia a eliminar
+     * @return true si la historia se eliminó con éxito, false en caso contrario
      */
     public function delete($id)
     {
-        // myQuery params
+        // parámetros para myQuery
         $sql = "DELETE FROM lineas_de_historial WHERE id=?";
         $vector = array($id);
 
-        // prepare sentence
+        // preparar sentencia
         $sentence = $this->dbConnection->myQuery($sql, $vector);
         
         if ($sentence != null && $sentence->rowCount() != 0)

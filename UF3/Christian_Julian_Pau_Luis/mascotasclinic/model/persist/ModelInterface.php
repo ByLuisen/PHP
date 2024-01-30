@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Interface containing all the mandatory methods needed in a Model object.
+ * Interfaz que contiene todos los métodos obligatorios necesarios en un objeto Modelo.
  */
 interface ModelInterface
 {

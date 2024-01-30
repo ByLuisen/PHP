@@ -1,5 +1,9 @@
 <?php
 
+/**
+ *Constantes de mensajes de error y de succes para la clase Owner
+ * @author Luis Enrique, Christian Sastre, Julian Ortega, Pau López
+ */
 class OwnerMessage
 {
     // DDBB SUCCESS/ERROR MESSAGES

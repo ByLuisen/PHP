@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +19,36 @@ Route::get('/', function () {
     // return "Bienvenido a la página PRINCIPAL";
 });
 
-Route::get('cursos', function () {
-    return "Bienvenido a la página CURSOS";
-});
+// Es equivalente a:
+// Route::view('/', 'welcome');
 
-Route::get('cursos/create', function () {
-    return "Estas en la página del formulario crear cursos";
-});
+
+//Routes del PostController (lógica del CRUD de Posts)
+/* Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+ */
+
+// controlador de recursos con todos los métodos de CRUD
+Route::resource('posts', PostController::class)->names('posts');
+
+// controlador de recursos con SOLO unos métodos de CRUD
+// Route::resource('posts', PostController::class)->only(['index', 'show']);
+
+// controlador de recursos EXCEPTO unos métodos de CRUD
+// Route::resource('posts', PostController::class)->except(['index', 'show']);
+
+// Route::get('cursos', function () {
+//     return "Bienvenido a la página CURSOS";
+// });
+
+// Route::get('cursos/create', function () {
+//     return "Estas en la página del formulario crear cursos";
+// });
 
 // Route::get('cursos/{curso}', function ($curso) {
 //     return "Bienvenido a la página de: $curso";
@@ -39,7 +63,12 @@ Route::get('cursos/create', function () {
 //     return "Bienvenido a la página de: $curso $mensaje $categoria";
 // });
 
-// proteger rutas con expresiones regulares
-Route::get('cursos/{curso}', function ($curso) {
-    return "Bienvenido a la página de: $curso";
-})->where('curso', '[A-Za-z]+');
+// // proteger rutas con expresiones regulares
+// Route::get('cursos/{curso}', function ($curso) {
+//     return "Bienvenido a la página de: $curso";
+// })->where('curso', '[A-Za-z]+');
+
+// // Route::view('blog', 'blog') -> name('noticias');
+// Route::view('fotos', 'fotos')->name('galeria');
+
+// Route::get()

@@ -14,27 +14,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::view('/', 'welcomeDaw2.home')->name('home');
+Route::view('/contact', 'welcomeDaw2.contact')->name('contact');
+Route::view('/blog', 'welcomeDaw2.blog')->name('blog');
+Route::view('/about', 'welcomeDaw2.about')->name('about');
+
+/* Route::get('/', function () {
     return view('welcome');
     // return "Bienvenido a la página PRINCIPAL";
-});
+}); */
 
 // Es equivalente a:
 // Route::view('/', 'welcome');
 
 
 //Routes del PostController (lógica del CRUD de Posts)
-/* Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
- */
+
 
 // controlador de recursos con todos los métodos de CRUD
-Route::resource('posts', PostController::class)->names('posts');
+// Route::resource('posts', PostController::class)->names('posts');
 
 // controlador de recursos con SOLO unos métodos de CRUD
 // Route::resource('posts', PostController::class)->only(['index', 'show']);

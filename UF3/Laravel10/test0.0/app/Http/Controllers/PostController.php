@@ -9,12 +9,14 @@ class PostController extends Controller
     //
     public function index()
     {
-        return "Aqui se mostrará el LISTADO DE POSTS";
+        return view('posts.index', [
+            'prueba' => 'Este es un mensaje de prueba en DAW2'
+        ]);
     }
 
     public function create()
     {
-        return "Aqui se mostrará el FORMULARIO para crear el POST";
+        return view('posts.create');
     }
 
     public function store()
@@ -24,12 +26,23 @@ class PostController extends Controller
 
     public function show($post)
     {
-        return "Aqui se mostrará el POST con id: $post";
+        // 1a forma
+        /* return view('posts.show', [
+            'post' => $post
+        ]); */
+
+        // 2a forma con el método compact:
+        // return view('posts.show', compact('post'));
+
+        // 3a forma con el método ->with():
+        return view('posts.show')->with('post', $post);
     }
 
     public function edit($post)
     {
-        return "Aqui se mostrara el formulario para editar el post $post";
+        return view('posts.edit', [
+            'post' => $post
+        ]);
     }
 
     public function update($post)
@@ -37,7 +50,8 @@ class PostController extends Controller
         return "Aqui se ACTUALIZA el POST con id = $post";
     }
 
-    public function destroy($post) {
+    public function destroy($post)
+    {
         return "Aqui se eliminiara el POST con id = $post";
     }
 }

@@ -15,22 +15,6 @@
 <body>
     <h1>Aqui se mostrará el LISTADO DE POSTS</h1>
     <p><?php echo $prueba ?></p>
-
-    <ul>
-        <li>
-            <a href="{{ route('posts.index') }}">Inicio</a>
-        </li>
-        <li>
-            <a href="{{ route('posts.create') }}">Create</a>
-        </li>
-        <li>
-            <a href="{{ route('posts.show', 1) }}">Show</a>
-        </li>
-        <li>
-            <a href="{{ route('posts.edit', 10) }}">Edit</a>
-        </li>
-    </ul>
-
 </body>
 
 </html>

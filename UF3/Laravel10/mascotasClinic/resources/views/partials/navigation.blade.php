@@ -13,10 +13,10 @@
 
                 <!-- Dropdown menu for Propietarios -->
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ route('listarPropietarios') }}">Listar todos</a></li>
-                    <li><a class="dropdown-item" href="{{ route('buscarMascota') }}">Buscar Mascota</a></li>
-                    <li><a class="dropdown-item" href="{{ route('anadirPropietario') }}">Añadir Propietario</a></li>
-                    <li><a class="dropdown-item" href="{{ route('modificarPropietario') }}">Modificar</a></li>
+                    <li><a class="dropdown-item" href="{{ route('propietarios.listar') }}">Listar todos</a></li>
+                    <li><a class="dropdown-item" href="{{ route('propietarios.buscarMascota') }}">Buscar Mascota</a></li>
+                    <li><a class="dropdown-item" href="{{ route('propietarios.anadir') }}">Añadir Propietario</a></li>
+                    <li><a class="dropdown-item" href="{{ route('propietarios.modificar') }}">Modificar</a></li>
                 </ul>
             </div>
 

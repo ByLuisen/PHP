@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Postdaw2Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::view('/', 'welcomeDaw2.home')->name('home');
 Route::view('/contact', 'welcomeDaw2.contact')->name('contact');
-Route::view('/blog', 'welcomeDaw2.blog')->name('blog');
+// Route::view('/blog', 'welcomeDaw2.blog', ['posts' => $posts])->name('blog');
+
+// Route::get('/blog', function() {
+//     $posts = [
+//         ['title' => '1r Post'],
+//         ['title' => '2n Post'],
+//         ['title' => '3r Post'],
+//         ['title' => '4r Post'],
+//         ['title' => '5th Post'],
+//     ];
+//     return view('welcomeDaw2.blog', ['posts' => $posts]);
+
+// })->name('blog');
+
+Route::get('/blog', [Postdaw2Controller::class, 'index'])->name('blog');
 Route::view('/about', 'welcomeDaw2.about')->name('about');
 
 /* Route::get('/', function () {

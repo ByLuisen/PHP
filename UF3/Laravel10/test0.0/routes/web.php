@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/notes', 'notes.index');
+Route::view('/notes/create', 'notes.create');
 
 Route::view('/', 'welcomeDaw2.home')->name('home');
 Route::view('/contact', 'welcomeDaw2.contact')->name('contact');

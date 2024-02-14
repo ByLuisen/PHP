@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class OwnerController extends Controller
+class PropietarioController extends Controller
 {
     //
     public function listar()
     {
-        return view('propietarios.listar');
+        $content = [
+            ['nif' => '46994853B', 'nom' => 'Luis Enrique Ledesma Ollague', 'email' => 'luisenric32@gmail.com', 'movil' => '657774051']
+        ];
+
+        return view('propietarios.listar', ['content' => $content]);
     }
 
     public function buscarMascota()

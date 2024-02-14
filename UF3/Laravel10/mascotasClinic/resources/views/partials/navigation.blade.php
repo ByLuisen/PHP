@@ -1,5 +1,5 @@
 <!-- Card container -->
-<div class="card">
+<div class="card mb-5">
     <!-- Card header -->
     <div class="card-header">
         <!-- Button group for Propietarios -->
@@ -14,7 +14,8 @@
                 <!-- Dropdown menu for Propietarios -->
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{{ route('propietarios.listar') }}">Listar todos</a></li>
-                    <li><a class="dropdown-item" href="{{ route('propietarios.buscarMascota') }}">Buscar Mascota</a></li>
+                    <li><a class="dropdown-item" href="{{ route('propietarios.buscarMascota') }}">Buscar Mascota</a>
+                    </li>
                     <li><a class="dropdown-item" href="{{ route('propietarios.anadir') }}">Añadir Propietario</a></li>
                     <li><a class="dropdown-item" href="{{ route('propietarios.modificar') }}">Modificar</a></li>
                 </ul>
@@ -29,10 +30,11 @@
 
                 <!-- Dropdown menu for Mascotas -->
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Listar todas</a></li>
-                    <li><a class="dropdown-item" href="#">Buscar</a></li>
-                    <li><a class="dropdown-item" href="#">Añadir Mascota</a></li>
-                    <li><a class="dropdown-item" href="#">Añadir una LineaHistorial</a></li>
+                    <li><a class="dropdown-item" href="{{ route('mascotas.listar') }}">Listar todas</a></li>
+                    <li><a class="dropdown-item" href="{{ route('mascotas.buscar') }}">Buscar</a></li>
+                    <li><a class="dropdown-item" href="{{ route('mascotas.anadir') }}">Añadir Mascota</a></li>
+                    <li><a class="dropdown-item" href="{{ route('mascotas.anadirLineaHistorial') }}">Añadir una
+                            LineaHistorial</a></li>
                 </ul>
             </div>
 
@@ -46,14 +48,9 @@
                 <!-- Dropdown menu for Lineas Historial -->
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Listar líneas del
-                        historial</a></li>
+                            historial</a></li>
                 </ul>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Card body -->
-<div class="card-body">
-    <!-- Content for the card body goes here -->
 </div>

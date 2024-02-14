@@ -19,6 +19,7 @@ class LineaDeHistorialFactory extends Factory
     {
         return [
             'mascota_id' => Mascota::all()->random()->id,
+            'fecha' => $this->faker->date,
             'motivo_visita' => $this->faker->sentence,
             'descripcion' => $this->faker->paragraph,
         ];

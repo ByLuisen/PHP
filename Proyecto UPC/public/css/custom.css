@@ -1,0 +1,54 @@
+body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../images/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body,
+html,
+#app,
+main {
+    height: 100%;
+    margin: 0;
+}
+
+/* Carousel styling */
+#introCarousel,
+.carousel-inner,
+.carousel-item,
+.carousel-item.active {
+    height: 100vh;
+}
+
+.fondoLogin {
+    height: calc(100% - 75px);
+    background-image: url("../images/fondoLogin.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.fondoGif {
+    background-image: url('../images/darksouls3.gif');
+    background-size: cover;
+    /* Para cubrir toda el área del body */
+    animation: loopBackground 20s infinite;
+    /* Reproducir en bucle cada 5 segundos */
+    background-attachment: fixed;
+}
+
+@keyframes loopBackground {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}

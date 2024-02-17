@@ -1,19 +1,65 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<x-layouts.app>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <x-slot name="title">
+        Create
+    </x-slot>
 
-    <title>Document</title>
+    <h1>{{ $frase }}</h1>
+    <br>
+    <div class="w-full max-w-xs">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-</head>
+        <form action="{{ route('posts.store') }}" method="post">
 
-<body>
-    <h1>Aqui se mostrará el FORMULARIO para crear el POST</h1>
-</body>
+            @csrf
 
-</html>
+            {{-- Name --}}
+            <div>
+                <label for="title"> Título </label>
+                <br>
+                <input class="bg-gray-200 border" type="text" name="title" id="title">
+                <br>
+                <br>
+            </div>
+
+            {{-- Slug --}}
+            <div>
+                <label for="slug"> Slug </label>
+                <br>
+                <input class="bg-gray-200 border" type="text" name="slug" id="slug">
+                <br>
+                <br>
+            </div>
+
+            {{-- Body --}}
+            <div>
+                <label for="body"> Contenido </label>
+                <br>
+                <textarea class="bg-gray-200 border" name="body" id="body" cols="30" rows="10"> </textarea>
+
+            </div>
+
+            {{-- Categories --}}
+            <div>
+                <label for="category_id">Categorías</label>
+                <select name="category_id" id="category_id">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Categories --}}
+            <div>
+                <label for="user_id">Usuarios</label>
+                <select name="user_id" id="user_id">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Boton Enviar --}}
+            <input type="submit" value="Enviar formulario" />
+        </form>
+    </div>
+</x-layouts.app>

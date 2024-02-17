@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<x-layouts.app>
+
+    <x-slot name="title">
+        Index
+    </x-slot>
+
+    <br>
+    <h1>Home Inicio -INDEX</h1>
+    <br>
+    <h1>{{ $frase }}</h1>
+    <br>
+
+    @forelse ($posts as $post)
+        <li>
+            <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>
+        </li>
+    @empty
+        <li>No hay posts</li>
+    @endforelse
+
+    {{ $posts->links() }}
+
+</x-layouts.app>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -14,7 +37,7 @@
 
 <body>
     <h1>Aqui se mostrará el LISTADO DE POSTS</h1>
-    <p><?php echo $prueba ?></p>
+    <p><?php echo $prueba; ?></p>
 
     <ul>
         <li>
@@ -33,4 +56,4 @@
 
 </body>
 
-</html>
+</html> --}}

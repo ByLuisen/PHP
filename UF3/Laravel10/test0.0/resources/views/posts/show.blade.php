@@ -1,21 +1,29 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<x-layouts.app>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <x-slot name="title">
+        Show
+    </x-slot>
 
-    <title>Document</title>
+    <br>
+    <h1>{{ $frase }}</h1>
+    <br>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-</head>
+    <div class="container mx-auto py-12">
+        <h1>{{ $post->title }}</h1>
 
-<body>
-    <h1>Aqui se mostrará el POST con id: <?php $post ?></h1>
+        <p>{{ $post->body }}</p>
 
-    <p><?php echo $post ?></p>
-</body>
+        <a href="{{ route('posts.edit', $post) }}">Editar post</a>
 
-</html>
+        <form action="{{ route('posts.destroy', $post) }}" method="POST">
+
+            @csrf
+            @method('DELETE')
+
+            <button type="submit">
+                Eliminar post
+            </button>
+        </form>
+    </div>
+
+</x-layouts.app>

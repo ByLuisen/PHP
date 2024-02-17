@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,22 +12,35 @@ class PostController extends Controller
     //
     public function index()
     {
-        return view('posts.index', [
-            'prueba' => 'Este es un mensaje de prueba en DAW2'
-        ]);
+        $frase = "Aquí se mostrará el LISTADO de POSTS:";
+        $posts = Post::paginate(10);
+
+        // return $posts;
+
+        return view('posts.index', compact('posts', 'frase'));
+
+        // return view('index', ['frase' => $frase]);
     }
 
     public function create()
     {
-        return view('posts.create');
+        $frase = "Aquí se mostrará el formulario para crear un post";
+
+        $categories = Category::all();
+        $users = User::all();
+
+        return view('posts.create', compact('categories','users', 'frase'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return "Aqui se mostrará el POST en la BD (por ejemplo)";
+        // return $request;
+        Post::create($request->all());
+
+        return "El post se creó con éxito";
     }
 
-    public function show($post)
+    public function show(Post $post)
     {
         // 1a forma
         /* return view('posts.show', [
@@ -35,7 +51,11 @@ class PostController extends Controller
         // return view('posts.show', compact('post'));
 
         // 3a forma con el método ->with():
-        return view('posts.show')->with('post', $post);
+        // return view('posts.show')->with('post', $post);
+
+        $frase = "Aquí se mostrará el CONTENIDO de un POSTS:";
+
+        return view('posts.show', compact('post', 'frase'));
     }
 
     public function edit($post)

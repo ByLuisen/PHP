@@ -6,7 +6,7 @@
         <a href="{{ route('contact') }}">Contacto</a>
     </li>
     <li>
-        <a href="{{ route('blog') }}">Blog</a>
+        <a href="{{ route('posts.create') }}">Crear</a>
     </li>
     <li>
         <a href="{{ route('about') }}">About</a>

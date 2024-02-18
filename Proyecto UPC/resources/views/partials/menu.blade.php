@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-md navbar-dark border border-2 border-dark-subtle shadow-lg m-3 rounded-5 bg-black bg-opacity-75"
+<nav class="navbar fixed-top navbar-expand-md navbar-dark border border-2 border-dark-subtle shadow-lg m-2 p-1 rounded-5 bg-black bg-opacity-75"
     style="backdrop-filter: blur(8px);">
     <div class="container fs-5">
         <a class="navbar-brand" href="{{ url('/') }}">

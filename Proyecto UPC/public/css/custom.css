@@ -26,6 +26,7 @@ main {
     height: 100vh;
 }
 
+/* Login */
 .fondoLogin {
     height: calc(100% - 75px);
     background-image: url("../images/fondoLogin.png");
@@ -34,6 +35,7 @@ main {
     background-size: contain;
 }
 
+/* Registro */
 .fondoGif {
     background-image: url('../images/darksouls3.gif');
     background-size: cover;
@@ -41,6 +43,10 @@ main {
     animation: loopBackground 20s infinite;
     /* Reproducir en bucle cada 5 segundos */
     background-attachment: fixed;
+}
+
+.cardRegister {
+    opacity: 1;
 }
 
 @keyframes loopBackground {
@@ -52,3 +58,4 @@ main {
         background-position: 100% 0;
     }
 }
+

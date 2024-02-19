@@ -4,7 +4,7 @@
     <div class="container-fluid fondoGif h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-md-5">
-                <div class="card">
+                <div class="card" style="opacity: 0.9; width:70%; heigth:70%; width: 500px; margin: 0 auto;">
                     <div class="card-header">{{ __('Registrarse') }}</div>
 
                     <div class="card-body">

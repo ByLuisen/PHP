@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $datos = range(0, 29); // Genera un array del 0 al 29
+
+    return view('welcome', ['datos' => $datos]);
 });
 
 Auth::routes();

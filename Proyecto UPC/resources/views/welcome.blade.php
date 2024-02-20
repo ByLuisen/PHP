@@ -3,6 +3,7 @@
 @section('estilos')
     <!-- Enlaces a tus estilos generales -->
     <link rel="stylesheet" href="{{ asset('css\cartas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css\team.css') }}">
 @endsection
 
 @section('content')

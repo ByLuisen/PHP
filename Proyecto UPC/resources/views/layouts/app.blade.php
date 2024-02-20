@@ -15,12 +15,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Agrega los enlaces a Swiper aquí -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.3.3/swiper-bundle.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.0.0/swiper-bundle.min.css">
-
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@4.5.0/dist/css/swiper.min.css">
     <link rel="stylesheet" href="{{ asset('css\custom.css') }}">
 
     <!--Scripts-->
@@ -28,8 +24,6 @@
 
     <!-- css dependiendo de la página -->
     @yield('estilos')
-    <link rel="stylesheet" href="{{ asset('css\team.css') }}">
-
 </head>
 
 <body>
@@ -47,8 +41,7 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.0.0/swiper-bundle.js"></script>
-
-<script type="text/javascript" src="{{ asset('js\script.js') }}"></script>
+<script type="module" src="{{ asset('js\cartas.js') }}"></script>
+<script type="module" src="{{ asset('js\script.js') }}"></script>
 
 </html>

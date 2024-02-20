@@ -71,7 +71,7 @@
 
     <!-- Sección UPC Team -->
     <section class="container-fluid"
-        style="background: linear-gradient(180deg, #ff3caa 50%, #784ba0f4 100%, #2b85c5 100%); padding-top: 50px; padding-bottom: 50px;">
+        style="background: linear-gradient(180deg, #e32f95 50%, #784ba0f4 100%, #2b85c5 100%); padding-top: 50px; padding-bottom: 50px;">
         <div>
             <!-- Paragrafo info de equipo -->
             <div class="container">

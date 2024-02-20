@@ -18,7 +18,7 @@ Route::get('/', function () {
     $datos = range(0, 29); // Genera un array del 0 al 29
 
     return view('welcome', ['datos' => $datos]);
-});
+})->name('index');
 
 Auth::routes();
 

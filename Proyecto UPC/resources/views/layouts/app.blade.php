@@ -42,6 +42,6 @@
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="module" src="{{ asset('js\cartas.js') }}"></script>
-<script type="module" src="{{ asset('js\script.js') }}"></script>
+<script type="module" src="{{ asset('js\team.js') }}"></script>
 
 </html>

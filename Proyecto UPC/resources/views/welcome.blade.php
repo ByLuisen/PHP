@@ -47,7 +47,7 @@
                 <div id="wrapper1" class="swiper-wrapper">
                     @foreach ($datos as $valor)
                         <div class="swiper-slide"
-                            style="background: linear-gradient(to top, #27270fa3, #203a4300, #2c536400), url('../images/{{ $valor }}.png') no-repeat 50% 50% / contain #D4AC30;">
+                            style="background: linear-gradient(to top, #27270fa3, #203a4300, #2c536400), url('../images/{{ $valor }}.png') no-repeat 50% 50% / contain #d4ab30;">
                         </div>
                     @endforeach
                 </div>
@@ -72,14 +72,12 @@
     <!-- Sección UPC Team -->
     <section class="container-fluid"
         style="background: linear-gradient(180deg, #ff3caa 50%, #784ba0f4 100%, #2b85c5 100%); padding-top: 50px; padding-bottom: 50px;">
-
         <div>
-            <!-- Título -->
-            <h1 class="mt-1 text-center" style="color: white;"><b>HIPPO TEAM</b></h1>
-
             <!-- Paragrafo info de equipo -->
             <div class="container">
-                <p class="mt-4" style="font-size: 1em; text-align: center; color: white;">
+                <p class="p-3"
+                    style="font-weight: 700;
+                font-size: 1.1rem; text-align: center; color: white;">
                     Somos un apasionado equipo de estudiantes dedicados al mundo del desarrollo de juegos. Con una
                     combinación única de creatividad, habilidades técnicas y determinación. Nuestro equipo está
                     comprometido con cada aspecto del desarrollo, desde el diseño de conceptos hasta la
@@ -98,7 +96,8 @@
         <section class="module-team">
 
             <div class="team">
-                <h2 class="title">Meet our Team</h2>
+                <h2 class="title">Conoce nuestro equipo</h2>
+
                 <div class="team-cards">
 
                     <!-- Slider main container -->
@@ -115,12 +114,12 @@
                     </div>
                 </div>
             </div>
-    </div>
-    </section>
+
+        </section>
     </div>
 @endsection
 
 <!-- Incluimos el footer -->
 @section('footer')
-    @include('footer.footer')
+    @include('partials.footer')
 @endsection

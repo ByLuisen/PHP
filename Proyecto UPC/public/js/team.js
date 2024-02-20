@@ -136,7 +136,7 @@ var mySwiper = new swiper(".swiper-container", {
     centeredSlides: false,
     speed: 800,
     slidesPerView: 3,
-    spaceBetween: 40,
+    spaceBetween: 20,
     threshold: 5,
 
 

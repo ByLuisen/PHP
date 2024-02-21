@@ -3,6 +3,14 @@
     <link rel="stylesheet" href="{{ asset('css\ranking.css') }}">
 @endsection
 @section('content')
+<div class="ranking text-center">
+<h1>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+               RANKINGS
+</h1>
 <table class="table table-sm table-hover table-striped">
   <thead class="thead-light">
     <tr>
@@ -21,4 +29,5 @@
     @endforeach
   </tbody>
 </table>
+</div>
 @endsection

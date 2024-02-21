@@ -27,6 +27,7 @@ Route::get('/eventos', function () {
 Route::get('/crear_eventos', function () {
     return view('eventos.crear-evento');
 })->name('crear_eventos');
+
 Route::get('/rankings', function () {
     $datos = [
         ['posicion' => '1', 'jugador' => 'luisen32', 'partidas_jugadas' => '147', 'partidas_ganadas' => '120', 'partidas_empatadas' => '2', 'partidas_perdidas' => '25'],
@@ -43,4 +44,5 @@ Route::get('/perfil', function () {
 
 Auth::routes();
 
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

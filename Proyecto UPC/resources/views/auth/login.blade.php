@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('estilos')
+    <link rel="stylesheet" href="{{ asset('css\custom.css') }}">
+@endsection
+
 @section('content')
     <div style="height: 75px"></div>
     <div class="container-fluid fondoLogin">

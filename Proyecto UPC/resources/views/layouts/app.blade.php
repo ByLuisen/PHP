@@ -18,9 +18,6 @@
     <!-- CDN imports -->
     @yield('CDNs')
 
-    {{-- Archivo CSS general --}}
-    <link rel="stylesheet" href="{{ asset('css\custom.css') }}">
-
     <!-- Bootstrap -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 

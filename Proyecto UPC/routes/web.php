@@ -29,9 +29,9 @@ Route::get('/crear_eventos', function () {
 })->name('crear_eventos');
 Route::get('/rankings', function () {
     $datos = [
-        ['posicion' => 'Primero', 'nombre' => 'Otto', 'partidas_ganadas' => '120'],
-        ['posicion' => 'Segundo', 'nombre' => 'Thornton', 'partidas_ganadas' => '83'],
-        ['posicion' => 'Tercero', 'nombre' => 'the Bird', 'partidas_ganadas' => '65'],
+        ['posicion' => '1', 'jugador' => 'luisen32', 'partidas_jugadas' => '147', 'partidas_ganadas' => '120', 'partidas_empatadas' => '2', 'partidas_perdidas' => '25'],
+        ['posicion' => '2', 'jugador' => 'juco', 'partidas_jugadas' => '137',  'partidas_ganadas' => '83', 'partidas_empatadas' => '6', 'partidas_perdidas' => '48'],
+        ['posicion' => '3', 'jugador' => 'yungkurt', 'partidas_jugadas' => '185', 'partidas_ganadas' => '65', 'partidas_empatadas' => '20', 'partidas_perdidas' => '100'],
     ];
     return view('rankings.index', ['datos' => $datos]);
 })->name('rankings');

@@ -37,11 +37,6 @@ main {
     background-size: contain;
 }
 
-.fondoGif {
-    background-image: url('../images/darksouls3.gif');
-    background-size: cover;
-}
-
 #player {
     width: 100%;
 }

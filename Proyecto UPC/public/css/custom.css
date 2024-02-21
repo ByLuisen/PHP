@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Oswald:400&display=swa);
+
 body * {
     margin: 0;
     padding: 0;
@@ -35,27 +37,11 @@ main {
     background-size: contain;
 }
 
-/* Registro */
 .fondoGif {
     background-image: url('../images/darksouls3.gif');
     background-size: cover;
-    /* Para cubrir toda el área del body */
-    animation: loopBackground 20s infinite;
-    /* Reproducir en bucle cada 5 segundos */
-    background-attachment: fixed;
 }
 
-.cardRegister {
-    opacity: 1;
+#player {
+    width: 100%;
 }
-
-@keyframes loopBackground {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: 100% 0;
-    }
-}
-

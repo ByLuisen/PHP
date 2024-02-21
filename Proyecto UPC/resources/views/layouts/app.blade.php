@@ -12,14 +12,16 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
+    <title>{{ config('app.name', 'Gwent') }}</title>
 
-    <!-- Agrega los enlaces a Swiper aquí -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@4.5.0/dist/css/swiper.min.css">
+    <!-- CDN imports -->
+    @yield('CDNs')
+
+    {{-- Archivo CSS general --}}
     <link rel="stylesheet" href="{{ asset('css\custom.css') }}">
 
-    <!--Scripts-->
+    <!-- Bootstrap -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <!-- css dependiendo de la página -->
@@ -35,13 +37,14 @@
         <main>
             @yield('content')
         </main>
-    </div>
-    <!-- footer -->
-    @yield('footer')
-</body>
 
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script type="module" src="{{ asset('js\cartas.js') }}"></script>
-<script type="module" src="{{ asset('js\team.js') }}"></script>
+        <!-- footer -->
+        @yield('footer')
+    </div>
+
+    {{-- Archivos Javascript --}}
+
+    @yield('scripts')
+</body>
 
 </html>

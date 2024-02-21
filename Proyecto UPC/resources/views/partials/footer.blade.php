@@ -50,7 +50,7 @@
                             src="{{ asset('images/fear-black-EN.png') }}" alt="Miedo" height="100px"
                             class="border border-5 border-dark"></a></li>
             </ul>
-            <p class="text-center text-white">&copy; 2024 Company, Inc</p>
+            <p class="text-center text-white">&copy; 2024 Gwent, Inc</p>
         </footer>
     </div>
 </section>

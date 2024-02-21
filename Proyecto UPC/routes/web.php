@@ -20,6 +20,14 @@ Route::get('/', function () {
     return view('welcome', ['datos' => $datos]);
 })->name('index');
 
+Route::get('/eventos', function () {
+    return view('eventos.index');
+})->name('eventos');
+
+Route::get('/crear_eventos', function () {
+    return view('eventos.crear-evento');
+})->name('crear_eventos');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

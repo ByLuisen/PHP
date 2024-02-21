@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('CDNs')
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@4.5.0/dist/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.plyr.io/3.4.6/plyr.css">
+@endsection
+
 @section('estilos')
     <!-- Enlaces a tus estilos generales -->
     <link rel="stylesheet" href="{{ asset('css\cartas.css') }}">
@@ -7,13 +13,16 @@
 @endsection
 
 @section('content')
-    <div id="introCarousel" class="carousel slide carousel-fade shadow-2-strong vh-100" data-bs-ride="carousel">
+    <div id="introCarousel" class="carousel slide carousel-fade shadow-2-strong" data-bs-ride="carousel"
+        style="height: 1035px">
         <!-- Inner -->
-        <div class="carousel-inner">
+        <div class="carousel-inner h-100">
             <!-- Single item -->
-            <div class="carousel-item active">
-                <video style="min-width: 100%; min-height: 100%" playsinline autoplay muted loop>
-                    <source class="h-100" src="{{ asset('videos/amanece.mp4') }}" type="video/mp4" />
+            <div class="carousel-item active h-100">
+                <video style="max-width: 100%;" playsinline autoplay muted loop>
+                    <source
+                        src="{{ asset('videos/20200404_Legends of Runeterra： Anuncio de lanzamiento y tráiler ｜ Legends of Runeterra.webm') }}"
+                        type="video/mp4" />
                 </video>
                 <div class="carousel-caption d-flex flex-column h-100 align-items-center justify-content-center">
                     <div class="d-flex justify-content-center align-items-center h-100">
@@ -28,6 +37,71 @@
                                 target="_blank" role="button">BRRRRRRR</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section" style="background-image: url({{ asset('images/fondo.jpg') }})">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <video controls crossorigin playsinline
+                        poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
+                        <!-- Video files -->
+                        <source
+                            src="{{ asset('videos/20200412_Exhibición de región： Islas de la Sombra - Jugabilidad ｜ Legends of Runeterra.mp4') }}"
+                            type="video/mp4" sizes="576" />
+                        <source
+                            src="{{ asset('videos/20200412_Exhibición de región： Islas de la Sombra - Jugabilidad ｜ Legends of Runeterra.webm') }}"
+                            type="video/webm" sizes="720" />
+
+                        <!-- Caption files -->
+                        <track kind="captions" label="English" srclang="en"
+                            src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" default>
+                        <track kind="captions" label="Français" srclang="fr"
+                            src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt">
+
+                        <!-- Fallback for browsers that don't support the <video> element -->
+                        <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+                            download>Download</a>
+                    </video>
+                </div>
+                <div class="col">
+                    <h2>Descifra el tablero y conviértete en un estratega sobresaliente</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit curabitur ridiculus, id aliquam duis posuere
+                        ultricies erat conubia orci, pulvinar sagittis pellentesque natoque eget sem scelerisque varius.
+                        Vestibulum enim auctor nullam etiam mattis et ullamcorper posuere.</p>
+                </div>
+            </div>
+            <div class="row text-center text-white" style="padding: 10% 5%;">
+                <div class="col">
+                    <img src="{{ asset('images/avatar1sf.png') }}" alt="">
+                    <h2>Lorem ipsum</h2>
+                    <p>Lorem ipsum dolor sit amet. Est sapiente minima ab dolorem veritatis qui mollitia atque aut
+                        voluptatem
+                        quia et iure amet. At officiis provident eum alias illum nam error odit non quia corrupti ut
+                        eligendi
+                        facere?</p>
+                </div>
+                <div class="col">
+                    <img src="{{ asset('images/avatar1sf.png') }}" alt="">
+
+                    <h2>Lorem ipsum</h2>
+                    <p>Lorem ipsum dolor sit amet. Est sapiente minima ab dolorem veritatis qui mollitia atque aut
+                        voluptatem
+                        quia et iure amet. At officiis provident eum alias illum nam error odit non quia corrupti ut
+                        eligendi
+                        facere?</p>
+                </div>
+                <div class="col">
+                    <img src="{{ asset('images/avatar1sf.png') }}" alt="">
+
+                    <h2>Lorem ipsum</h2>
+                    <p>Lorem ipsum dolor sit amet. Est sapiente minima ab dolorem veritatis qui mollitia atque aut
+                        voluptatem
+                        quia et iure amet. At officiis provident eum alias illum nam error odit non quia corrupti ut
+                        eligendi
+                        facere?</p>
                 </div>
             </div>
         </div>
@@ -47,7 +121,7 @@
                 <div id="wrapper1" class="swiper-wrapper">
                     @foreach ($datos as $valor)
                         <div class="swiper-slide"
-                            style="background: linear-gradient(to top, #27270fa3, #203a4300, #2c536400), url('../images/{{ $valor }}.png') no-repeat 50% 50% / contain #d4ab30;">
+                            style="background: linear-gradient(to top, #27270f99, #203a4300, #2c536400), url('../images/{{ $valor }}.png') no-repeat 50% 50% / contain #d4ab30;">
                         </div>
                     @endforeach
                 </div>
@@ -122,4 +196,9 @@
 <!-- Incluimos el footer -->
 @section('footer')
     @include('partials.footer')
+@endsection
+
+@section('scripts')
+    <script type="module" src="{{ asset('js\cartas.js') }}"></script>
+    <script type="module" src="{{ asset('js\team.js') }}"></script>
 @endsection

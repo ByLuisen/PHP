@@ -1,8 +1,8 @@
 <nav class="navbar fixed-top navbar-expand-md navbar-dark border border-2 border-dark-subtle shadow-lg m-2 p-1 rounded-5 bg-black bg-opacity-50"
     style="backdrop-filter: blur(8px);">
     <div class="container fs-5">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+        <a class="navbar-brand p-0" href="{{ url('/') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" height="40">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -13,7 +13,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Eventos') }}</a>
+                    <a class="nav-link text-white" href="{{ route('eventos') }}">{{ __('Eventos') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Ranking') }}</a>

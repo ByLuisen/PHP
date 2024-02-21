@@ -35,27 +35,37 @@ main {
     background-size: contain;
 }
 
-/* Registro */
 .fondoGif {
     background-image: url('../images/darksouls3.gif');
     background-size: cover;
-    /* Para cubrir toda el área del body */
-    animation: loopBackground 20s infinite;
-    /* Reproducir en bucle cada 5 segundos */
-    background-attachment: fixed;
 }
 
-.cardRegister {
-    opacity: 1;
+#player {
+    width: 100%;
 }
 
-@keyframes loopBackground {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: 100% 0;
-    }
+#player::-webkit-media-controls {
+    display: none !important;
 }
 
+/* Controles personalizados */
+.custom-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    position: relative;
+    bottom: 40px;
+    /* Ajusta según tus necesidades */
+    transition: background-color 0.3s;
+}
+
+.custom-controls:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.play-pause {
+    color: #fff;
+    cursor: pointer;
+}

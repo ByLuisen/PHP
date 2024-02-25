@@ -7,11 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <title>{{ config('app.name', 'Gwent') }}</title>
 
@@ -39,8 +35,11 @@
         @yield('footer')
     </div>
 
-    {{-- Archivos Javascript --}}
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    {{-- Archivos Javascript --}}
     @yield('scripts')
 </body>
 

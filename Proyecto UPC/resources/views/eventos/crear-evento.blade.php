@@ -1,85 +1,66 @@
 @extends('layouts.app')
 
-@section('CDNs')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-@endsection
-
 @section('estilos')
     <link rel="stylesheet" href="{{ asset('css\crear-evento.css') }}">
 @endsection
 
 @section('content')
-    <div class="login-box">
-        <form class="container1">
+    <div style="margin-top: 110px">
+
+        <form action="{{ route('crear_evento') }}" method="post" class="container1">
+            @csrf
             <div class="row">
                 <h4 class="text-center">Crear Evento</h4>
+                <!-- Tipo de evento -->
                 <div class="input-group input-group-icon">
-                    <input type="text" placeholder="Full Name" />
-                    <div class="input-icon"><i class="fa fa-user"></i></div>
+                    <label for="tipo">Tipo de evento</label>
+                    <br>
+                    <select name="tipo" id="tipo" style="width:511px;">
+                        <option value="Torneo" @if (isset($evento) && $evento['tipo'] == 'Torneo') selected @endif>Torneo</option>
+                        <option value="Dibujo" @if (isset($evento) && $evento['tipo'] == 'Dibujo') selected @endif>Dibujo</option>
+                    </select>
                 </div>
-                <div class="input-group input-group-icon">
-                    <input type="email" placeholder="Email Adress" />
-                    <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                </div>
-                <div class="input-group input-group-icon">
-                    <input type="password" placeholder="Password" />
-                    <div class="input-icon"><i class="fa fa-key"></i></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-half">
-                    <h4>Date of Birth</h4>
-                    <div class="input-group">
-                        <div class="col-third">
-                            <input type="text" placeholder="DD" />
-                        </div>
-                        <div class="col-third">
-                            <input type="text" placeholder="MM" />
-                        </div>
-                        <div class="col-third">
-                            <input type="text" placeholder="YYYY" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-half">
-                    <h4>Gender</h4>
-                    <div class="input-group">
-                        <input id="gender-male" type="radio" name="gender" value="male" />
-                        <label for="gender-male">Male</label>
-                        <input id="gender-female" type="radio" name="gender" value="female" />
-                        <label for="gender-female">Female</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <h4>Payment Details</h4>
+
+                <!-- Nombre -->
                 <div class="input-group">
-                    <input id="payment-method-card" type="radio" name="payment-method" value="card" checked="true" />
-                    <label for="payment-method-card"><span><i class="fa fa-cc-visa"></i>Credit Card</span></label>
-                    <input id="payment-method-paypal" type="radio" name="payment-method" value="paypal" />
-                    <label for="payment-method-paypal"> <span><i class="fa fa-cc-paypal"></i>Paypal</span></label>
+                    <input type="text" name="nombre" placeholder="Nombre del evento"
+                        value="{{ isset($evento) ? $evento['nombre'] : '' }}" />
                 </div>
-                <div class="input-group input-group-icon">
-                    <input type="text" placeholder="Card Number" />
-                    <div class="input-icon"><i class="fa fa-credit-card"></i></div>
+                @error('nombre')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+
+                <!-- Fecha de inicio -->
+                <label for="tipo">Fecha y hora de inicio</label>
+                <div class="input-group">
+                    <input type="datetime-local" name="fecha_inicio" min="{{ date('Y-m-d\TH:i') }}"
+                        max="{{ date('Y-m-d\TH:i', strtotime('+1 month')) }}"
+                        value="{{ isset($evento) ? $fecha_objeto->format('Y-m-d H:i') : '' }}" />
                 </div>
-                <div class="col-half">
-                    <div class="input-group input-group-icon">
-                        <input type="text" placeholder="Card CVC" />
-                        <div class="input-icon"><i class="fa fa-user"></i></div>
-                    </div>
+                @error('fecha_inicio')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+
+                <!-- Duración del evento -->
+                <div class="input-group">
+                    <label for="tipo">Duración del evento</label>
+                    <br>
+                    <select name="duracion" id="duracion" style="width:511px;">
+                        <option value="00:30" @if (isset($evento) && $evento['duracion'] == '00:30') selected @endif>30 minutos</option>
+                        <option value="01:00" @if (isset($evento) && $evento['duracion'] == '01:00') selected @endif>1 hora</option>
+                        <option value="01:30" @if (isset($evento) && $evento['duracion'] == '01:30') selected @endif>1 hora y 30 minutos
+                        </option>
+                    </select>
                 </div>
-                <div class="col-half">
-                    <div class="input-group">
-                        <select>
-                            <option>01 Jan</option>
-                            <option>02 Jan</option>
-                        </select>
-                        <select>
-                            <option>2015</option>
-                            <option>2016</option>
-                        </select>
-                    </div>
+                @error('duracion')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary w-25 rounded-pill fs-5">
+                        Crear
+                    </button>
+
                 </div>
             </div>
         </form>

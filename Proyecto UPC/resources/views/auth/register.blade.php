@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('estilos')
-    <!-- Vendor CSS-->
-    <link href="{{ asset('vendor/select2/select2.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('vendor/datepicker/daterangepicker.css') }}" rel="stylesheet" media="all">
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css\registro.css') }}">
 @endsection
@@ -68,13 +65,3 @@
     </div>
 @endsection
 
-@section('scripts')
-    <!-- Jquery JS-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <!-- Vendor JS-->
-    <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('vendor/datepicker/moment.min.js') }}"></script>
-    <script src="{{ asset('vendor/datepicker/daterangepicker.js') }}"></script>
-
-    <script src="{{ asset('js/registro.js') }}"></script>
-@endsection

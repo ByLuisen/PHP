@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function eventos()
+    {
+        return $this->belongsToMany(Evento::class, 'evento_user', 'user_id', 'evento_id');
+    }
 }

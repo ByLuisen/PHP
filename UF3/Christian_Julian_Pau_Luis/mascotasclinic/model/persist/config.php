@@ -6,8 +6,8 @@
  */
 
 const DSN = "mysql:host=localhost;dbname=mascotasclinic";
-const USER = "m07";
-const PASSWORD = "m07";
+const USER = "root";
+const PASSWORD = "";
 
 
 

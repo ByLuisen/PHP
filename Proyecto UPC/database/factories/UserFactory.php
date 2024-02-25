@@ -23,11 +23,22 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $partidas_jugadas = $this->faker->numberBetween(50, 200);
+        $partidas_ganadas = $this->faker->numberBetween(0, $partidas_jugadas);
+        $partidas_perdidas = $this->faker->numberBetween(0, $partidas_jugadas - $partidas_ganadas);
+        $partidas_empatadas = $partidas_jugadas - $partidas_ganadas - $partidas_perdidas;
+
+        $user = fake()->userName();
+
         return [
-            'name' => fake()->name(),
+            'name' => $user,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => $user,
+            'partidas_jugadas' => $partidas_jugadas,
+            'partidas_ganadas' => $partidas_ganadas,
+            'partidas_empatadas' => $partidas_empatadas,
+            'partidas_perdidas' => $partidas_perdidas,
             'remember_token' => Str::random(10),
         ];
     }

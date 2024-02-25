@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ asset('css\ranking.css') }}">
 @endsection
 @section('content')
+    <?php $posicion = 0; ?>
     <div class="container" style="padding: 110px 0px 44px">
         <div class="row justify-content-between">
             <div class="col-8 ranking">
@@ -21,14 +22,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($datos as $dato)
+                        @foreach ($rankings as $ranking)
+                            <?php $posicion++; ?>
                             <tr>
-                                <th scope="row">{{ $dato['posicion'] }}</th>
-                                <td>{{ $dato['jugador'] }}</td>
-                                <td>{{ $dato['partidas_jugadas'] }}</td>
-                                <td>{{ $dato['partidas_ganadas'] }}</td>
-                                <td>{{ $dato['partidas_empatadas'] }}</td>
-                                <td>{{ $dato['partidas_perdidas'] }}</td>
+                                <th scope="row">{{ $posicion }}</th>
+                                <td>{{ $ranking['name'] }}</td>
+                                <td>{{ $ranking['partidas_jugadas'] }}</td>
+                                <td>{{ $ranking['partidas_ganadas'] }}</td>
+                                <td>{{ $ranking['partidas_empatadas'] }}</td>
+                                <td>{{ $ranking['partidas_perdidas'] }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -39,32 +41,27 @@
                     <div class="row">
                         <div class="col p-0">
                             <h2 class="p-0">
-                                FILTROS
+                                FILTRAR
                             </h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col p-0">
-                            <form action="{{ route('logout') }}" method="POST">
+                            <form action="{{ route('search_user') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="jugador" class="text-white">Buscar por Jugador</label>
-                                    <input id="jugador" type=text placeholder="Jugador"
-                                        class="form-control
-                                        @error('jugador') is-invalid @enderror"
-                                        name="jugador">
+                                    <label for="name" class="text-white">Por jugador</label>
+                                    <input id="name" type="text" placeholder="Jugador" name="name"
+                                        class="form-control">
 
                                     <div class="mt-2 text-center">
                                         <button type="submit" class="btn p-1 text-light" style="background-color: #FF00FB">
                                             Buscar
                                         </button>
+                                        @error('name')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-
-                                    @error('jugador')
-                                        <span class="text-center invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
                             </form>
                         </div>

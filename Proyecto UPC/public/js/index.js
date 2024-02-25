@@ -7,31 +7,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Bind event listener
     function on(selector, type, callback) {
-      document.querySelector(selector).addEventListener(type, callback, false);
+        document.querySelector(selector).addEventListener(type, callback, false);
     }
 
     // Play
     on('.js-play', 'click', () => {
-      player.play();
+        player.play();
     });
 
     // Pause
     on('.js-pause', 'click', () => {
-      player.pause();
+        player.pause();
     });
 
     // Stop
     on('.js-stop', 'click', () => {
-      player.stop();
+        player.stop();
     });
 
     // Rewind
     on('.js-rewind', 'click', () => {
-      player.rewind();
+        player.rewind();
     });
 
     // Forward
     on('.js-forward', 'click', () => {
-      player.forward();
+        player.forward();
     });
-  });
+});

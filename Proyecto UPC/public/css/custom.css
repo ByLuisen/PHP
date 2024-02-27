@@ -7,7 +7,7 @@ body * {
 }
 
 body {
-    background-image: url("../images/fondo.jpg");
+    background-image: url("../images/fondo.webp");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -31,7 +31,7 @@ main {
 /* Login */
 .fondoLogin {
     height: calc(100% - 75px);
-    background-image: url("../images/fondoLogin.png");
+    background-image: url("../images/fondoLogin.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

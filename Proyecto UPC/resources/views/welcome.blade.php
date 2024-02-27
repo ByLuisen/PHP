@@ -4,6 +4,7 @@
     <!-- Se incluyen los estilos del carousel -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swiper@4.5.0/dist/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
 @endsection
 
 @section('estilos')
@@ -22,7 +23,7 @@
             <!-- Elemento del carousel activo -->
             <div class="carousel-item active h-100">
                 <!-- Video del carousel -->
-                <video style="max-width: 100%;" playsinline autoplay muted loop>
+                <video style="max-width: 100%;" playsinline autoplay muted loop loading="lazy">
                     <source src="{{ asset('videos/carousel.webm') }}" type="video/mp4" />
                 </video>
             </div>
@@ -30,7 +31,7 @@
     </div>
 
     <!-- Sección principal -->
-    <div class="section" style="background-image: url({{ asset('images/fondo.jpg') }}); background-size: cover">
+    <div class="section" style="background-image: url({{ asset('images/fondo.webp') }}); background-size: cover">
         <div class="container">
             <div class="row">
                 <!-- Columna de video -->
@@ -64,7 +65,7 @@
             <div class="row text-center text-white" style="padding: 10% 5%;">
                 <!-- Característica: Cuerpo a cuerpo -->
                 <div class="col">
-                    <img src="{{ asset('images/espada_rol_.png') }}" alt="" width="100px" height="100px">
+                    <img src="{{ asset('images/espada_rol_.webp') }}" alt="" width="100px" height="100px">
                     <h2>Cuerpo a cuerpo</h2>
                     <p>
                         Se especializan en el combate cercano. Son hábiles
@@ -76,7 +77,7 @@
                 </div>
                 <!-- Característica: Apoyo -->
                 <div class="col">
-                    <img src="{{ asset('images/estrella_rol_.png') }}" alt="" width="100px" height="100px">
+                    <img src="{{ asset('images/estrella_rol_.webp') }}" alt="" width="100px" height="100px">
                     <h2>Apoyo</h2>
                     <p>
                         Destacan por su versatilidad y habilidades únicas.
@@ -88,7 +89,7 @@
                 </div>
                 <!-- Característica: Arquero -->
                 <div class="col">
-                    <img src="{{ asset('images/arquero_rol_.png') }}" alt="" width="100px" height="100px">
+                    <img src="{{ asset('images/arquero_rol_.webp') }}" alt="" width="100px" height="100px">
                     <h2>Arquero</h2>
                     <p>
                         Expertos en el combate a distancia. Utilizan arcos y flechas para atacar a sus
@@ -99,7 +100,7 @@
                 </div>
                 <!-- Característica: Catapulta -->
                 <div class="col">
-                    <img src="{{ asset('images/catapulta_rol_.png') }}" alt="" width="125px">
+                    <img src="{{ asset('images/catapulta_rol_.webp') }}" alt="" width="125px">
                     <h2>Catapulta</h2>
                     <p>
                         Diseñadas para causar daño masivo en un área específica del campo de batalla. Son especialmente
@@ -127,7 +128,7 @@
                     <!-- Iteración sobre los datos de las cartas -->
                     @foreach ($datos as $valor)
                         <div class="swiper-slide"
-                            style="background: linear-gradient(to top, #27270f99, #203a4300, #2c536400), url('../images/{{ $valor }}.png') no-repeat 50% 50% / contain #d4ab30;">
+                            style="background: linear-gradient(to top, #27270f99, #203a4300, #2c536400), url('../images/{{ $valor }}.webp') no-repeat 50% 50% / contain #d4ab30;">
                         </div>
                     @endforeach
                 </div>

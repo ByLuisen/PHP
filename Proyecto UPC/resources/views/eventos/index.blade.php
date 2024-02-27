@@ -17,7 +17,7 @@
                         @foreach ($eventos as $evento)
                             <div class="evento-container col-4 p-3 position-relative">
                                 <div class="rounded-5 p-4"
-                                    style="background-image: url('{{ asset('images/' . $evento['tipo'] . '.jpg') }}'); background-size: cover;
+                                    style="background-image: url('{{ asset('images/' . $evento['tipo'] . '.webp') }}'); background-size: cover;
                         background-position: 50% 50%; opacity: 0.9; min-height: 236px">
                                     <div class="row">
                                         <div class="col">

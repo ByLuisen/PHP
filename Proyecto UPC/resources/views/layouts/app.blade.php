@@ -7,8 +7,8 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
+
+    <link rel="icon" href="{{ asset('images/logo.webp') }}" type="image/x-icon">
     <title>{{ config('app.name', 'Gwent') }}</title>
 
     <!-- CDN imports -->

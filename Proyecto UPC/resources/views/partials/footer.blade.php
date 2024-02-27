@@ -41,13 +41,13 @@
 
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                 <li class="nav-item"><a href="https://pegi.info/" target="_blank" class="nav-link px-2"><img
-                            src="{{ asset('images/pegi7.png') }}" alt="PEGI 7" height="100px"
+                            src="{{ asset('images/pegi7.webp') }}" alt="PEGI 7" height="100px"
                             class="border border-5 border-dark"></a></li>
                 <li class="nav-item"><a href="https://pegi.info/" target="_blank" class="nav-link px-2"><img
-                            src="{{ asset('images/violence-black-EN.png') }}" alt="Violencia" height="100px"
+                            src="{{ asset('images/violence-black-EN.webp') }}" alt="Violencia" height="100px"
                             class="border border-5 border-dark"></a></li>
                 <li class="nav-item"><a href="https://pegi.info/" target="_blank" class="nav-link px-2"><img
-                            src="{{ asset('images/fear-black-EN.png') }}" alt="Miedo" height="100px"
+                            src="{{ asset('images/fear-black-EN.webp') }}" alt="Miedo" height="100px"
                             class="border border-5 border-dark"></a></li>
             </ul>
             <p class="text-center text-white">&copy; 2024 Gwent, Inc</p>

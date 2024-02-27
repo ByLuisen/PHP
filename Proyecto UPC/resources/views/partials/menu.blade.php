@@ -2,7 +2,7 @@
     style="backdrop-filter: blur(8px);">
     <div class="container fs-5">
         <a class="navbar-brand p-0" href="{{ url('/') }}">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" height="40">
+            <img src="{{ asset('images/logo.webp') }}" alt="Logo" height="40">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
